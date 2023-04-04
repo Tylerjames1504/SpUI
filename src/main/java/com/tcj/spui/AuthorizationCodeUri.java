@@ -17,7 +17,7 @@ import java.util.Scanner;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class AuthorizationCodeUri {
-    private static final AuthorizationCodeUriRequest authorizationCodeUriRequest = Main.spotifyApi.authorizationCodeUri()
+    private static final AuthorizationCodeUriRequest authorizationCodeUriRequest = MainHELLO.spotifyApi.authorizationCodeUri()
             .scope("user-top-read, playlist-modify-private")
             .show_dialog(true)
             .build();

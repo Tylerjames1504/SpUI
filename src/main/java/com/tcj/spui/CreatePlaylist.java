@@ -12,11 +12,11 @@ public class CreatePlaylist {
 
     public static void execute() {
         try {
-            getCurrentUsersProfileRequest = Main.spotifyApi.getCurrentUsersProfile()
+            getCurrentUsersProfileRequest = MainHELLO.spotifyApi.getCurrentUsersProfile()
                     .build();
 
-            createPlaylistRequest = Main.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), Main.name)
-                    .public_(Main.playlistPublic)
+            createPlaylistRequest = MainHELLO.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), MainHELLO.name)
+                    .public_(MainHELLO.playlistPublic)
                     .build();
 
             Playlist playlist = createPlaylistRequest.execute();

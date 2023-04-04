@@ -11,7 +11,7 @@ public class GetSearchArtists {
     private static SearchArtistsRequest searchArtistsRequest;
     Paging<Artist> artistPagingToReturn;
     GetSearchArtists(SpotifyApi spotifyApi, String name){
-        searchArtistsRequest = spotifyApi.searchArtists(name).limit(5).market(Main.location).build();
+        searchArtistsRequest = spotifyApi.searchArtists(name).limit(5).market(MainHELLO.location).build();
 
     }
 

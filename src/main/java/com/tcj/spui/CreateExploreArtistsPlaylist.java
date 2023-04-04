@@ -29,7 +29,7 @@ public class CreateExploreArtistsPlaylist {
     private static ArrayList<Integer> setRandom = new ArrayList<Integer>();
     private static CreatePlaylistRequest createPlaylistRequest;
     private static GetCurrentUsersProfileRequest getCurrentUsersProfileRequest;
-    private static int[] randoms = new int[Main.numArtists];
+    private static int[] randoms = new int[MainHELLO.numArtists];
     private static ArrayList<String> urisArrayList = new ArrayList<String>();
     private static String[] uris;
     private static AddItemsToPlaylistRequest addItemsToPlaylistRequest;
@@ -44,27 +44,27 @@ public class CreateExploreArtistsPlaylist {
         index = 0;
         q = "genre:";
         setRandom = new ArrayList<Integer>();
-        randoms = new int[Main.numArtists];
+        randoms = new int[MainHELLO.numArtists];
         urisArrayList = new ArrayList<String>();
         alreadyUsedArtistId = new ArrayList<String>();
     }
     public static void execute(){
         reset();
         try {
-            q += Main.genre;
-                       getCurrentUsersProfileRequest = Main.spotifyApi.getCurrentUsersProfile()
+            q += MainHELLO.genre;
+                       getCurrentUsersProfileRequest = MainHELLO.spotifyApi.getCurrentUsersProfile()
                     .build();
 
-            createPlaylistRequest = Main.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), Main.name)
-                    .public_(Main.playlistPublic)
+            createPlaylistRequest = MainHELLO.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), MainHELLO.name)
+                    .public_(MainHELLO.playlistPublic)
                     .build();
 
             playlist = createPlaylistRequest.execute();
             playlistId = playlist.getId();
 
             for(int i = 0; i < 3; i++){
-                searchArtistsRequest = Main.spotifyApi.searchArtists(q)
-                        .market(Main.location)
+                searchArtistsRequest = MainHELLO.spotifyApi.searchArtists(q)
+                        .market(MainHELLO.location)
             .limit(50)
             .offset(offset)
 //          .includeExternal("audio")
@@ -82,24 +82,24 @@ public class CreateExploreArtistsPlaylist {
                 setRandom.add(x);
             }
             Collections.shuffle(setRandom);
-            for(int i = 0; i < Main.numArtists; i++){
+            for(int i = 0; i < MainHELLO.numArtists; i++){
                 randoms[i] = setRandom.get(i);
             }
 
-            for(int i = 0; i < Main.numArtists; i++){
-                getArtistsAlbumsRequest = Main.spotifyApi.getArtistsAlbums(artistIDs[i])
+            for(int i = 0; i < MainHELLO.numArtists; i++){
+                getArtistsAlbumsRequest = MainHELLO.spotifyApi.getArtistsAlbums(artistIDs[i])
                         .album_type("album")
                         .limit(50)
 //          .offset(0)
-                        .market(Main.location)
+                        .market(MainHELLO.location)
                         .build();
                     final Paging<AlbumSimplified> albumSimplifiedPaging = getArtistsAlbumsRequest.execute();
                     if (albumSimplifiedPaging.getItems().length > 1) {
-                    for(int x = 0; x < Main.limit; x++) {
+                    for(int x = 0; x < MainHELLO.limit; x++) {
 
                             int randomNum = ThreadLocalRandom.current().nextInt(0, albumSimplifiedPaging.getItems().length);
 
-                            GetAlbumsTracksRequest getAlbumsTracksRequest = Main.spotifyApi.getAlbumsTracks(
+                            GetAlbumsTracksRequest getAlbumsTracksRequest = MainHELLO.spotifyApi.getAlbumsTracks(
                                             albumSimplifiedPaging.getItems()[randomNum].getId())
                                     .limit(50)
                                     .build();
@@ -108,12 +108,12 @@ public class CreateExploreArtistsPlaylist {
 
                             int trackRandomNum = ThreadLocalRandom.current().nextInt(0, trackSimplifiedPaging.getItems().length);
                             if (!urisArrayList.contains(trackSimplifiedPaging.getItems()[trackRandomNum].getUri())) {
-                                if(!Main.includeInstrumental && !trackSimplifiedPaging.getItems()[trackRandomNum].getName().toLowerCase().contains("instrumental")){
+                                if(!MainHELLO.includeInstrumental && !trackSimplifiedPaging.getItems()[trackRandomNum].getName().toLowerCase().contains("instrumental")){
                                     urisArrayList.add(trackSimplifiedPaging.getItems()[trackRandomNum].getUri());
                                     System.out.println("ADDED: " + trackSimplifiedPaging.getItems()[trackRandomNum].getName());
                                     Thread.sleep(200);
                                 }
-                                if(Main.includeInstrumental){
+                                if(MainHELLO.includeInstrumental){
                                     urisArrayList.add(trackSimplifiedPaging.getItems()[trackRandomNum].getUri());
                                     System.out.println("ADDED: " + trackSimplifiedPaging.getItems()[trackRandomNum].getName());
                                     Thread.sleep(200);
@@ -123,7 +123,7 @@ public class CreateExploreArtistsPlaylist {
                         uris = new String[urisArrayList.size()];
                         urisArrayList.toArray(uris);
                         urisArrayList.clear();
-                        addItemsToPlaylistRequest = Main.spotifyApi
+                        addItemsToPlaylistRequest = MainHELLO.spotifyApi
                                 .addItemsToPlaylist(playlistId, uris)
                                 .build();
                         snapshotResult = addItemsToPlaylistRequest.execute();

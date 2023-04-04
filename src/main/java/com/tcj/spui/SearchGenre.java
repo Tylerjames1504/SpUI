@@ -15,7 +15,7 @@ public class SearchGenre {
             alphabet = input.nextLine();
         }
         try{
-            final String[] strings = Main.spotifyApi.getAvailableGenreSeeds().build().execute();
+            final String[] strings = MainHELLO.spotifyApi.getAvailableGenreSeeds().build().execute();
             char[] genreChar;
             char[] alphabetChar = alphabet.toCharArray();
             System.out.println();

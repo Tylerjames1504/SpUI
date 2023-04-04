@@ -12,15 +12,15 @@ import se.michaelthelin.spotify.requests.data.users_profile.GetCurrentUsersProfi
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class UserTopTracks {
-    private static final SpotifyApi spotifyApi = Main.spotifyApi;
+    private static final SpotifyApi spotifyApi = MainHELLO.spotifyApi;
     private static GetUsersTopTracksRequest getUsersTopTracksRequest;
     private static Track[] tracks;
 
     public static void execute() {
-        tracks = new Track[Main.limit];
+        tracks = new Track[MainHELLO.limit];
 
         getUsersTopTracksRequest = spotifyApi.getUsersTopTracks()
-                .limit(Main.limit)
+                .limit(MainHELLO.limit)
                 .build();
 
         try {
@@ -39,22 +39,22 @@ public class UserTopTracks {
 
     public static void createUserTopTrackPlaylist(){
         try{
-            GetCurrentUsersProfileRequest getCurrentUsersProfileRequest = Main.spotifyApi.getCurrentUsersProfile()
+            GetCurrentUsersProfileRequest getCurrentUsersProfileRequest = MainHELLO.spotifyApi.getCurrentUsersProfile()
                     .build();
 
-            CreatePlaylistRequest createPlaylistRequest = Main.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), Main.name)
-                    .public_(Main.playlistPublic)
+            CreatePlaylistRequest createPlaylistRequest = MainHELLO.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), MainHELLO.name)
+                    .public_(MainHELLO.playlistPublic)
                     .build();
 
             Playlist playlist = createPlaylistRequest.execute();
             String playlistId = playlist.getId();
 
-            String[] uris = new String[Main.limit];
+            String[] uris = new String[MainHELLO.limit];
             for(int i = 0; i < tracks.length; i++){
                 uris[i] = tracks[i].getUri();
             }
 
-            SnapshotResult addItemsToPlaylistRequest = Main.spotifyApi
+            SnapshotResult addItemsToPlaylistRequest = MainHELLO.spotifyApi
                     .addItemsToPlaylist(playlistId, uris)
                     .build()
                     .execute();

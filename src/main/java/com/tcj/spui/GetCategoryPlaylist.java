@@ -22,8 +22,8 @@ public class GetCategoryPlaylist {
 
     public static Paging<PlaylistSimplified>  getPlaylists() {
         try {
-            getCategoryRequest = Main.spotifyApi.getCategorysPlaylists(Main.category)
-                    .country(Main.location)
+            getCategoryRequest = MainHELLO.spotifyApi.getCategorysPlaylists(MainHELLO.category)
+                    .country(MainHELLO.location)
                     .limit(50)
 //          .offset(0)
                     .build();
@@ -42,7 +42,7 @@ public class GetCategoryPlaylist {
             boolean isListComplete = false;
             ArrayList<String> categories = new ArrayList<String>();
             while(!isListComplete){
-                getListOfCategoriesRequest = Main.spotifyApi.getListOfCategories()
+                getListOfCategoriesRequest = MainHELLO.spotifyApi.getListOfCategories()
                 .limit(50)
                 .offset(offset)
                 .build();

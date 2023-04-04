@@ -19,7 +19,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
-        Main.run();
+        //launch();
+        //MainHELLO.run();
+        Main startProgram = new Main();
     }
 }

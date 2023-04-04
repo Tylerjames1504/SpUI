@@ -28,8 +28,8 @@ public class UserTopArtists {
     public static void getUsersTopArtists() {
         try {
 
-            getUsersTopArtistsRequest = Main.spotifyApi.getUsersTopArtists()
-                    .limit(Main.limit)
+            getUsersTopArtistsRequest = MainHELLO.spotifyApi.getUsersTopArtists()
+                    .limit(MainHELLO.limit)
                     .build();
 
             final Paging<Artist> artistPaging = getUsersTopArtistsRequest.execute();
@@ -52,37 +52,37 @@ public class UserTopArtists {
             urisArrayList = new ArrayList<String>();
             offset = 0;
 
-           GetCurrentUsersProfileRequest getCurrentUsersProfileRequest = Main.spotifyApi.getCurrentUsersProfile()
+           GetCurrentUsersProfileRequest getCurrentUsersProfileRequest = MainHELLO.spotifyApi.getCurrentUsersProfile()
                     .build();
 
-           CreatePlaylistRequest createPlaylistRequest = Main.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), Main.name)
-                   .public_(Main.playlistPublic)
+           CreatePlaylistRequest createPlaylistRequest = MainHELLO.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), MainHELLO.name)
+                   .public_(MainHELLO.playlistPublic)
                    .build();
 
             Playlist playlist = createPlaylistRequest.execute();
             String playlistId = playlist.getId();
 
-            final Paging<Artist> artistPaging = Main.spotifyApi.getUsersTopArtists()
+            final Paging<Artist> artistPaging = MainHELLO.spotifyApi.getUsersTopArtists()
                     .limit(50)
                     .build()
                     .execute();
-            for(int i = 0; i < Main.numArtists; i++){
+            for(int i = 0; i < MainHELLO.numArtists; i++){
                 randomArtistId.add(artistPaging.getItems()[i].getId());
             }
             Collections.shuffle(randomArtistId);
-            for(int i = 0; i < Main.numArtists; i++){
+            for(int i = 0; i < MainHELLO.numArtists; i++){
                 String artistId = randomArtistId.get(i);
 
-                    GetArtistsAlbumsRequest getArtistsAlbumsRequest = Main.spotifyApi.getArtistsAlbums(artistId)
+                    GetArtistsAlbumsRequest getArtistsAlbumsRequest = MainHELLO.spotifyApi.getArtistsAlbums(artistId)
                             .album_type("album")
                             .limit(50)
                             .build();
                     final Paging<AlbumSimplified> albumSimplifiedPaging = getArtistsAlbumsRequest.execute();
                     if (albumSimplifiedPaging.getItems().length > 1) {
-                        for(int x = 0; x < Main.limit; x++){
+                        for(int x = 0; x < MainHELLO.limit; x++){
                             int randomNum = ThreadLocalRandom.current().nextInt(0, albumSimplifiedPaging.getItems().length);
 
-                            GetAlbumsTracksRequest getAlbumsTracksRequest = Main.spotifyApi.getAlbumsTracks(
+                            GetAlbumsTracksRequest getAlbumsTracksRequest = MainHELLO.spotifyApi.getAlbumsTracks(
                                             albumSimplifiedPaging.getItems()[randomNum].getId())
                                     .limit(50)
                                     .build();
@@ -91,12 +91,12 @@ public class UserTopArtists {
 
                             int trackRandomNum = ThreadLocalRandom.current().nextInt(0, trackSimplifiedPaging.getItems().length);
                             if (!urisArrayList.contains(trackSimplifiedPaging.getItems()[trackRandomNum].getUri())) {
-                                if(!Main.includeInstrumental && !trackSimplifiedPaging.getItems()[trackRandomNum].getName().toLowerCase().contains("instrumental")){
+                                if(!MainHELLO.includeInstrumental && !trackSimplifiedPaging.getItems()[trackRandomNum].getName().toLowerCase().contains("instrumental")){
                                     urisArrayList.add(trackSimplifiedPaging.getItems()[trackRandomNum].getUri());
                                     System.out.println("ADDED: " + trackSimplifiedPaging.getItems()[trackRandomNum].getName());
                                     Thread.sleep(200);
                                 }
-                                if(Main.includeInstrumental){
+                                if(MainHELLO.includeInstrumental){
                                     urisArrayList.add(trackSimplifiedPaging.getItems()[trackRandomNum].getUri());
                                     System.out.println("ADDED: " + trackSimplifiedPaging.getItems()[trackRandomNum].getName());
                                     Thread.sleep(200);
@@ -107,7 +107,7 @@ public class UserTopArtists {
                         String[] uris = new String[urisArrayList.size()];
                         urisArrayList.toArray(uris);
                         urisArrayList.clear();
-                        SnapshotResult addItemsToPlaylistRequest = Main.spotifyApi
+                        SnapshotResult addItemsToPlaylistRequest = MainHELLO.spotifyApi
                                 .addItemsToPlaylist(playlistId, uris)
                                 .build()
                                 .execute();

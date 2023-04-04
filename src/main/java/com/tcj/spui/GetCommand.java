@@ -12,17 +12,17 @@ public class GetCommand {
             case "searchartists" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green Enter name you want to search|@"));
-                Main.name = input.nextLine();
+                MainHELLO.name = input.nextLine();
                 System.out.println();
-                GetSearchArtists searching = new GetSearchArtists(Main.spotifyApi, Main.name);
+                GetSearchArtists searching = new GetSearchArtists(MainHELLO.spotifyApi, MainHELLO.name);
                 System.out.println(searching);
                 System.out.println();
             }
             case "getartiststoptracks" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green Enter name you want to search|@"));
-                Main.name = input.nextLine();
-                GetArtistsTopTracks top = new GetArtistsTopTracks(Main.spotifyApi, Main.name, Main.location);
+                MainHELLO.name = input.nextLine();
+                GetArtistsTopTracks top = new GetArtistsTopTracks(MainHELLO.spotifyApi, MainHELLO.name, MainHELLO.location);
                 System.out.println();
                 top.execute();
                 System.out.println();
@@ -30,9 +30,9 @@ public class GetCommand {
             case "getrecommendations" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green Enter the genre you want|@"));
-                Main.genre = input.nextLine();
+                MainHELLO.genre = input.nextLine();
                 System.out.println(ansi().render("@|green Enter how many recommendations you want|@"));
-                Main.limit = input.nextInt();
+                MainHELLO.limit = input.nextInt();
                 System.out.println();
                 GetRecommendations.execute();
                 System.out.println();
@@ -51,7 +51,7 @@ public class GetCommand {
             case "getmytopartists" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green How many top artists would you like to see?|@"));
-                Main.limit = input.nextInt();
+                MainHELLO.limit = input.nextInt();
                 System.out.println();
                 UserTopArtists.getUsersTopArtists();
                 System.out.println();
@@ -60,15 +60,15 @@ public class GetCommand {
                 if (user.equalsIgnoreCase("y")) {
                     input.nextLine();
                     System.out.println(ansi().render("@|green Name of the playlist:|@"));
-                    Main.name = input.nextLine();
+                    MainHELLO.name = input.nextLine();
                     System.out.println(ansi().render("@|green Would you like the playlist to be public? |@@|yellow (y or n)|@"));
-                    Main.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
+                    MainHELLO.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
                     System.out.println(ansi().render("@|green How many artists (randomized) should be included in the playlist?|@"));
-                    Main.numArtists = input.nextInt();
+                    MainHELLO.numArtists = input.nextInt();
                     System.out.println(ansi().render("@|green How many songs per artists?|@"));
-                    Main.limit = input.nextInt();
+                    MainHELLO.limit = input.nextInt();
                     System.out.println(ansi().render("@|green Include instrumental? |@@|yellow (y or n)|@"));
-                    Main.includeInstrumental = input.next().equalsIgnoreCase("y");
+                    MainHELLO.includeInstrumental = input.next().equalsIgnoreCase("y");
                     System.out.println();
                     UserTopArtists.createUsersTopArtistsPlaylist();
                 }
@@ -77,7 +77,7 @@ public class GetCommand {
             case "getmytoptracks" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green How many tracks would you like to see?|@"));
-                Main.limit = input.nextInt();
+                MainHELLO.limit = input.nextInt();
                 System.out.println();
                 UserTopTracks.execute();
                 System.out.println();
@@ -85,9 +85,9 @@ public class GetCommand {
                 if (input.next().equalsIgnoreCase("y")) {
                     input.nextLine();
                     System.out.println(ansi().render("@|green Name of the playlist:|@"));
-                    Main.name = input.nextLine();
+                    MainHELLO.name = input.nextLine();
                     System.out.println(ansi().render("@|green Would you like the playlist to be public? |@@|yellow (y or n)|@"));
-                    Main.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
+                    MainHELLO.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
                     System.out.println();
                     UserTopTracks.createUserTopTrackPlaylist();
                 }
@@ -96,9 +96,9 @@ public class GetCommand {
             case "createplaylist" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green Name of the playlist:|@"));
-                Main.name = input.nextLine();
+                MainHELLO.name = input.nextLine();
                 System.out.println(ansi().render("@|green Would you like the playlist to be public? |@@|yellow (y or n)|@"));
-                Main.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
+                MainHELLO.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
                 System.out.println();
                 CreatePlaylist.execute();
                 System.out.println();
@@ -106,17 +106,17 @@ public class GetCommand {
             case "createcategoryplaylist" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green Category you want:|@"));
-                Main.category = input.nextLine();
+                MainHELLO.category = input.nextLine();
                 System.out.println(ansi().render("@|green Genre preference (in case there are duplicates):|@"));
-                Main.genre = input.nextLine();
+                MainHELLO.genre = input.nextLine();
                 System.out.println(ansi().render("@|green Name of the playlist:|@"));
-                Main.name = input.nextLine();
+                MainHELLO.name = input.nextLine();
                 System.out.println(ansi().render("@|green Would you like the playlist to be public? |@@|yellow (y or n)|@"));
-                Main.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
+                MainHELLO.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
                 System.out.println(ansi().render("@|green How many playlists to search?|@ @|yellow (Total # of songs = [# of playlists] X [# of songs per playlist])|@"));
-                Main.numPlaylists = input.nextInt();
+                MainHELLO.numPlaylists = input.nextInt();
                 System.out.println(ansi().render("@|green How many songs per playlist?|@ @|yellow (Total # of songs = [# of playlists] X [# of songs per playlist])|@"));
-                Main.limit = input.nextInt();
+                MainHELLO.limit = input.nextInt();
                 System.out.println();
                 CreateCategoryPlaylist.execute();
                 System.out.println();
@@ -124,16 +124,16 @@ public class GetCommand {
             case "remixplaylists" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green Genre preference|@ @|yellow (This is for in case there are duplicates. Press enter to skip):|@"));
-                Main.genre = input.nextLine();
+                MainHELLO.genre = input.nextLine();
                 System.out.println(ansi().render("@|green Name of the playlist:|@"));
-                Main.name = input.nextLine();
+                MainHELLO.name = input.nextLine();
                 System.out.println(ansi().render("@|green Would you like the playlist to be public? |@@|yellow (y or n)|@"));
-                Main.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
+                MainHELLO.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
                 System.out.println(ansi().render("@|green How many playlists to search? |@" +
                         "\n@|yellow (Current number playlists in the file: " + RemixPlaylists.playlistNumbers() + ")|@"));
-                Main.numPlaylists = input.nextInt();
+                MainHELLO.numPlaylists = input.nextInt();
                 System.out.println(ansi().render("@|green How many songs per playlist|@ @|yellow [Max: 100]|@@|green ?|@ @|yellow (Total # of songs = [# of playlists] X [# of songs per playlists])|@"));
-                Main.limit = input.nextInt();
+                MainHELLO.limit = input.nextInt();
                 System.out.println();
                 RemixPlaylists.execute();
                 System.out.println();
@@ -141,11 +141,11 @@ public class GetCommand {
             case "createrecommendedplaylist" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green Genre you want:|@"));
-                Main.genre = input.nextLine();
+                MainHELLO.genre = input.nextLine();
                 System.out.println(ansi().render("@|green Name of the playlist:|@"));
-                Main.name = input.nextLine();
+                MainHELLO.name = input.nextLine();
                 System.out.println(ansi().render("@|green Would you like the playlist to be public? |@@|yellow (y or n)|@"));
-                Main.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
+                MainHELLO.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
                 System.out.println();
                 CreateRecommendedPlaylist.execute();
                 System.out.println();
@@ -158,17 +158,17 @@ public class GetCommand {
             case "createexploreartistsplaylist" -> {
                 AuthorizationCodeRefresh.authorizationCodeRefresh();
                 System.out.println(ansi().render("@|green What genre?|@"));
-                Main.genre = input.nextLine();
+                MainHELLO.genre = input.nextLine();
                 System.out.println(ansi().render("@|green Name of the playlist?|@"));
-                Main.name = input.nextLine();
+                MainHELLO.name = input.nextLine();
                 System.out.println(ansi().render("@|green Would you like the playlist to be public? |@@|yellow (y or n)|@"));
-                Main.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
+                MainHELLO.playlistPublic = (input.nextLine().equalsIgnoreCase("y"));
                 System.out.println(ansi().render("@|green How many artists?|@"));
-                Main.numArtists = input.nextInt();
+                MainHELLO.numArtists = input.nextInt();
                 System.out.println(ansi().render("@|green How many songs per artist?|@"));
-                Main.limit = input.nextInt();
+                MainHELLO.limit = input.nextInt();
                 System.out.println(ansi().render("@|green Include instrumental?|@ @|yellow (y or n)|@"));
-                Main.includeInstrumental = input.next().equalsIgnoreCase("y");
+                MainHELLO.includeInstrumental = input.next().equalsIgnoreCase("y");
                 System.out.println();
                 CreateExploreArtistsPlaylist.execute();
                 System.out.println();

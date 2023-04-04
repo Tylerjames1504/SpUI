@@ -26,7 +26,7 @@ public class AuthorizationCodeRefresh {
                 data = reader.nextLine();
                 if (data.startsWith("code=")) {
                     code = data.substring(5);
-                    authorizationCodeRequest = Main.spotifyApi.authorizationCode(code)
+                    authorizationCodeRequest = MainHELLO.spotifyApi.authorizationCode(code)
                             .build();
                 }
             }
@@ -37,12 +37,12 @@ public class AuthorizationCodeRefresh {
 
     public static void authorizationCodeRefresh() {
         try {
-            authorizationCodeRefreshRequest = Main.spotifyApi.authorizationCodeRefresh()
+            authorizationCodeRefreshRequest = MainHELLO.spotifyApi.authorizationCodeRefresh()
                     .build();
             final AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRefreshRequest.execute();
 
             // Set access and refresh token for further "spotifyApi" object usage
-            Main.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken());
+            MainHELLO.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken());
         } catch (Exception e) {
             System.out.println(ansi().render("@|red Error: " + e.getMessage() + "|@"));
         }
@@ -53,8 +53,8 @@ public class AuthorizationCodeRefresh {
             final AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRequest.execute();
 
             // Set access and refresh token for further "spotifyApi" object usage
-            Main.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken());
-            Main.spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken());
+            MainHELLO.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken());
+            MainHELLO.spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken());
 
                 File myObj = new File("refresh.txt");
                 PrintWriter output = new PrintWriter(myObj);

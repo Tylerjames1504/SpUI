@@ -34,11 +34,11 @@ public class RemixPlaylists {
 
     public static void createPlaylist() {
         try {
-            getCurrentUsersProfileRequest = Main.spotifyApi.getCurrentUsersProfile()
+            getCurrentUsersProfileRequest = MainHELLO.spotifyApi.getCurrentUsersProfile()
                     .build();
 
-            createPlaylistRequest = Main.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), Main.name)
-                    .public_(Main.playlistPublic)
+            createPlaylistRequest = MainHELLO.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), MainHELLO.name)
+                    .public_(MainHELLO.playlistPublic)
                     .build();
 
             playlist = createPlaylistRequest.execute();
@@ -61,7 +61,7 @@ public class RemixPlaylists {
                 }
             }
             for (int i = 0; i < playlistArrayList.size(); i++) {
-                GetPlaylistRequest getPlaylistRequest = Main.spotifyApi.getPlaylist(playlistArrayList.get(i))
+                GetPlaylistRequest getPlaylistRequest = MainHELLO.spotifyApi.getPlaylist(playlistArrayList.get(i))
                         .build();
 
                 playlists.add(getPlaylistRequest.execute());
@@ -72,9 +72,9 @@ public class RemixPlaylists {
     }
     public static void addSongs() {
         try {
-            for (int i = 0; i < Main.numPlaylists; i++) {
+            for (int i = 0; i < MainHELLO.numPlaylists; i++) {
 
-                getPlaylistsItemsRequest = Main.spotifyApi
+                getPlaylistsItemsRequest = MainHELLO.spotifyApi
                         .getPlaylistsItems(playlists.get(i).getId())
                         .build();
 
@@ -82,19 +82,19 @@ public class RemixPlaylists {
                 for(int z = 0; z < getPlaylistsItemsRequest.execute().getItems().length; z++){
                     randomArray.add(z);
                 }
-                randomNumbers = new int[Main.limit];
+                randomNumbers = new int[MainHELLO.limit];
                 Collections.shuffle(randomArray);
                 for(int z = 0; z < randomNumbers.length; z++){
                     randomNumbers[z] = randomArray.get(z);
                 }
 
-                for (int x = 0; x < Main.limit; x++) {
+                for (int x = 0; x < MainHELLO.limit; x++) {
                     IPlaylistItem playlistItem = getPlaylistsItemsRequest.execute().getItems()[randomNumbers[x]].getTrack();
                     if (playlistItem.getType().toString().equals("TRACK")
                             && !urisList.contains(playlistItem.getUri())) {
                         urisList.add(playlistItem.getUri());
                         System.out.println("ADDED: " + playlistItem.getName());
-                    }else if (!(Main.genre.length()==0)){
+                    }else if (!(MainHELLO.genre.length()==0)){
                         Recommendations rec = GetRecommendations.getRecommendations();
 
                         while(urisList.contains(rec.getTracks()[0].getUri())){
@@ -109,7 +109,7 @@ public class RemixPlaylists {
 
                 urisList.toArray(uris);
                 urisList.clear();
-                addItemsToPlaylistRequest = Main.spotifyApi
+                addItemsToPlaylistRequest = MainHELLO.spotifyApi
                         .addItemsToPlaylist(playlistId, uris)
                         .build();
                 addItemsToPlaylistRequest.execute();

@@ -5,7 +5,7 @@ import se.michaelthelin.spotify.requests.data.browse.miscellaneous.GetAvailableG
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class GetSeedGenreList {
-    private static final GetAvailableGenreSeedsRequest getAvailableGenreSeedsRequest = Main.spotifyApi.getAvailableGenreSeeds()
+    private static final GetAvailableGenreSeedsRequest getAvailableGenreSeedsRequest = MainHELLO.spotifyApi.getAvailableGenreSeeds()
             .build();
 
     public static void getAvailableGenreSeeds_Sync() {

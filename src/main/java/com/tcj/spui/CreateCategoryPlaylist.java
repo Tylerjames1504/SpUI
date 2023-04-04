@@ -37,11 +37,11 @@ public class CreateCategoryPlaylist {
     }
     public static void createPlaylist() {
         try {
-            getCurrentUsersProfileRequest = Main.spotifyApi.getCurrentUsersProfile()
+            getCurrentUsersProfileRequest = MainHELLO.spotifyApi.getCurrentUsersProfile()
                     .build();
 
-            createPlaylistRequest = Main.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), Main.name)
-                    .public_(Main.playlistPublic)
+            createPlaylistRequest = MainHELLO.spotifyApi.createPlaylist(getCurrentUsersProfileRequest.execute().getId(), MainHELLO.name)
+                    .public_(MainHELLO.playlistPublic)
                     .build();
 
             playlist = createPlaylistRequest.execute();
@@ -61,13 +61,13 @@ public class CreateCategoryPlaylist {
                 setRandom.add(i);
             }
             Collections.shuffle(setRandom);
-            for(int i = 0; i < Main.numPlaylists; i++){
+            for(int i = 0; i < MainHELLO.numPlaylists; i++){
                 randomPlaylistNumbers[i] = setRandom.get(i);
             }
 
-            for (int i = 0; i < Main.numPlaylists; i++) {
+            for (int i = 0; i < MainHELLO.numPlaylists; i++) {
 
-                    getPlaylistsItemsRequest = Main.spotifyApi
+                    getPlaylistsItemsRequest = MainHELLO.spotifyApi
                             .getPlaylistsItems(playlistSimplifiedPaging.getItems()[randomPlaylistNumbers[i]].getId())
                             .build();
                 randomNumbers = new int[getPlaylistsItemsRequest.execute().getItems().length];
@@ -76,13 +76,13 @@ public class CreateCategoryPlaylist {
                     setRandom.add(z);
                 }
                 Collections.shuffle(setRandom);
-                for(int z = 0; z < Main.limit; z++){
+                for(int z = 0; z < MainHELLO.limit; z++){
                     randomNumbers[i] = setRandom.get(i);
                 }
 
                 Paging<PlaylistTrack> playlistSimplifiedPaging1 = getPlaylistsItemsRequest.execute();
 
-                for (int x = 0; x < Main.limit; x++) {
+                for (int x = 0; x < MainHELLO.limit; x++) {
                         if (playlistSimplifiedPaging1.getItems()[randomNumbers[x]].getTrack().getType().toString().equals("TRACK")
                                 && !urisList.contains(playlistSimplifiedPaging1.getItems()[randomNumbers[x]].getTrack().getUri())) {
                             urisList.add(playlistSimplifiedPaging1.getItems()[randomNumbers[x]].getTrack().getUri());
@@ -104,7 +104,7 @@ public class CreateCategoryPlaylist {
 
                 urisList.toArray(uris);
                 urisList.clear();
-                addItemsToPlaylistRequest = Main.spotifyApi
+                addItemsToPlaylistRequest = MainHELLO.spotifyApi
                         .addItemsToPlaylist(playlistId, uris)
                         .build();
                 SnapshotResult snapshotResult = addItemsToPlaylistRequest.execute();

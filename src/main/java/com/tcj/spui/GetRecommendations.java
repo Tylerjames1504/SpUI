@@ -11,7 +11,7 @@ import java.io.IOException;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class GetRecommendations {
-    private static final SpotifyApi spotifyApi = Main.spotifyApi;
+    private static final SpotifyApi spotifyApi = MainHELLO.spotifyApi;
     private int limit;
     private String genre;
 
@@ -19,9 +19,9 @@ public class GetRecommendations {
 
     public static void execute() {
         getRecommendationsRequest = spotifyApi.getRecommendations()
-                .limit(Main.limit)
-                .market(Main.location)
-                .seed_genres(Main.genre)
+                .limit(MainHELLO.limit)
+                .market(MainHELLO.location)
+                .seed_genres(MainHELLO.genre)
                 .build();
         try {
             final Recommendations recommendations = getRecommendationsRequest.execute();
@@ -39,8 +39,8 @@ public class GetRecommendations {
 
     public static Recommendations getRecommendations() {
         getRecommendationsRequest = spotifyApi.getRecommendations()
-                .seed_genres(Main.genre)
-                .market(Main.location)
+                .seed_genres(MainHELLO.genre)
+                .market(MainHELLO.location)
                 .build();
         try {
             Recommendations recommendations = getRecommendationsRequest.execute();
@@ -54,8 +54,8 @@ public class GetRecommendations {
     public static Recommendations getFullRecommendations() {
         getRecommendationsRequest = spotifyApi.getRecommendations()
                 .limit(50)
-                .seed_genres(Main.genre)
-                .market(Main.location)
+                .seed_genres(MainHELLO.genre)
+                .market(MainHELLO.location)
                 .build();
         try {
             final Recommendations recommendations = getRecommendationsRequest.execute();
