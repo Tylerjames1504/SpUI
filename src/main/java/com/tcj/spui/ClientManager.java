@@ -42,6 +42,7 @@ public class ClientManager {
                 .show_dialog(true).build();
         return authorizationCodeUriRequest.execute().toString();
     }
+
     public void initiateApp() {
         try {
             if (Desktop.isDesktopSupported()) Desktop.getDesktop().browse(uri);
