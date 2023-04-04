@@ -41,27 +41,9 @@ public class ClientManager {
                         "playlist-modify-public, playlist-modify-private, user-top-read")
                 .show_dialog(true).build();
     }
-    public void initiateApp() {
+    public void initiateApp(String token) {
         try {
-            if (Desktop.isDesktopSupported()) Desktop.getDesktop().browse(uri);
-            String cmd = "";
-            ServerSocket ss=new ServerSocket(8080, 1, InetAddress.getByName("127.0.0.1"));
-            Socket s=ss.accept();//establishes connection
-            var rawIn = s.getInputStream();
-            var in = new BufferedReader(new InputStreamReader(rawIn, StandardCharsets.US_ASCII)); {
-                while (true){
-                    cmd = in.readLine().trim();
-                    if (cmd == null) break; //client is hung up
-                    if (cmd.isEmpty()) continue; //empty line was sent
-                    if(cmd.indexOf("code") != -1){
-                        cmd = cmd.substring(cmd.indexOf("code")+5,cmd.indexOf("state") - 1);
-                        cmd = cmd.replaceAll("\\s.*", "");
-                        break;
-                    }
-                }
-            }
-            ss.close(); s.close(); rawIn.close(); in.close();
-            AuthorizationCodeRequest authorizationCodeRequest = this.spotifyApi.authorizationCode(cmd)
+            AuthorizationCodeRequest authorizationCodeRequest = this.spotifyApi.authorizationCode(token)
                     .build();
             AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRequest.execute();
             this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
