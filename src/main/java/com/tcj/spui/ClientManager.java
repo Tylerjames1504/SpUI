@@ -33,15 +33,16 @@ public class ClientManager {
                 .setClientSecret("b604863adab94bfb947b81500e03c78e") // get from database, currently hardcoded
                 .setRedirectUri(redirectUri)
                 .build();
-        this.initiateApp();
     }
-    private void initiateApp() {
+    public String authorizeUser() {
         AuthorizationCodeUriRequest authorizationCodeUriRequest = this.spotifyApi.authorizationCodeUri()
                 .state("x4xkmn9pu3j6uwt7en")
                 .scope("user-read-private, user-read-email, playlist-read-private, playlist-read-collaborative, " +
                         "playlist-modify-public, playlist-modify-private, user-top-read")
                 .show_dialog(true).build();
-        URI uri = authorizationCodeUriRequest.execute();
+        return authorizationCodeUriRequest.execute().toString();
+    }
+    public void initiateApp() {
         try {
             if (Desktop.isDesktopSupported()) Desktop.getDesktop().browse(uri);
             String cmd = "";
