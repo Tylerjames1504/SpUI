@@ -18,7 +18,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         engine = webView.getEngine();
-        engine.load(session.authorizeUser());
+        engine.load(session.getAuthRequestLink());
         session.initiateApp();
     }
 }

@@ -23,26 +23,24 @@ public class ClientManager {
     private final String clientId = "4076d474b9884c8f88f3c9cf40f80890";
     private final URI redirectUri = URI.create("http://localhost:8080/callback");
     private SpotifyApi spotifyApi;
+    private AuthorizationCodeUriRequest authorizationCodeUriRequest;
 
     public SpotifyApi callApi() {
         return this.spotifyApi;
     }
+    public String getAuthRequestLink() { return authorizationCodeUriRequest.execute().toString(); }
     public ClientManager() {
         this.spotifyApi = new SpotifyApi.Builder()
                 .setClientId(clientId)
                 .setClientSecret("b604863adab94bfb947b81500e03c78e") // get from database, currently hardcoded
                 .setRedirectUri(redirectUri)
                 .build();
-    }
-    public String authorizeUser() {
-        AuthorizationCodeUriRequest authorizationCodeUriRequest = this.spotifyApi.authorizationCodeUri()
+        this.authorizationCodeUriRequest = this.spotifyApi.authorizationCodeUri()
                 .state("x4xkmn9pu3j6uwt7en")
                 .scope("user-read-private, user-read-email, playlist-read-private, playlist-read-collaborative, " +
                         "playlist-modify-public, playlist-modify-private, user-top-read")
                 .show_dialog(true).build();
-        return authorizationCodeUriRequest.execute().toString();
     }
-
     public void initiateApp() {
         try {
             if (Desktop.isDesktopSupported()) Desktop.getDesktop().browse(uri);
