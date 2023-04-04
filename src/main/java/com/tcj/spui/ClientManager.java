@@ -35,7 +35,7 @@ public class ClientManager {
                 .build();
         this.initiateApp();
     }
-    public void initiateApp() {
+    private void initiateApp() {
         AuthorizationCodeUriRequest authorizationCodeUriRequest = this.spotifyApi.authorizationCodeUri()
                 .state("x4xkmn9pu3j6uwt7en")
                 .scope("user-read-private, user-read-email, playlist-read-private, playlist-read-collaborative, " +
