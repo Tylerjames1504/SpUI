@@ -25,7 +25,7 @@ public class ClientManager {
     private SpotifyApi spotifyApi;
     private AuthorizationCodeUriRequest authorizationCodeUriRequest;
 
-    public SpotifyApi callApi() {
+    public SpotifyApi grabApi() {
         return this.spotifyApi;
     }
     public String getAuthRequestLink() { return authorizationCodeUriRequest.execute().toString(); }

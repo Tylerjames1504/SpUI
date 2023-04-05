@@ -7,21 +7,27 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class App extends Application {
+    public static ClientManager session; // session is accessible across all controls which allows them to access spotifyApi data and also refresh the auth token
     @Override
     public void start(Stage initialStage) throws IOException {
-        Parent base = FXMLLoader.load(getClass().getResource("APP.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        session = new ClientManager();
+        Parent base = loader.load();
         initialStage.setTitle("Login");
+        initialStage.centerOnScreen();
         initialStage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
-        initialStage.setScene(new Scene(base));
+        Scene login = new Scene(base);
+        initialStage.setScene(login);
+        initialStage.setResizable(false);
+        login.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("login_style.css")).toExternalForm());
         initialStage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
+    public static void main(String[] args) { launch();}
 
 
 }
