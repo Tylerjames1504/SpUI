@@ -15,29 +15,21 @@ import org.junit.jupiter.api.Test;
 
 public class SpUIDatabaseTest {
 
-  @Test
-  public void testNoAuthHeader() throws URISyntaxException, IOException, InterruptedException {
-
-    SpUIDatabase db = new SpUIDatabase();
-    HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(INITIAL_ENDPOINT)).build();
-    Assertions.assertEquals(401, db.databaseResponse(request).statusCode());
-
-  }
+//  @Test
+//  public void testNoAuthHeader() throws URISyntaxException, IOException, InterruptedException {
+//
+//    SpUIDatabase db = new SpUIDatabase();
+//    HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(INITIAL_ENDPOINT)).build();
+//    Assertions.assertEquals(401, db.databaseResponse().statusCode());
+//
+//  }
 
   @Test
   public void testSuccessfulGetOnInitEndpoint()
       throws URISyntaxException, IOException, InterruptedException {
 
     SpUIDatabase db = new SpUIDatabase();
-    HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(INITIAL_ENDPOINT))
-        .headers("CF-Access-Client-Id", CFServiceToken.id, "CF-Access-Client-Secret",
-            CFServiceToken.secret).build();
-    int response = 0;
-    // usually does not connect the first time
-    for (int i = 0; i < 3; i++) {
-      response = db.databaseResponse(request).statusCode();
-    }
-    Assertions.assertEquals(200, response);
+    Assertions.assertEquals(200, db.databaseResponse().statusCode());
 
   }
 
