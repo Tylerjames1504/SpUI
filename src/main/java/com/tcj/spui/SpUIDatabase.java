@@ -19,6 +19,9 @@ public class SpUIDatabase {
 
   public static final String INITIAL_ENDPOINT = "https://spui.tylerturner.tech";
 
+  public static final String CF_ACCESS_CLIENT_ID = System.getenv("CF_ACCESS_CLIENT_ID");
+  public static final String CF_ACCESS_CLIENT_SECRET = System.getenv("CF_ACCESS_CLIENT_SECRET");
+
   public HttpClient client;
 
   private String authHeader;
@@ -42,8 +45,8 @@ public class SpUIDatabase {
     do {
       response = this.client.send(
           HttpRequest.newBuilder().GET().uri(URI.create(INITIAL_ENDPOINT))
-              .headers("CF-Access-Client-Id", Secrets.id, "CF-Access-Client-Secret",
-                  Secrets.secret).build(), HttpResponse.BodyHandlers.ofString());
+              .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+                  CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
       if (response.statusCode() == 200) {
         return response;
       }
@@ -84,8 +87,8 @@ public class SpUIDatabase {
   public String getClientSecret()
       throws Exception {
 
-    return stripResponse(this.client.send(HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/app")).headers("CF-Access-Client-Id", Secrets.id, "CF-Access-Client-Secret",
-        Secrets.secret).build(), HttpResponse.BodyHandlers.ofString())).get("client_secret");
+    return stripResponse(this.client.send(HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/app")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+        CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString())).get("client_secret");
 
   }
 

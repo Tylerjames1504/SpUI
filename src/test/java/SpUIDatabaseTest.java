@@ -1,6 +1,5 @@
 import static com.tcj.spui.SpUIDatabase.INITIAL_ENDPOINT;
 
-import com.tcj.spui.Secrets;
 import com.tcj.spui.SpUIDatabase;
 import java.io.IOException;
 import java.lang.reflect.MalformedParameterizedTypeException;
@@ -30,8 +29,9 @@ public class SpUIDatabaseTest {
 
   @Test
   public void testGetClientSecret() throws Exception {
+    String CLIENT_SECRET = System.getenv("CLIENT_SECRET");
     SpUIDatabase db = new SpUIDatabase();
-    Assertions.assertEquals(Secrets.appSecret, db.getClientSecret());
+    Assertions.assertEquals(CLIENT_SECRET, db.getClientSecret());
   }
 
   @Test
