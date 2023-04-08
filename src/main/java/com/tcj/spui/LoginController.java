@@ -38,11 +38,8 @@ public class LoginController implements Initializable {
                 stage.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("home_page_style.css")).toExternalForm());
                 stage.centerOnScreen();
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
-                stage.setMinWidth(640);
-                stage.setMinHeight(360);
-                stage.setMaxWidth(1920);
-                stage.setMaxHeight(1080);
                 stage.setTitle("Home");
+                stage.setResizable(false);
                 stage.show();
             }
         });

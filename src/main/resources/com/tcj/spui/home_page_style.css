@@ -3,4 +3,38 @@
 }
 #leftPane{
     -fx-background-color: #181818;
+    -fx-background-radius: 20px;
 }
+#middleLeftPane{
+    -fx-background-color: #181818;
+    -fx-background-radius: 20px;
+}
+#middleRightPane{
+    -fx-background-color: #181818;
+    -fx-background-radius: 20px;
+}
+#myTopArtistsInnerPane{
+    -fx-background-color: #191414;
+    -fx-background-radius: 10px;
+}
+#myTopSongsInnerPane{
+    -fx-background-color: #191414;
+    -fx-background-radius: 10px;
+}
+#topArtistsLabel{
+    -fx-font-family: Techno;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+#topSongsLabel{
+    -fx-font-family: Techno;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+/*#buttonTest{
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-image: url("https://media.geeksforgeeks.org/wp-content/uploads/20190314004249/sample-image2.png");
+}*/

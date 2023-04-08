@@ -11,7 +11,7 @@ import java.util.Objects;
 
 
 public class App extends Application {
-    public static ClientManager session; // session is accessible across all controls which allows them to access spotifyApi data and also refresh the auth token
+    public static ClientManager session; // session is accessible across all controllers which allows them to access spotifyApi data and also refresh the auth token
     @Override
     public void start(Stage initialStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
