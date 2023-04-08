@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
         env: |
-         CF_ACCESS_CLIENT_ID = ${{ secret.CF_ACCESS_CLIENT_ID }}
-         CF_ACCESS_CLIENT_SECRET = $ {{ secret.CF_ACCESS_CLIENT_SECRET }}
+         CF_ACCESS_CLIENT_ID = ${{ secrets.CF_ACCESS_CLIENT_ID }}
+         CF_ACCESS_CLIENT_SECRET = $ {{ secrets.CF_ACCESS_CLIENT_SECRET }}
     - name: Build with Maven
       run: mvn -B package --file pom.xml
