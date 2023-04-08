@@ -104,7 +104,7 @@ public class SpUIDatabase {
       throws Exception {
 
     SpUIDatabase db = new SpUIDatabase();
-    System.out.println(db.response.body());
+    System.out.println(db.response);
 
     System.out.println(db.getClientSecret());
   }
