@@ -33,6 +33,150 @@
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
+#changeArtists{
+    -fx-font-family: Techno;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-background-color: #181818;
+}
+#errorLabelArtists{
+    -fx-background-color: transparent;
+    -fx-font-family: Techno;
+    -fx-font-size: 18px;
+}
+#artistHover0 {
+    -fx-background-radius: 5px;
+}
+#artistHover1 {
+    -fx-background-radius: 5px;
+}
+#artistHover2 {
+    -fx-background-radius: 5px;
+}
+#artistHover3 {
+    -fx-background-radius: 5px;
+}
+#artistHover4 {
+    -fx-background-radius: 5px;
+}
+#artistHover5 {
+    -fx-background-radius: 5px;
+}
+#artistHover6 {
+    -fx-background-radius: 5px;
+}
+#artistHover7 {
+    -fx-background-radius: 5px;
+}
+#artistHover8 {
+    -fx-background-radius: 5px;
+}
+#artistHover9 {
+    -fx-background-radius: 5px;
+}
+#topArtistInfo0 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+#topArtistInfo1 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo3 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo4 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo5 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo6 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo7 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo8 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistInfo9 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu0 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+#topArtistPopu1{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu3 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu4 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu5 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu6 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu7 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu8 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topArtistPopu9 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+
 /*#buttonTest{
     -fx-background-size: cover;
     -fx-background-position: center;

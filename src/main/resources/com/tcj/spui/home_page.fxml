@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
@@ -11,12 +11,51 @@
       <Region fx:id="leftPane" layoutX="20.0" layoutY="14.0" prefHeight="697.0" prefWidth="274.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <Region fx:id="middleLeftPane" layoutX="290.0" layoutY="10.0" prefHeight="700.0" prefWidth="482.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="10.0" />
       <Region fx:id="middleRightPane" layoutX="784.0" layoutY="10.0" prefHeight="700.0" prefWidth="482.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <Label fx:id="topArtistsLabel" layoutX="319.0" layoutY="28.0" prefHeight="34.0" prefWidth="458.0" text="My Top Artists" />
+      <Label fx:id="topArtistsLabel" layoutX="319.0" layoutY="28.0" prefHeight="34.0" prefWidth="442.0" text="My Top Artists" />
       <Label fx:id="topSongsLabel" layoutX="813.0" layoutY="28.0" prefHeight="34.0" prefWidth="442.0" stylesheets="@home_page_style.css" text="My Top Songs" />
-      <Button layoutX="604.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Button" />
       <Region fx:id="myTopArtistsInnerPane" layoutX="315.0" layoutY="71.0" prefHeight="619.0" prefWidth="442.0" />
       <Region fx:id="myTopSongsInnerPane" layoutX="809.0" layoutY="71.0" prefHeight="619.0" prefWidth="442.0" />
-      <Button layoutX="515.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Button" />
-      <ImageView fx:id="topArtistImage0" fitHeight="128.0" fitWidth="128.0" layoutX="336.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="errorLabelArtists" layoutX="380.0" layoutY="98.0" prefHeight="54.0" prefWidth="377.0" textFill="WHITE" />
+      <Region fx:id="artistHover0" layoutX="322.0" layoutY="78.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="74.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo0" layoutX="415.0" layoutY="103.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu0" layoutX="615.0" layoutY="103.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover1" layoutX="322.0" layoutY="157.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo1" layoutX="415.0" layoutY="176.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu1" layoutX="615.0" layoutY="176.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover2" layoutX="322.0" layoutY="216.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo2" layoutX="415.0" layoutY="235.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu2" layoutX="615.0" layoutY="235.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover3" layoutX="322.0" layoutY="275.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo3" layoutX="415.0" layoutY="294.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu3" layoutX="615.0" layoutY="294.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover4" layoutX="322.0" layoutY="334.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo4" layoutX="415.0" layoutY="353.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu4" layoutX="615.0" layoutY="353.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover5" layoutX="322.0" layoutY="393.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo5" layoutX="415.0" layoutY="412.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu5" layoutX="615.0" layoutY="412.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover6" layoutX="322.0" layoutY="452.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo6" layoutX="415.0" layoutY="471.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu6" layoutX="615.0" layoutY="471.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover7" layoutX="322.0" layoutY="511.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo7" layoutX="415.0" layoutY="530.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu7" layoutX="615.0" layoutY="530.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover8" layoutX="322.0" layoutY="570.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo8" layoutX="415.0" layoutY="589.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu8" layoutX="615.0" layoutY="589.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Region fx:id="artistHover9" layoutX="322.0" layoutY="629.0" onMouseEntered="#onHover" onMouseExited="#offHover" prefHeight="54.0" prefWidth="430.0" />
+      <Label fx:id="topArtistInfo9" layoutX="415.0" layoutY="648.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <Label fx:id="topArtistPopu9" layoutX="615.0" layoutY="648.0" onMouseEntered="#onHover" onMouseExited="#offHover" textFill="WHITE" />
+      <ToggleButton fx:id="changeArtists" layoutX="640.0" layoutY="30.0" mnemonicParsing="false" onAction="#populateArtists" onMouseEntered="#underline" onMouseExited="#reset" text="Show All Time" />
+      <ImageView fx:id="topArtistImage0" fitHeight="70.0" fitWidth="70.0" layoutX="325.0" layoutY="80.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage1" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="159.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage2" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="218.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage3" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="277.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage4" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="336.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage5" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="395.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage6" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="454.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage7" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="513.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage8" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="572.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topArtistImage9" fitHeight="50.0" fitWidth="50.0" layoutX="325.0" layoutY="631.0" onMouseEntered="#onHover" onMouseExited="#offHover" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
