@@ -318,8 +318,8 @@ public class HomePageController {
             if (sourceInfo[1].toLowerCase().contains("song")) Desktop.getDesktop().browse(new URI(trackPaging.getItems()[index].getExternalUrls().get("spotify")));
             if (sourceInfo[1].toLowerCase().contains("artist")) Desktop.getDesktop().browse(new URI(artistPaging.getItems()[index].getExternalUrls().get("spotify")));
             if (sourceInfo[1].toLowerCase().contains("discov")) {
-                Desktop.getDesktop().browse(new URI(discoveryShown[index].getExternalUrls().get("spotify")));
                 Desktop.getDesktop().browse(new URI(discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify")));
+                Desktop.getDesktop().browse(new URI(discoveryShown[index].getExternalUrls().get("spotify")));
             }
         }
         catch (IOException | URISyntaxException e) {
