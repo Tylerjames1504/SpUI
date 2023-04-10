@@ -321,6 +321,92 @@
     -fx-font-size: 14px;
 }
 
+
+#topLeftMenuPane {
+    -fx-background-color: #191414;
+    -fx-background-radius: 10px;
+}
+#bottomLeftMenuPane {
+    -fx-background-color: #191414;
+    -fx-background-radius: 10px;
+}
+#discoveryColumnLabel {
+    -fx-font-family: Techno;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+#discovHover0 {
+    -fx-background-radius: 5px;
+}
+#discovHover1 {
+    -fx-background-radius: 5px;
+}
+#discovHover2 {
+    -fx-background-radius: 5px;
+}
+#discovHover3 {
+    -fx-background-radius: 5px;
+}
+#discovHover4 {
+    -fx-background-radius: 5px;
+}
+#discovHover5 {
+    -fx-background-radius: 5px;
+}
+#discovHover6 {
+    -fx-background-radius: 5px;
+}
+#discovHover7 {
+    -fx-background-radius: 5px;
+}
+#discovHover8 {
+    -fx-background-radius: 5px;
+}
+#discovHover9 {
+    -fx-background-radius: 5px;
+}
+#discovInfo0 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#discovInfo1 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#discovInfo2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#discovInfo3 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#discovInfo4 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#discovInfo5 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#discovInfo6 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#discovInfo7 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+
 /*#buttonTest{
     -fx-background-size: cover;
     -fx-background-position: center;

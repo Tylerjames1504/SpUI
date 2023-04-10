@@ -22,10 +22,16 @@ import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.miscellaneous.AudioAnalysis;
 import se.michaelthelin.spotify.model_objects.specification.*;
+import se.michaelthelin.spotify.requests.data.albums.GetAlbumRequest;
+import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
+import se.michaelthelin.spotify.requests.data.browse.GetListOfNewReleasesRequest;
+import se.michaelthelin.spotify.requests.data.browse.GetRecommendationsRequest;
+import se.michaelthelin.spotify.requests.data.browse.miscellaneous.GetAvailableGenreSeedsRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioAnalysisForTrackRequest;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
 
 import java.awt.*;
 import java.net.URI;
@@ -35,6 +41,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.List;
 
 public class HomePageController {
     private SpotifyApi spotifyApi;
@@ -66,6 +75,8 @@ public class HomePageController {
     // per element hover functionality features top Songs full set
     private Paging<Track> trackPaging;
     private Paging<Artist> artistPaging;
+    private ArrayList<TrackSimplified> discoveryPool = new ArrayList();
+    private Track[] discoveryShown = new Track[8];
     public void initialize() {
         this.spotifyApi = App.session.grabApi();
         topArtistsLabel.sceneProperty().addListener((observable, oldScene, newScene) -> {
@@ -73,8 +84,72 @@ public class HomePageController {
                 this.currentScene = topArtistsLabel.getScene();
                 initializeArtists();
                 initializeSongs();
+                initializeDiscovery();
             }
         });
+    }
+    public void initializeDiscovery() {
+        String artistsBuilder = "";
+        String tracksBuilder = "";
+        for (int i = 0; i < artistPaging.getItems().length; i++) {
+            if (i == 3) break;
+            artistsBuilder += artistPaging.getItems()[i].getId();
+            if (i < 2 && i != artistPaging.getItems().length) artistsBuilder += ",";
+        }
+        for (int i = 0; i < trackPaging.getItems().length; i++) {
+            if (i == 2) break;
+            tracksBuilder += trackPaging.getItems()[i].getId();
+            if (i < 1 && i != trackPaging.getItems().length) tracksBuilder += ",";
+        }
+        final GetRecommendationsRequest getRecommendationsRequest = this.spotifyApi.getRecommendations()
+                .limit(15)
+                .seed_artists(artistsBuilder)
+                .seed_tracks(tracksBuilder)
+                .build();
+        final GetListOfNewReleasesRequest getListOfNewReleasesRequest = this.spotifyApi.getListOfNewReleases()
+                .limit(5)
+                .build();
+        try {
+            Recommendations recommendations = getRecommendationsRequest.execute();
+            TrackSimplified[] recommendedTracks = recommendations.getTracks();
+            Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
+            for (int i = 0; i < newReleases.getItems().length; i++) {
+                Paging<TrackSimplified> albumsTracks = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build().execute();
+                discoveryPool.add(albumsTracks.getItems()[0]);
+            }
+            for (int i = 0; i < recommendedTracks.length; i++) {
+                discoveryPool.add(recommendedTracks[i]);
+            }
+            Random random = new Random();
+            int bound = 20;
+            for (int i = 0; i < discoveryShown.length; i++) {
+                int index = random.nextInt(0,bound);
+                Track track = this.spotifyApi.getTrack(discoveryPool.get(index).getId()).build().execute();
+                this.discoveryShown[i] = track;
+                Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 50,50, false, false);
+                ((ImageView) currentScene.lookup("#discovImage" + i)).setImage(trackImage);
+                String trackName = track.getName();
+                if (trackName.length() > 20) {
+                    trackName = trackName.substring(0,19) + "...";
+                }
+                ArtistSimplified[] artists = track.getArtists();
+                String allArtists = "- ";
+                for (int k = 0; k < artists.length; k++) {
+                    allArtists += artists[k].getName();
+                    if (k != artists.length - 1) allArtists += ", ";
+                }
+                if (allArtists.length() > 20) {
+                    allArtists = allArtists.substring(0,19) + "...";
+                }
+                ((Label) currentScene.lookup("#discovInfo" + i)).setText(trackName + "\n" + allArtists);
+                discoveryPool.remove(index);
+                bound--;
+            }
+
+        }
+        catch (IOException | ParseException | SpotifyWebApiException  e) {
+            System.out.println(e);
+        }
     }
     public void initializeSongs() { // recent songs is default
         final GetUsersTopTracksRequest getUsersTopTracksRequest = this.spotifyApi.getUsersTopTracks()
@@ -117,6 +192,7 @@ public class HomePageController {
         disableSet(disableSet);
     }
     public void populateSongs() { // recent songs is default
+        App.session.refreshAuthCode();
         if (songButtonState.equals("short_term")) {
             songButtonState = "long_term";
             changeSongs.setText("Show Recent");
@@ -195,6 +271,7 @@ public class HomePageController {
         disableSet(disableSet);
     }
     public void populateArtists(ActionEvent event) {
+        App.session.refreshAuthCode();
         if (artistButtonState.equals("short_term")) {
             artistButtonState = "long_term";
             changeArtists.setText("Show Recent");
@@ -232,31 +309,39 @@ public class HomePageController {
         }
         enableSet(enableSet);
     }
-    public void onClickTopArtistsSongs(MouseEvent event) {
+    public void onClickExpandable(MouseEvent event) {
+        App.session.refreshAuthCode();
         String[] sourceInfo = parseSource(event.getSource());
         int index = Integer.parseInt(sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
         try {
+            App.session.refreshAuthCode();
             if (sourceInfo[1].toLowerCase().contains("song")) Desktop.getDesktop().browse(new URI(trackPaging.getItems()[index].getExternalUrls().get("spotify")));
             if (sourceInfo[1].toLowerCase().contains("artist")) Desktop.getDesktop().browse(new URI(artistPaging.getItems()[index].getExternalUrls().get("spotify")));
+            if (sourceInfo[1].toLowerCase().contains("discov")) {
+                Desktop.getDesktop().browse(new URI(discoveryShown[index].getExternalUrls().get("spotify")));
+                Desktop.getDesktop().browse(new URI(discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify")));
+            }
         }
         catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
-    public void onHoverTopArtistsSongs(MouseEvent event) {
+    public void onHoverExpandable(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
-        String songOrArtist = "";
-        if (sourceInfo[1].toLowerCase().contains("song")) songOrArtist = "song";
-        if (sourceInfo[1].toLowerCase().contains("artist")) songOrArtist = "artist";
-        Region selected = (Region) currentScene.lookup("#" + songOrArtist + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
+        String type = "";
+        if (sourceInfo[1].toLowerCase().contains("song")) type = "song";
+        if (sourceInfo[1].toLowerCase().contains("artist")) type = "artist";
+        if (sourceInfo[1].toLowerCase().contains("discov")) type = "discov";
+        Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
         selected.setStyle("-fx-background-color: #323436");
     }
-    public void offHoverTopArtistsSongs(MouseEvent event) {
+    public void offHoverExpandable(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
-        String songOrArtist = "";
-        if (sourceInfo[1].toLowerCase().contains("song")) songOrArtist = "song";
-        if (sourceInfo[1].toLowerCase().contains("artist")) songOrArtist = "artist";
-        Region selected = (Region) currentScene.lookup("#" + songOrArtist + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
+        String type = "";
+        if (sourceInfo[1].toLowerCase().contains("song")) type = "song";
+        if (sourceInfo[1].toLowerCase().contains("artist")) type = "artist";
+        if (sourceInfo[1].toLowerCase().contains("discov")) type = "discov";
+        Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
         selected.setStyle("-fx-background-color: transparent");
     }
     public void underline(MouseEvent event) {

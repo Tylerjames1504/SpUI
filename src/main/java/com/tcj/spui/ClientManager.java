@@ -59,6 +59,6 @@ public class ClientManager {
              AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRefreshRequest.execute();
              this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
          }
-         catch (Exception e) {System.out.println(e);}
+         catch (Exception e) { System.out.println(e); }
     }
 }
