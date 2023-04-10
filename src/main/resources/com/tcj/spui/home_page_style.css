@@ -177,6 +177,150 @@
     -fx-font-size: 14px;
 }
 
+#changeSongs{
+    -fx-font-family: Techno;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-background-color: #181818;
+}
+#errorLabelSongs{
+    -fx-background-color: transparent;
+    -fx-font-family: Techno;
+    -fx-font-size: 18px;
+}
+#songHover0 {
+    -fx-background-radius: 5px;
+}
+#songHover1 {
+    -fx-background-radius: 5px;
+}
+#songHover2 {
+    -fx-background-radius: 5px;
+}
+#songHover3 {
+    -fx-background-radius: 5px;
+}
+#songHover4 {
+    -fx-background-radius: 5px;
+}
+#songHover5 {
+    -fx-background-radius: 5px;
+}
+#songHover6 {
+    -fx-background-radius: 5px;
+}
+#songHover7 {
+    -fx-background-radius: 5px;
+}
+#songHover8 {
+    -fx-background-radius: 5px;
+}
+#songHover9 {
+    -fx-background-radius: 5px;
+}
+#topSongInfo0 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+#topSongInfo1 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo3 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo4 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo5 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo6 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo7 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo8 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo9 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu0 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+#topSongPopu1{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu3 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu4 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu5 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu6 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu7 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu8 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu9 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+
 /*#buttonTest{
     -fx-background-size: cover;
     -fx-background-position: center;
