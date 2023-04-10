@@ -73,6 +73,11 @@ public class HomePageController {
     private String[] topSongPiecesMax = {"songHover", "topSongInfo", "topSongPopu","topSongImage","changeSongs"};
     private int[] topSongPiecesMaxSizes = {10, 10, 10, 10, -1};
     // per element hover functionality features top Songs full set
+
+    private String[] discovPieces = {"discovHover", "discovInfo","discovImage"};
+    private int[] discovPiecesSizes = {8, 8, 8};
+    private String[] discovPiecesMax = {"discovHover", "discovInfo","discovImage"}; //add refresh
+    private int[] discovPiecesMaxSizes = {8, 8, 8}; // add -1
     private Paging<Track> trackPaging;
     private Paging<Artist> artistPaging;
     private ArrayList<TrackSimplified> discoveryPool = new ArrayList();
@@ -102,27 +107,33 @@ public class HomePageController {
             if (i < 1 && i != trackPaging.getItems().length) tracksBuilder += ",";
         }
         final GetRecommendationsRequest getRecommendationsRequest = this.spotifyApi.getRecommendations()
-                .limit(15)
+                .limit(40)
                 .seed_artists(artistsBuilder)
                 .seed_tracks(tracksBuilder)
                 .build();
         final GetListOfNewReleasesRequest getListOfNewReleasesRequest = this.spotifyApi.getListOfNewReleases()
-                .limit(5)
+                .limit(16)
                 .build();
+        int size = 0;
         try {
-            Recommendations recommendations = getRecommendationsRequest.execute();
-            TrackSimplified[] recommendedTracks = recommendations.getTracks();
+            List<TrackSimplified> recommendedTracks = new ArrayList();
+            if (artistPaging.getItems().length > 0) {
+                Recommendations recommendations = getRecommendationsRequest.execute();
+                recommendedTracks = Arrays.asList(recommendations.getTracks());
+            }
             Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
             for (int i = 0; i < newReleases.getItems().length; i++) {
                 Paging<TrackSimplified> albumsTracks = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build().execute();
                 discoveryPool.add(albumsTracks.getItems()[0]);
             }
-            for (int i = 0; i < recommendedTracks.length; i++) {
-                discoveryPool.add(recommendedTracks[i]);
+            for (int i = 0; i < recommendedTracks.size(); i++) {
+                discoveryPool.add(recommendedTracks.get(i));
             }
+            int bound = discoveryPool.size();
+            size = bound;
             Random random = new Random();
-            int bound = 20;
-            for (int i = 0; i < discoveryShown.length; i++) {
+            for (int i = 0; i < size; i++) {
+                if (i == 8) break;
                 int index = random.nextInt(0,bound);
                 Track track = this.spotifyApi.getTrack(discoveryPool.get(index).getId()).build().execute();
                 this.discoveryShown[i] = track;
@@ -148,8 +159,15 @@ public class HomePageController {
 
         }
         catch (IOException | ParseException | SpotifyWebApiException  e) {
-            System.out.println(e);
+            throw new RuntimeException(e);
         }
+        System.out.println(size);
+        ArrayList<String> disableSet = generateSet(0, size, discovPiecesSizes, discovPieces);
+        if (size == 0) {
+            disableSet = generateSet(0, size, discovPiecesMaxSizes, discovPiecesMax);
+            //errorLabelSongs.setText("Oops.. looks like there are no recommended songs or releases"); // error label
+        }
+        disableSet(disableSet);
     }
     public void initializeSongs() { // recent songs is default
         final GetUsersTopTracksRequest getUsersTopTracksRequest = this.spotifyApi.getUsersTopTracks()
