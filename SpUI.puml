@@ -1,0 +1,79 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class App {
++{Static}session: ClientManager
++start(): void
++{Static}main(): void
+}
+class ClientManager {
+-clientId: String
+-redirectUri: URI
+-spotifyApi: SpotifyApi
+-authorizationCodeUriRequest: AuthorizationCodeUriRequest
++grabApi(): SpotifyApi
++getAuthRequestLink(): String
++initiateApp(): void
+refreshAuthCode(): void
+}
+class LoginController {
+-webView: WebView
+-engine: WebEngine
++initialize(): void
+}
+class HomePageController {
+-spotifyApi: SpotifyApi
+-currentScene: Scene
+-topArtistsLabel: Label
+-changeArtists: ToggleButton
+-changeSongs: ToggleButton
+-errorLabelArtists: Label
+-errorLabelSongs: Label
+-artistButtonState: String
+-songButtonState: String
+-topArtistPieces: String[]
+-topArtistPiecesSizes: int[]
+-topArtistPiecesMax: String[]
+-topArtistPiecesMaxSizes: int[]
+-topSongPieces: String[]
+-topSongPiecesSizes: int[]
+-topSongPiecesMax: String[]
+-topSongPiecesMaxSizes: int[]
+-discovPieces: String[]
+-discovPiecesSizes: int[]
+-discovPiecesMax: String[]
+-discovPiecesMaxSizes: int[]
+-trackPaging: Paging<>
+-artistPaging: Paging<>
+-discoveryPool: ArrayList<>
+-discoveryShown: Track[]
++initialize(): void
++initializeDiscovery(): void
++initializeSongs(): void
+}
+
+
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+'/
+@enduml
