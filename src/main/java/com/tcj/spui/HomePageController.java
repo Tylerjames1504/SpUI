@@ -107,12 +107,12 @@ public class HomePageController {
             if (i < 1 && i != trackPaging.getItems().length) tracksBuilder += ",";
         }
         final GetRecommendationsRequest getRecommendationsRequest = this.spotifyApi.getRecommendations()
-                .limit(40)
+                .limit(20)
                 .seed_artists(artistsBuilder)
                 .seed_tracks(tracksBuilder)
                 .build();
         final GetListOfNewReleasesRequest getListOfNewReleasesRequest = this.spotifyApi.getListOfNewReleases()
-                .limit(16)
+                .limit(10)
                 .build();
         int size = 0;
         try {
