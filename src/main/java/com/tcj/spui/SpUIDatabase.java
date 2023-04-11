@@ -1,8 +1,7 @@
 package com.tcj.spui;
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,10 +9,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpConnectTimeoutException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import com.google.gson.Gson;
-import java.util.ArrayList;
+import java.net.http.HttpResponse.BodyHandlers;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class SpUIDatabase {
 
@@ -24,35 +26,83 @@ public class SpUIDatabase {
 
   public HttpClient client;
 
-  private String authHeader;
-
 
   private HttpResponse<String> response;
 
 
-  public SpUIDatabase() throws URISyntaxException, IOException, InterruptedException {
+  public SpUIDatabase() throws  IOException, InterruptedException {
 
     this.client = HttpClient.newHttpClient();
-    this.response = initalConnect();
+    this.response = initConnect();
 
   }
 
-  public HttpResponse<String> initalConnect() throws IOException, InterruptedException {
+  public static Map<String, Object> stripResponse(HttpResponse<String> response) {
+
+//    ArrayList<HashMap<String, String>> ArrayListOfUserMaps = new ArrayList<>();
+//    String[] jsonStringArray;
+//    if (response.body().charAt(0) == '[') {
+//      jsonStringArray = response.body().substring(1, response.body().length() - 1).replaceAll("},\\{", "};{")
+//          .replaceAll("[\\[\\]]", "").split(";");
+//    } else {
+//      jsonStringArray = response.body().replaceAll("},\\{", "};{")
+//          .replaceAll("[\\[\\]]", "")
+//          .split(";");
+//    }
+//    for (String jsonString : jsonStringArray) {
+//      HashMap<String, String> userMap = g.fromJson(jsonString, HashMap.class);
+//      ArrayListOfUserMaps.add(userMap);
+
+//    }
+    JSONArray jsonArray = null;
+    if (response.body().charAt(0) == '[') {
+      jsonArray = new JSONArray(response.body());
+      if (jsonArray.length() < 1) {
+        return null;
+      } else {
+        return jsonArray.getJSONObject(0).toMap();
+      }
+    } else {
+      return new JSONObject(response.body()).toMap();
+    }
+
+  }
+
+
+
+//  public static ArrayList<HashMap<String, String>> stripResponse(String response)
+//      throws Exception {
+//
+//    Gson g = new Gson();
+//    ArrayList<HashMap<String, String>> ArrayListOfUserMaps = new ArrayList<>();
+//    String[] jsonStringArray = response.replaceAll("},\\{", "};{").replaceAll("[\\[\\]]", "")
+//        .split(";");
+//    for (String jsonString : jsonStringArray) {
+//      HashMap<String, String> userMap = g.fromJson(jsonString,
+//          new TypeToken<HashMap<String, String>>() {
+//          }.getType());
+//      ArrayListOfUserMaps.add(userMap);
+//
+//    }
+//    return ArrayListOfUserMaps;
+//
+//  }
+
+  public HttpResponse<String> initConnect() throws IOException, InterruptedException {
 
     HttpResponse<String> response;
     long startTime = System.currentTimeMillis();
     long currentTime;
     do {
-      response = this.client.send(
-          HttpRequest.newBuilder().GET().uri(URI.create(INITIAL_ENDPOINT))
-              .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
-                  CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+      response = this.client.send(HttpRequest.newBuilder().GET().uri(URI.create(INITIAL_ENDPOINT))
+          .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+              CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
       if (response.statusCode() == 200) {
         return response;
       }
+      Thread.sleep(1000);
       currentTime = System.currentTimeMillis();
-    }
-    while (currentTime < (startTime + 5000));
+    } while (currentTime < (startTime + 5000));
 
     switch (response.statusCode()) {
       case 401 -> {
@@ -70,26 +120,63 @@ public class SpUIDatabase {
     }
   }
 
-  public static HashMap<String, String> stripResponse(HttpResponse<String> response) throws Exception {
+  public String getClientSecret() throws Exception {
 
-    ArrayList<String> responseAsList = new ArrayList<>(
-        List.of(response.body().replaceAll("[\\[\\]{\"}]", "").split(":")));
-    if (responseAsList.size() % 2 != 0) {
-      throw new Exception("Response not an even number");
-    }
-    HashMap<String, String> outputMap = new HashMap<>();
-    for (int i = 0; i < responseAsList.size(); i += 2) {
-      outputMap.put(responseAsList.get(i), responseAsList.get(i+1));
-    }
-    return outputMap;
+    return (String) Objects.requireNonNull(stripResponse(this.client.send(
+        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/app"))
+            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+                CF_ACCESS_CLIENT_SECRET).build(), BodyHandlers.ofString()))).get("client_secret");
+
   }
 
-  public String getClientSecret()
-      throws Exception {
+  public Map<String, Object> getUser(String usersEmail)
+      throws URISyntaxException, IOException, InterruptedException {
 
-    return stripResponse(this.client.send(HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/app")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
-        CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString())).get("client_secret");
+    HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
+        .uri(new URI(INITIAL_ENDPOINT + "/user" + "?user_email=eq." + usersEmail))
+        .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+            CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+    return stripResponse(response);
 
+  }
+
+  public HashMap<Integer, HashMap<String, String>> getUsers() throws Exception {
+
+    HttpResponse<String> response = this.client.send(
+        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/user"))
+            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+                CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+    Gson g = new Gson();
+    HashMap<Integer, HashMap<String, String>> mapOfUserMaps = new HashMap<>();
+    String[] jsonStringArray = response.body().replaceAll("},\\{", "}☺{").replaceAll("[\\[\\]]", "")
+        .split("☺");
+    for (String jsonString : jsonStringArray) {
+      HashMap<String, String> userMap = g.fromJson(jsonString,
+          new TypeToken<HashMap<String, String>>() {
+          }.getType());
+      mapOfUserMaps.put(Integer.parseInt(userMap.get("user_id")), userMap);
+    }
+    return mapOfUserMaps;
+  }
+
+  public HttpResponse<String> initUser(String userEmail, String authCode, String refreshToken)
+      throws URISyntaxException, IOException, InterruptedException {
+
+    return this.client.send(HttpRequest.newBuilder().POST(
+        HttpRequest.BodyPublishers.ofString(String.format("{\"user_email\":\"%s\",\"auth_code\":\"%s\",\"refresh_token\":\"%s\"}",
+            userEmail, authCode, refreshToken)))
+        .uri(new URI(INITIAL_ENDPOINT + "/user?on_conflict=user_email")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID,
+            "CF-Access-Client-Secret", CF_ACCESS_CLIENT_SECRET, "Prefer", "resolution=merge-duplicates").build(),
+        HttpResponse.BodyHandlers.ofString());
+
+  }
+
+  public HttpResponse<String> deleteUser(String userEmail)
+      throws URISyntaxException, IOException, InterruptedException {
+    return this.client.send(HttpRequest.newBuilder().DELETE()
+        .uri(new URI(INITIAL_ENDPOINT + "/user" + "?user_email=eq." + userEmail))
+        .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+            CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
   }
 
   public HttpResponse<String> getResponse() {
@@ -100,13 +187,45 @@ public class SpUIDatabase {
     this.response = response;
   }
 
-  public static void main(String[] args)
-      throws Exception {
+  // used for testing
+  public static void main(String[] args) throws Exception {
 
     SpUIDatabase db = new SpUIDatabase();
-    System.out.println(db.response);
 
-    System.out.println(db.getClientSecret());
+//    String testResponse = "[{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":2,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":3,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":4,\"user_email\":\"user@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}]";
+//    String testUser = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}";
+//
+//    String req ="{\"user_email\": \"user@gmail.com\", \"auth_code\": \"aslkdfjaio\", \"refresh_token\":\"asldkfjawefj\"}";
+//    String req2 = "{\"user_id\":1,\"user_id\":2,\"user_id\":3}";
+//    HttpResponse<String> response = db.client.send(HttpRequest.newBuilder().DELETE().uri(new URI(INITIAL_ENDPOINT + "/user?user_id=lte.3")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+//        CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+//    System.out.println(response.body());
+
+//    System.out.println(testResponse);
+//    System.out.println(stripResponse(db.getClientSecret()));
+//    System.out.println(testResponse);
+
+//    HttpResponse<String> responseUser = db.client.send(
+//        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/user"))
+//            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+//                CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+
+//    HttpResponse<String> responseMain = db.client.send(
+//        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT))
+//            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+//                CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+//
+////    JSONObject jsonObject = new JSONObject(responseUser.body());
+//    JSONArray jsonArray = new JSONArray(responseMain.body());
+//
+//    System.out.println(jsonArray.get(2));
+////    System.out.println(stripResponse(responseUser));
+    System.out.println(db.deleteUser("snoopDog@wokesmeed.edu").statusCode());
+
+
+
+
+
   }
 
 }

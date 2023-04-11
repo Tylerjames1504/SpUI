@@ -1,25 +1,24 @@
-import static com.tcj.spui.SpUIDatabase.INITIAL_ENDPOINT;
+package com.tcj.spuiTests;
+
+import static com.tcj.spui.SpUIDatabase.stripResponse;
 
 import com.tcj.spui.SpUIDatabase;
 import java.io.IOException;
-import java.lang.reflect.MalformedParameterizedTypeException;
-import java.net.URI;
+
 import java.net.URISyntaxException;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.HashMap;
-import org.junit.*;
 
-import static com.tcj.spui.SpUIDatabase.stripResponse;
-import static org.junit.Assert.*;
+import java.util.ArrayList;
 
+
+import java.util.Map;
+import org.junit.platform.commons.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class SpUIDatabaseTest {
+public class SpUIDatabaseTests {
 
   @Test
-  public void testSuccessfulGetOnInitEndpoint()
+  public void TestSuccessfulGetOnInitEndpoint()
       throws URISyntaxException, IOException, InterruptedException {
 
     SpUIDatabase db = new SpUIDatabase();
@@ -35,9 +34,12 @@ public class SpUIDatabaseTest {
   }
 
   @Test
-  public void testStripResponse() throws Exception {
+  public void TestStripResponse() throws Exception {
     SpUIDatabase db = new SpUIDatabase();
-    Assertions.assertInstanceOf(HashMap.class, stripResponse(db.getResponse()));
+
+    Assertions.assertInstanceOf(Map.class, stripResponse(db.getResponse()));
   }
+
+
 
 }

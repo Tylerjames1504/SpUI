@@ -16,6 +16,11 @@ module com.example.demo {
     requires com.google.gson;
     requires nv.i18n;
     requires org.apache.httpcomponents.core5.httpcore5;
+    requires java.net.http;
+    requires org.json;
+    requires com.tcj.spui;
+    requires org.junit.jupiter;
+
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;

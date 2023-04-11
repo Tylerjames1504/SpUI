@@ -1,27 +1,34 @@
 package com.tcj.spui;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Map;
+import java.util.NoSuchElementException;
+
 public class User {
 
-  private String name;
+  private int id;
   private String email;
   private String authCode;
   private String refreshToken;
 
-  public User(String name) {
+  public User(String email, SpUIDatabase db)
+      throws NoSuchElementException, URISyntaxException, IOException, InterruptedException {
 
-    this.name = name;
-    this.email = null; //TODO get email from db using name
-    this.authCode = null; //TODO get authCode from db using name
-    this.refreshToken = null; // TODO get refreshToken from db using name
+    Map<String, Object> userMap = db.getUser(email);
+    this.id = Integer.parseInt(String.valueOf(userMap.get("user_id")));
+    this.email = email;
+    this.authCode = String.valueOf(userMap.get("auth_code")); //TODO get authCode from db using name
+    this.refreshToken = String.valueOf(userMap.get("refresh_token")); // TODO get refreshToken from db using name
 
   }
 
-  public String getName() {
-    return name;
+  public int getId() {
+    return id;
   }
 
-  public void setName(String name) {
-    this.name = name;
+public void setId(int id) {
+    this.id = id;
   }
 
   public String getEmail() {
@@ -48,5 +55,8 @@ public class User {
     this.refreshToken = refreshToken;
   }
 
+  public String toString() {
+    return "User: " + this.id + " " + this.email + " " + this.authCode + " " + this.refreshToken;
+  }
 
 }
