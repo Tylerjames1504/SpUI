@@ -16,10 +16,13 @@ public class User {
       throws NoSuchElementException, URISyntaxException, IOException, InterruptedException {
 
     Map<String, Object> userMap = db.getUser(email);
-//    this.id = Integer.parseInt(String.valueOf(userMap.get("user_id")));
+    if (userMap == null) {
+      throw new NoSuchElementException("User not found");
+    }
+    this.id = Integer.parseInt(String.valueOf(userMap.get("user_id")));
     this.email = email;
-    this.authCode = String.valueOf(userMap.get("auth_code")); //TODO get authCode from db using name
-    this.refreshToken = String.valueOf(userMap.get("refresh_token")); // TODO get refreshToken from db using name
+    this.authCode = String.valueOf(userMap.get("auth_code"));
+    this.refreshToken = String.valueOf(userMap.get("refresh_token"));
 
   }
 

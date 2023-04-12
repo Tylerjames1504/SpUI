@@ -18,12 +18,12 @@ public class UserTests {
   }
 
 
-//  @Test
-//  public void getUserIdFromUserClassTest()
-//      throws Exception {
-//    User user = new User("user@gmail.com", this.db);
-//    Assertions.assertEquals(4, user.getId());
-//  }
+  @Test
+  public void getUserIdFromUserClassTest()
+      throws Exception {
+    User user = new User("user@gmail.com", this.db);
+    Assertions.assertEquals(4, user.getId());
+  }
   @Test
   public void getUserEmailFromUserClassTest()
       throws Exception {
@@ -45,8 +45,12 @@ public class UserTests {
     Assertions.assertEquals(user.getRefreshToken(), "asldkfjawefj");
   }
 
-//  @Test void getUserThatDoesNotExistTest() throws Exception {
-//    User user = new User("noSuchUser@gmail.com", this.db);
-//    Assertions.assertNull(user.getEmail());
-//  }
+  @Test
+  public void getUserThatDoesNotExistTest() throws Exception {
+
+    Assertions.assertThrows(NoSuchElementException.class, () -> {
+      User user = new User("noSuchUser@gmail.com", this.db);
+      user.toString();
+    });
+  }
 }

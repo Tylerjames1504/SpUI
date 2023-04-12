@@ -36,7 +36,7 @@ public class SpUIDatabase {
 
   public static Map<String, Object> stripResponse(HttpResponse<String> response) {
 
-    JSONArray jsonArray = null;
+    JSONArray jsonArray;
     if (response.body().charAt(0) == '[') {
       jsonArray = new JSONArray(response.body());
       if (jsonArray.length() < 1) {
@@ -118,23 +118,15 @@ public class SpUIDatabase {
 
   }
 
-  public HashMap<Integer, HashMap<String, String>> getUsers() throws Exception {
+  public Map<String, Object> getUser(int userId)
+      throws URISyntaxException, IOException, InterruptedException {
 
-    HttpResponse<String> response = this.client.send(
-        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/user"))
-            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
-                CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
-    Gson g = new Gson();
-    HashMap<Integer, HashMap<String, String>> mapOfUserMaps = new HashMap<>();
-    String[] jsonStringArray = response.body().replaceAll("},\\{", "}☺{").replaceAll("[\\[\\]]", "")
-        .split("☺");
-    for (String jsonString : jsonStringArray) {
-      HashMap<String, String> userMap = g.fromJson(jsonString,
-          new TypeToken<HashMap<String, String>>() {
-          }.getType());
-      mapOfUserMaps.put(Integer.parseInt(userMap.get("user_id")), userMap);
-    }
-    return mapOfUserMaps;
+    HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
+        .uri(new URI(INITIAL_ENDPOINT + "/user" + "?user_id=eq." + userId))
+        .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+            CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+    return stripResponse(response);
+
   }
 
   public HttpResponse<String> initUser(String userEmail, String authCode, String refreshToken)
@@ -171,8 +163,9 @@ public class SpUIDatabase {
     SpUIDatabase db = new SpUIDatabase();
 
 //    String testResponse = "[{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":2,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":3,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":4,\"user_email\":\"user@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}]";
-//    String testUser = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}";
-//
+    String testUser = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}";
+    String testUser2 = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\"";
+
 //    String req ="{\"user_email\": \"user@gmail.com\", \"auth_code\": \"aslkdfjaio\", \"refresh_token\":\"asldkfjawefj\"}";
 //    HttpResponse<String> response = db.client.send(HttpRequest.newBuilder().DELETE().uri(new URI(INITIAL_ENDPOINT + "/user?user_id=lte.3")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
 //        CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
@@ -195,8 +188,8 @@ public class SpUIDatabase {
 //    System.out.println(stripResponse(testUser));
 //    System.out.println(db.deleteUser("snoopDog@wokesmeed.edu").statusCode());
 //    System.out.println(db.getUser("noUser"));
-    User user = new User("user@gmail.com", db);
-    System.out.println(user);
+
+
 
 
 
