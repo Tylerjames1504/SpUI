@@ -84,7 +84,7 @@ public class SpUIDatabase {
     switch (response.statusCode()) {
       case 401 -> {
         throw new HttpConnectTimeoutException(
-            String.format("\nCode %d\nPermission Denied (headers were not passed in)", response.statusCode()));
+            String.format("\nCode %d\nPermission Denied (headers were not passed in correctly)", response.statusCode()));
       }
       case 404 -> {
         throw new HttpConnectTimeoutException(
