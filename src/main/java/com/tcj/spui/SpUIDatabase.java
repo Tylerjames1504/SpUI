@@ -21,14 +21,16 @@ import se.michaelthelin.spotify.model_objects.special.Actions.JsonUtil;
 public class SpUIDatabase {
 
   public static final String INITIAL_ENDPOINT = "https://spui.tylerturner.tech";
-  public static final String CF_ACCESS_CLIENT_ID = System.getenv("CF_ACCESS_CLIENT_ID");
-  public static final String CF_ACCESS_CLIENT_SECRET = System.getenv("CF_ACCESS_CLIENT_SECRET");
+  public static final String CF_ACCESS_CLIENT_ID = System.getProperty("CF_ACCESS_CLIENT_ID");
+  public static final String CF_ACCESS_CLIENT_SECRET = System.getProperty("CF_ACCESS_CLIENT_SECRET");
   public HttpClient client;
   private HttpResponse<String> response;
 
 
   public SpUIDatabase() throws  IOException, InterruptedException {
 
+    System.out.println("CF_ACCESS_CLIENT_ID: " + CF_ACCESS_CLIENT_ID);
+    System.out.println("CF_ACCESS_CLIENT_SECRET: " + CF_ACCESS_CLIENT_SECRET);
     this.client = HttpClient.newHttpClient();
     this.response = initConnect();
 
