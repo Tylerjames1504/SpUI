@@ -200,10 +200,6 @@ public class SpUIDatabase {
 //        CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
 //    System.out.println(response.body());
 
-//    System.out.println(testResponse);
-//    System.out.println(stripResponse(db.getClientSecret()));
-//    System.out.println(testResponse);
-
 //    HttpResponse<String> responseUser = db.client.send(
 //        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/user"))
 //            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
