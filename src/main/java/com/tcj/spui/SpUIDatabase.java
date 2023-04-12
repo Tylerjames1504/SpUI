@@ -20,13 +20,9 @@ import org.json.JSONObject;
 public class SpUIDatabase {
 
   public static final String INITIAL_ENDPOINT = "https://spui.tylerturner.tech";
-
   public static final String CF_ACCESS_CLIENT_ID = System.getenv("CF_ACCESS_CLIENT_ID");
   public static final String CF_ACCESS_CLIENT_SECRET = System.getenv("CF_ACCESS_CLIENT_SECRET");
-
   public HttpClient client;
-
-
   private HttpResponse<String> response;
 
 
@@ -39,21 +35,6 @@ public class SpUIDatabase {
 
   public static Map<String, Object> stripResponse(HttpResponse<String> response) {
 
-//    ArrayList<HashMap<String, String>> ArrayListOfUserMaps = new ArrayList<>();
-//    String[] jsonStringArray;
-//    if (response.body().charAt(0) == '[') {
-//      jsonStringArray = response.body().substring(1, response.body().length() - 1).replaceAll("},\\{", "};{")
-//          .replaceAll("[\\[\\]]", "").split(";");
-//    } else {
-//      jsonStringArray = response.body().replaceAll("},\\{", "};{")
-//          .replaceAll("[\\[\\]]", "")
-//          .split(";");
-//    }
-//    for (String jsonString : jsonStringArray) {
-//      HashMap<String, String> userMap = g.fromJson(jsonString, HashMap.class);
-//      ArrayListOfUserMaps.add(userMap);
-
-//    }
     JSONArray jsonArray = null;
     if (response.body().charAt(0) == '[') {
       jsonArray = new JSONArray(response.body());
@@ -67,6 +48,24 @@ public class SpUIDatabase {
     }
 
   }
+
+  public static Map<String, Object> stripResponse(String response) {
+
+    JSONArray jsonArray = null;
+    if (response.charAt(0) == '[') {
+      jsonArray = new JSONArray(response);
+      if (jsonArray.length() < 1) {
+        return null;
+      } else {
+        return jsonArray.getJSONObject(0).toMap();
+      }
+    } else {
+      return new JSONObject(response).toMap();
+    }
+
+  }
+
+
 
 
 
@@ -193,7 +192,7 @@ public class SpUIDatabase {
     SpUIDatabase db = new SpUIDatabase();
 
 //    String testResponse = "[{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":2,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":3,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":4,\"user_email\":\"user@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}]";
-//    String testUser = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}";
+    String testUser = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}";
 //
 //    String req ="{\"user_email\": \"user@gmail.com\", \"auth_code\": \"aslkdfjaio\", \"refresh_token\":\"asldkfjawefj\"}";
 //    String req2 = "{\"user_id\":1,\"user_id\":2,\"user_id\":3}";
@@ -219,8 +218,11 @@ public class SpUIDatabase {
 //    JSONArray jsonArray = new JSONArray(responseMain.body());
 //
 //    System.out.println(jsonArray.get(2));
-////    System.out.println(stripResponse(responseUser));
-    System.out.println(db.deleteUser("snoopDog@wokesmeed.edu").statusCode());
+//    System.out.println(stripResponse(testUser));
+//    System.out.println(db.deleteUser("snoopDog@wokesmeed.edu").statusCode());
+//    System.out.println(db.getUser("noUser"));
+    User user = new User("user@gmail.com", db);
+    System.out.println(user);
 
 
 
