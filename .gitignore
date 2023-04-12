@@ -6,6 +6,7 @@ target/
 setup.txt
 refresh.txt
 playlistList.txt
+src/main/java/com/tcj/spui/CFServiceToken.java
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
