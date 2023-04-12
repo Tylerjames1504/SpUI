@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import se.michaelthelin.spotify.model_objects.special.Actions.JsonUtil;
 
 
 public class SpUIDatabase {
@@ -84,7 +85,7 @@ public class SpUIDatabase {
     switch (response.statusCode()) {
       case 401 -> {
         throw new HttpConnectTimeoutException(
-            String.format("\nCode %d\nPermission Denied (headers were not passed in correctly)", response.statusCode()));
+            String.format("\nCode %d\nPermission Denied (headers were not passed in correctly)\nID: %s\nSecret: %s", response.statusCode(), CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET));
       }
       case 404 -> {
         throw new HttpConnectTimeoutException(
