@@ -164,8 +164,11 @@
                         <include>**/com/tcj/spuiTests/*Tests.java</include>
                     </includes>
                     <environmentVariables>
+                        <!--suppress UnresolvedMavenProperty -->
                         <CF_ACCESS_CLIENT_ID>${ env.CF_ACCESS_CLIENT_ID }</CF_ACCESS_CLIENT_ID>
+                        <!--suppress UnresolvedMavenProperty -->
                         <CF_ACCESS_CLIENT_SECRET>${ env.CF_ACCESS_CLIENT_SECRET }</CF_ACCESS_CLIENT_SECRET>
+                        <!--suppress UnresolvedMavenProperty -->
                         <CLIENT_SECRET>${ env.CLIENT_SECRET }</CLIENT_SECRET>
                     </environmentVariables>
                 </configuration>

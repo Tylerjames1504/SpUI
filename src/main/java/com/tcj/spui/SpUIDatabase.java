@@ -65,28 +65,6 @@ public class SpUIDatabase {
 
   }
 
-
-
-
-
-//  public static ArrayList<HashMap<String, String>> stripResponse(String response)
-//      throws Exception {
-//
-//    Gson g = new Gson();
-//    ArrayList<HashMap<String, String>> ArrayListOfUserMaps = new ArrayList<>();
-//    String[] jsonStringArray = response.replaceAll("},\\{", "};{").replaceAll("[\\[\\]]", "")
-//        .split(";");
-//    for (String jsonString : jsonStringArray) {
-//      HashMap<String, String> userMap = g.fromJson(jsonString,
-//          new TypeToken<HashMap<String, String>>() {
-//          }.getType());
-//      ArrayListOfUserMaps.add(userMap);
-//
-//    }
-//    return ArrayListOfUserMaps;
-//
-//  }
-
   public HttpResponse<String> initConnect() throws IOException, InterruptedException {
 
     HttpResponse<String> response;
@@ -99,14 +77,14 @@ public class SpUIDatabase {
       if (response.statusCode() == 200) {
         return response;
       }
-      Thread.sleep(1000);
+      Thread.sleep(500);
       currentTime = System.currentTimeMillis();
     } while (currentTime < (startTime + 5000));
 
     switch (response.statusCode()) {
       case 401 -> {
         throw new HttpConnectTimeoutException(
-            String.format("\nCode %d\nPermission Denied", response.statusCode()));
+            String.format("\nCode %d\nPermission Denied (headers were not passed in)", response.statusCode()));
       }
       case 404 -> {
         throw new HttpConnectTimeoutException(
