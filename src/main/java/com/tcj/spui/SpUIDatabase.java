@@ -29,8 +29,6 @@ public class SpUIDatabase {
 
   public SpUIDatabase() throws  IOException, InterruptedException {
 
-    System.out.println("CF_ACCESS_CLIENT_ID: " + CF_ACCESS_CLIENT_ID);
-    System.out.println("CF_ACCESS_CLIENT_SECRET: " + CF_ACCESS_CLIENT_SECRET);
     this.client = HttpClient.newHttpClient();
     this.response = initConnect();
 
