@@ -195,7 +195,6 @@ public class SpUIDatabase {
     String testUser = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}";
 //
 //    String req ="{\"user_email\": \"user@gmail.com\", \"auth_code\": \"aslkdfjaio\", \"refresh_token\":\"asldkfjawefj\"}";
-//    String req2 = "{\"user_id\":1,\"user_id\":2,\"user_id\":3}";
 //    HttpResponse<String> response = db.client.send(HttpRequest.newBuilder().DELETE().uri(new URI(INITIAL_ENDPOINT + "/user?user_id=lte.3")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
 //        CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
 //    System.out.println(response.body());
