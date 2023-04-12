@@ -9,7 +9,8 @@
 name: Java CI with Maven
 
 on:
-  [push]
+  push:
+    branches: [ '*' ]
 
 jobs:
   build:
