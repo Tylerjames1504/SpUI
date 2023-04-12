@@ -31,4 +31,5 @@ jobs:
       env:
         CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
         CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_SECRET }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       run: mvn --batch-mode --update-snapshots package --file pom.xml
