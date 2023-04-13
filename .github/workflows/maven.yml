@@ -10,16 +10,12 @@ name: Java CI with Maven
 
 on:
   push:
-    branches:
-      - '*'
+    branches: ['*']
 
 jobs:
   build:
 
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: ["ubuntu-latest", "macos-latest"]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -33,4 +29,4 @@ jobs:
             CF_ACCESS_CLIENT_ID = ${{ secrets.CF_ACCESS_CLIENT_ID }}
             CF_ACCESS_CLIENT_SECRET = $ {{ secrets.CF_ACCESS_CLIENT_SECRET }}
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots -DCF_ACCESS_CLIENT_ID=${{vars.CF_ACCESS_CLIENT_ID}} -DCF_ACCESS_CLIENT_SECRET=${{vars.CF_ACCESS_CLIENT_SECRET}} -DCLIENT_SECRET=${{vars.CLIENT_SECRET}} package --file pom.xml
+        run: mvn -B package --file pom.xml
