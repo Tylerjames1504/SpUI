@@ -1,7 +1,5 @@
 package com.tcj.spui;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,24 +8,23 @@ import java.net.http.HttpConnectTimeoutException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import se.michaelthelin.spotify.model_objects.special.Actions.JsonUtil;
 
 
 public class SpUIDatabase {
 
   public static final String INITIAL_ENDPOINT = "https://spui.tylerturner.tech";
   public static final String CF_ACCESS_CLIENT_ID = System.getProperty("CF_ACCESS_CLIENT_ID");
-  public static final String CF_ACCESS_CLIENT_SECRET = System.getProperty("CF_ACCESS_CLIENT_SECRET");
+  public static final String CF_ACCESS_CLIENT_SECRET = System.getProperty(
+      "CF_ACCESS_CLIENT_SECRET");
   public HttpClient client;
   private HttpResponse<String> response;
 
 
-  public SpUIDatabase() throws  IOException, InterruptedException {
+  public SpUIDatabase() throws IOException, InterruptedException {
 
     this.client = HttpClient.newHttpClient();
     this.response = initConnect();
@@ -85,7 +82,9 @@ public class SpUIDatabase {
     switch (response.statusCode()) {
       case 401 -> {
         throw new HttpConnectTimeoutException(
-            String.format("\nCode %d\nPermission Denied (headers were not passed in correctly)\nID: %s\nSecret: %s", response.statusCode(), CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET));
+            String.format(
+                "\nCode %d\nPermission Denied (headers were not passed in correctly)\nID: %s\nSecret: %s",
+                response.statusCode(), CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET));
       }
       case 404 -> {
         throw new HttpConnectTimeoutException(
@@ -133,10 +132,13 @@ public class SpUIDatabase {
       throws URISyntaxException, IOException, InterruptedException {
 
     return this.client.send(HttpRequest.newBuilder().POST(
-        HttpRequest.BodyPublishers.ofString(String.format("{\"user_email\":\"%s\",\"auth_code\":\"%s\",\"refresh_token\":\"%s\"}",
-            userEmail, authCode, refreshToken)))
-        .uri(new URI(INITIAL_ENDPOINT + "/user?on_conflict=user_email")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID,
-            "CF-Access-Client-Secret", CF_ACCESS_CLIENT_SECRET, "Prefer", "resolution=merge-duplicates").build(),
+                HttpRequest.BodyPublishers.ofString(
+                    String.format("{\"user_email\":\"%s\",\"auth_code\":\"%s\",\"refresh_token\":\"%s\"}",
+                        userEmail, authCode, refreshToken)))
+            .uri(new URI(INITIAL_ENDPOINT + "/user?on_conflict=user_email"))
+            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID,
+                "CF-Access-Client-Secret", CF_ACCESS_CLIENT_SECRET, "Prefer",
+                "resolution=merge-duplicates").build(),
         HttpResponse.BodyHandlers.ofString());
 
   }
