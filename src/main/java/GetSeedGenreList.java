@@ -1,5 +1,3 @@
-package com.tcj.spui;
-
 import se.michaelthelin.spotify.requests.data.browse.miscellaneous.GetAvailableGenreSeedsRequest;
 
 import static org.fusesource.jansi.Ansi.ansi;

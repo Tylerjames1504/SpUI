@@ -1,5 +1,3 @@
-package com.tcj.spui;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 

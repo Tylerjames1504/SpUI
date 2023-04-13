@@ -1,5 +1,3 @@
-package com.tcj.spui;
-
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 
 import java.awt.Desktop;

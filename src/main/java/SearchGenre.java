@@ -1,5 +1,3 @@
-package com.tcj.spui;
-
 import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;

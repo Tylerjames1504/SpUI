@@ -1,5 +1,3 @@
-package com.tcj.spui;
-
 import com.neovisionaries.i18n.CountryCode;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.specification.Track;
