@@ -1,10 +1,13 @@
 package com.tcj.spui;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import kotlin.reflect.KParameter;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 
+import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,18 +71,24 @@ public class AppManager {
     public class GuiManager { // current Stages: login
         public StageManager stageManager;
         public GuiManager(Stage initialStage) {
-            this.stageManager.addStage("login", initialStage);
+            this.stageManager.buildStage("login", initialStage);
         }
+        public StageManager getStageManager() { return this.stageManager; }
         public class StageManager {
             private HashMap<String, SceneManager> stageSet = new HashMap();
             public SceneManager retrieveStageSubNetworkWithKey(String stageKey) {
                 return stageSet.get(stageKey);
             }
-            public void addStage(String stageName, Stage stage) {
+            public void buildStage(Stage stage, String stageName, String iconPath, String title, Boolean centerOnScreen, Boolean resizable, StageStyle style) {
                 SceneManager stageChild = new SceneManager(stage);
                 stageSet.put(stageName, stageChild);
+                try { stage.getIcons().add(new Image(getClass().getResourceAsStream(iconPath))); }
+                catch(Exception e) { System.out.println(e + "Incorrect Icon File Path"); }
+                stage.setTitle(title);
+                if (centerOnScreen) { stage.centerOnScreen(); }
+                if (!(resizable)) { stage.setResizable(false); }
+                stage.initStyle(style);
             }
-            //public void buildStage(Stage stage,String iconPath, String title, Boolean centerOnScreen, )
             public class SceneManager {
                 private HashMap<String, Scene> sceneSetOfStageSet = new HashMap();
                 private Stage parentStage;
@@ -89,8 +98,9 @@ public class AppManager {
                 public Stage getParentStage() {
                     return this.parentStage;
                 }
-                public void addScene(String sceneName, Scene scene) {
+                public void buildScene(String sceneName, Scene scene, String fxmlFile, String styleSheet) {
                     sceneSetOfStageSet.put(sceneName, scene);
+
                 }
             }
 
