@@ -1,5 +1,6 @@
 package com.tcj.spui;
 
+import java.net.URISyntaxException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,13 +14,15 @@ import java.util.Objects;
 public class App extends Application {
     public static ClientManager session; // session is accessible across all controllers which allows them to access spotifyApi data and also refresh the auth token
     @Override
-    public void start(Stage initialStage) throws IOException {
+    public void start(Stage initialStage)
+        throws IOException, InterruptedException, URISyntaxException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         session = new ClientManager();
         Parent base = loader.load();
         initialStage.setTitle("Login");
         initialStage.centerOnScreen();
-        initialStage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
+        initialStage.getIcons().add(new Image(
+            Objects.requireNonNull(getClass().getResourceAsStream("Icon.png"))));
         Scene login = new Scene(base);
         initialStage.setScene(login);
         initialStage.setResizable(false);

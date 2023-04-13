@@ -336,7 +336,7 @@ public class HomePageController {
                 if (sourceInfo[1].toLowerCase().contains("song")) Runtime.getRuntime().exec("xdg-open " + trackPaging.getItems()[index].getExternalUrls().get("spotify"));
                 if (sourceInfo[1].toLowerCase().contains("artist")) Runtime.getRuntime().exec("xdg-open " + artistPaging.getItems()[index].getExternalUrls().get("spotify"));
                 if (sourceInfo[1].toLowerCase().contains("discov")) {
-                    Runtime.getRuntime().exec("xdg-open " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
+//                    Runtime.getRuntime().exec("xdg-open " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
                     Runtime.getRuntime().exec("xdg-open " + discoveryShown[index].getExternalUrls().get("spotify"));
                 }
             } catch (IOException e) {
@@ -347,7 +347,7 @@ public class HomePageController {
                 if (sourceInfo[1].toLowerCase().contains("song")) Runtime.getRuntime().exec("open " + trackPaging.getItems()[index].getExternalUrls().get("spotify"));
                 if (sourceInfo[1].toLowerCase().contains("artist")) Runtime.getRuntime().exec("open " + artistPaging.getItems()[index].getExternalUrls().get("spotify"));
                 if (sourceInfo[1].toLowerCase().contains("discov")) {
-                    Runtime.getRuntime().exec("open " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
+//                    Runtime.getRuntime().exec("open " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
                     Runtime.getRuntime().exec("open " + discoveryShown[index].getExternalUrls().get("spotify"));
                 }
             } catch (IOException e) {
@@ -358,7 +358,7 @@ public class HomePageController {
                 if (sourceInfo[1].toLowerCase().contains("song")) Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + trackPaging.getItems()[index].getExternalUrls().get("spotify"));
                 if (sourceInfo[1].toLowerCase().contains("artist")) Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + artistPaging.getItems()[index].getExternalUrls().get("spotify"));
                 if (sourceInfo[1].toLowerCase().contains("discov")) {
-                    Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
+//                    Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
                     Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + discoveryShown[index].getExternalUrls().get("spotify"));
                 }
             } catch (IOException e) {
