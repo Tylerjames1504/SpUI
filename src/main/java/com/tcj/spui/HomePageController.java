@@ -161,7 +161,6 @@ public class HomePageController {
         catch (IOException | ParseException | SpotifyWebApiException  e) {
             throw new RuntimeException(e);
         }
-        System.out.println(size);
         ArrayList<String> disableSet = generateSet(0, size, discovPiecesSizes, discovPieces);
         if (size == 0) {
             disableSet = generateSet(0, size, discovPiecesMaxSizes, discovPiecesMax);
@@ -331,6 +330,20 @@ public class HomePageController {
         App.session.refreshAuthCode();
         String[] sourceInfo = parseSource(event.getSource());
         int index = Integer.parseInt(sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("linux")) {
+            try {
+                if (sourceInfo[1].toLowerCase().contains("song")) Runtime.getRuntime().exec("xdg-open " + trackPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("artist")) Runtime.getRuntime().exec("xdg-open " + artistPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("discov")) {
+                    Runtime.getRuntime().exec("xdg-open " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
+                    Runtime.getRuntime().exec("xdg-open " + discoveryShown[index].getExternalUrls().get("spotify"));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
         try {
             App.session.refreshAuthCode();
             if (sourceInfo[1].toLowerCase().contains("song")) Desktop.getDesktop().browse(new URI(trackPaging.getItems()[index].getExternalUrls().get("spotify")));
