@@ -38,7 +38,7 @@ public class LoginController implements Initializable {
                 stage.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("home_page_style.css")).toExternalForm());
                 stage.centerOnScreen();
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
-                stage.setTitle("Home");
+                stage.setTitle("SpUI");
                 stage.setResizable(false);
                 stage.show();
             }

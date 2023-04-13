@@ -98,7 +98,7 @@ public class SpUIDatabase {
     }
   }
 
-  public String getClientSecret() throws Exception {
+  public String getClientSecret() throws URISyntaxException, IOException, InterruptedException {
 
     return (String) Objects.requireNonNull(stripResponse(this.client.send(
         HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/app"))
@@ -189,7 +189,7 @@ public class SpUIDatabase {
 //    System.out.println(db.deleteUser("snoopDog@wokesmeed.edu").statusCode());
 //    System.out.println(db.getUser("noUser"));
 
-
+    System.out.println(db.getUser(4));
 
   }
 
