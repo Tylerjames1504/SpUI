@@ -1,4 +1,5 @@
 package com.tcj.spui;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -8,9 +9,11 @@ import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class AppManager {
     private AppUser user;
@@ -71,7 +74,8 @@ public class AppManager {
     public class GuiManager { // current Stages: login
         public StageManager stageManager;
         public GuiManager(Stage initialStage) {
-            this.stageManager.buildStage("login", initialStage);
+            this.stageManager.buildAddStage("login", "Icon.png", "Login",true, false, null);
+            //stageManager.retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", );
         }
         public StageManager getStageManager() { return this.stageManager; }
         public class StageManager {
@@ -79,15 +83,16 @@ public class AppManager {
             public SceneManager retrieveStageSubNetworkWithKey(String stageKey) {
                 return stageSet.get(stageKey);
             }
-            public void buildStage(Stage stage, String stageName, String iconPath, String title, Boolean centerOnScreen, Boolean resizable, StageStyle style) {
-                SceneManager stageChild = new SceneManager(stage);
+            public void buildAddStage(String stageName, String iconPath, String title, Boolean centerOnScreen, Boolean resizable, StageStyle style) {
+                Stage newStage = new Stage();
+                SceneManager stageChild = new SceneManager(newStage);
                 stageSet.put(stageName, stageChild);
-                try { stage.getIcons().add(new Image(getClass().getResourceAsStream(iconPath))); }
-                catch(Exception e) { System.out.println(e + "Incorrect Icon File Path"); }
-                stage.setTitle(title);
-                if (centerOnScreen) { stage.centerOnScreen(); }
-                if (!(resizable)) { stage.setResizable(false); }
-                stage.initStyle(style);
+                try { newStage.getIcons().add(new Image(getClass().getResourceAsStream(iconPath))); }
+                catch(Exception e) { System.out.println(e + "incorrect icon file path, ignore if empty icon string was provided"); }
+                newStage.setTitle(title);
+                if (centerOnScreen) { newStage.centerOnScreen(); }
+                if (!(resizable)) { newStage.setResizable(false); }
+                if (style != null) { newStage.initStyle(style); }
             }
             public class SceneManager {
                 private HashMap<String, Scene> sceneSetOfStageSet = new HashMap();
@@ -98,9 +103,21 @@ public class AppManager {
                 public Stage getParentStage() {
                     return this.parentStage;
                 }
-                public void buildScene(String sceneName, Scene scene, String fxmlFile, String styleSheet) {
-                    sceneSetOfStageSet.put(sceneName, scene);
+                public void buildAddScene(String sceneName, String fxmlSheet, String styleSheet) {
+                    FXMLLoader loader;
+                    Scene newScene = null;
 
+                    try {
+                        loader = new FXMLLoader(getClass().getResource(fxmlSheet));
+                        newScene = new Scene(loader.load());
+                    }
+                    catch (NullPointerException e) { System.out.println(e + "fxmlSheet path is invalid"); }
+                    catch (IOException e) { System.out.println(e + "Error loading fxmlSheet"); }
+
+                    sceneSetOfStageSet.put(sceneName, newScene);
+
+                    try { newScene.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource(styleSheet)).toExternalForm()); }
+                    catch (NullPointerException e) { System.out.println(e + "styleSheet path is invalid, ignore if empty styleSheet was provided"); }
                 }
             }
 
