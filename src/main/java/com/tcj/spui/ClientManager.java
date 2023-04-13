@@ -1,5 +1,6 @@
 package com.tcj.spui;
 
+import java.net.URISyntaxException;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -25,14 +26,16 @@ public class ClientManager {
     private SpotifyApi spotifyApi;
     private AuthorizationCodeUriRequest authorizationCodeUriRequest;
 
+    public SpUIDatabase db = new SpUIDatabase();
+
     public SpotifyApi grabApi() {
         return this.spotifyApi;
     }
     public String getAuthRequestLink() { return authorizationCodeUriRequest.execute().toString(); }
-    public ClientManager() {
+    public ClientManager() throws IOException, InterruptedException, URISyntaxException {
         this.spotifyApi = new SpotifyApi.Builder()
                 .setClientId(clientId)
-                .setClientSecret("b604863adab94bfb947b81500e03c78e") //TODO get from database, currently hardcoded
+                .setClientSecret(db.getClientSecret()) // get from database, currently hardcoded
                 .setRedirectUri(redirectUri)
                 .build();
         this.authorizationCodeUriRequest = this.spotifyApi.authorizationCodeUri()
@@ -40,14 +43,15 @@ public class ClientManager {
                 .scope("user-read-private, user-read-email, playlist-read-private, playlist-read-collaborative, " +
                         "playlist-modify-public, playlist-modify-private, user-top-read")
                 .show_dialog(true).build();
+        System.out.println(this.authorizationCodeUriRequest.getBody());
     }
     public void initiateApp(String token) {
         try {
             AuthorizationCodeRequest authorizationCodeRequest = this.spotifyApi.authorizationCode(token)
                     .build();
             AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRequest.execute();
-            this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); //TODO, this line is the access token
-            this.spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken()); //TODO, this line is the refresh token
+            this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
+            this.spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken()); // database
         }
         catch (IOException | SpotifyWebApiException | ParseException e) { System.out.println(e);}
     }
@@ -57,7 +61,7 @@ public class ClientManager {
                 .build();
          try {
              AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRefreshRequest.execute();
-             this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); //TODO, this line is the new access token, refresh token stays the same
+             this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
          }
          catch (Exception e) { System.out.println(e); }
     }
