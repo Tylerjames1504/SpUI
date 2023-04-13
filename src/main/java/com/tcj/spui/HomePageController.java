@@ -45,6 +45,10 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.List;
 
+
+/*TODO, currently refreshing the access token in this class whenever the user is clicking (ctrl + f : "App.session.refreshAuthCode();") to find instances
+ TODO Will need to do this automatically to avoid timeout and 401 error */
+
 public class HomePageController {
     private SpotifyApi spotifyApi;
     private Scene currentScene;
@@ -82,6 +86,8 @@ public class HomePageController {
     private Paging<Artist> artistPaging;
     private ArrayList<TrackSimplified> discoveryPool = new ArrayList();
     private Track[] discoveryShown = new Track[8];
+
+//    This method is called after the Scene of this controller is completely set. -> Inits artists, songs, and discovery
     public void initialize() {
         this.spotifyApi = App.session.grabApi();
         topArtistsLabel.sceneProperty().addListener((observable, oldScene, newScene) -> {
@@ -93,6 +99,8 @@ public class HomePageController {
             }
         });
     }
+
+//    Initializes the discovery section of the main page using a pool of recommended tracks and new popular tracks
     public void initializeDiscovery() {
         String artistsBuilder = "";
         String tracksBuilder = "";
@@ -168,6 +176,7 @@ public class HomePageController {
         }
         disableSet(disableSet);
     }
+//    Initializes the top songs section of the main page using the users top 10 songs
     public void initializeSongs() { // recent songs is default
         final GetUsersTopTracksRequest getUsersTopTracksRequest = this.spotifyApi.getUsersTopTracks()
                 .limit(10)
@@ -208,6 +217,7 @@ public class HomePageController {
         }
         disableSet(disableSet);
     }
+//    When the button to swap between recent and all time songs is pressed, this method is called. Reacts to the button state and swaps the songs accordingly
     public void populateSongs() { // recent songs is default
         App.session.refreshAuthCode();
         if (songButtonState.equals("short_term")) {
@@ -256,6 +266,7 @@ public class HomePageController {
         }
         enableSet(enableSet);
     }
+//    Initializes the top artists section of the main page using the users top 10 artists
     public void initializeArtists() { // recent artists is default
         final GetUsersTopArtistsRequest getUsersTopArtistsRequest = this.spotifyApi.getUsersTopArtists()
                 .limit(10)
@@ -287,6 +298,7 @@ public class HomePageController {
         }
         disableSet(disableSet);
     }
+//    When the button to swap between recent and all time artists is pressed, this method is called. Reacts to the button state and swaps the artists accordingly
     public void populateArtists(ActionEvent event) {
         App.session.refreshAuthCode();
         if (artistButtonState.equals("short_term")) {
@@ -326,6 +338,7 @@ public class HomePageController {
         }
         enableSet(enableSet);
     }
+//    Generic method that opens up an artist and songs link when it is clicked on in the gui
     public void onClickExpandable(MouseEvent event) {
         App.session.refreshAuthCode();
         String[] sourceInfo = parseSource(event.getSource());
@@ -357,6 +370,7 @@ public class HomePageController {
             throw new RuntimeException(e);
         }
     }
+//    Generic method that changes the color of the background behind elements when they are hovered over
     public void onHoverExpandable(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
         String type = "";
@@ -366,6 +380,7 @@ public class HomePageController {
         Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
         selected.setStyle("-fx-background-color: #323436");
     }
+//    Generic method that changes back the color of the background behind elements when they are no longer hovered over
     public void offHoverExpandable(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
         String type = "";
@@ -375,6 +390,7 @@ public class HomePageController {
         Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
         selected.setStyle("-fx-background-color: transparent");
     }
+//    Underlines the text of the Swap button when hovered over
     public void underline(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
         String type = sourceInfo[0];
@@ -393,7 +409,7 @@ public class HomePageController {
         }
 
     }
-
+//    Undoes the underlining of the text when the mouse is no longer hovering over the button
     public void resetUnderline(MouseEvent event) { //usage onMouseExited (add elements below if needed)
         String[] sourceInfo = parseSource(event.getSource());
         String type = sourceInfo[0];
@@ -411,6 +427,7 @@ public class HomePageController {
             button.setUnderline(false);
         }
     }
+//    Given a popularity number referring to a track or artist, returns a string that represents the popularity
     public String popToString(int popularity) {
         if (popularity >= 90) return "Very Popular";
         else if (popularity >= 67) return "Popular";
