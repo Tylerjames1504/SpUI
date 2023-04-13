@@ -342,20 +342,41 @@ public class HomePageController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            return;
-        }
-        try {
-            App.session.refreshAuthCode();
-            if (sourceInfo[1].toLowerCase().contains("song")) Desktop.getDesktop().browse(new URI(trackPaging.getItems()[index].getExternalUrls().get("spotify")));
-            if (sourceInfo[1].toLowerCase().contains("artist")) Desktop.getDesktop().browse(new URI(artistPaging.getItems()[index].getExternalUrls().get("spotify")));
-            if (sourceInfo[1].toLowerCase().contains("discov")) {
-                Desktop.getDesktop().browse(new URI(discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify")));
-                Desktop.getDesktop().browse(new URI(discoveryShown[index].getExternalUrls().get("spotify")));
+        } else if (os.contains("mac")) {
+            try {
+                if (sourceInfo[1].toLowerCase().contains("song")) Runtime.getRuntime().exec("open " + trackPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("artist")) Runtime.getRuntime().exec("open " + artistPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("discov")) {
+                    Runtime.getRuntime().exec("open " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
+                    Runtime.getRuntime().exec("open " + discoveryShown[index].getExternalUrls().get("spotify"));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (os.contains("win")) {
+            try {
+                if (sourceInfo[1].toLowerCase().contains("song")) Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + trackPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("artist")) Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + artistPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("discov")) {
+                    Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
+                    Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + discoveryShown[index].getExternalUrls().get("spotify"));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
-        catch (IOException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            App.session.refreshAuthCode();
+//            if (sourceInfo[1].toLowerCase().contains("song")) Desktop.getDesktop().browse(new URI(trackPaging.getItems()[index].getExternalUrls().get("spotify")));
+//            if (sourceInfo[1].toLowerCase().contains("artist")) Desktop.getDesktop().browse(new URI(artistPaging.getItems()[index].getExternalUrls().get("spotify")));
+//            if (sourceInfo[1].toLowerCase().contains("discov")) {
+//                Desktop.getDesktop().browse(new URI(discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify")));
+//                Desktop.getDesktop().browse(new URI(discoveryShown[index].getExternalUrls().get("spotify")));
+//            }
+//        }
+//        catch (IOException | URISyntaxException e) {
+//            throw new RuntimeException(e);
+//        }
     }
     public void onHoverExpandable(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
