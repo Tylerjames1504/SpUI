@@ -35,7 +35,7 @@ public class ClientManager {
     public ClientManager() throws IOException, InterruptedException, URISyntaxException {
         this.spotifyApi = new SpotifyApi.Builder()
                 .setClientId(clientId)
-                .setClientSecret(db.getClientSecret()) // get from database, currently hardcoded
+                .setClientSecret(db.getClientSecret()) //TODO get from database, seems like its implemeted here
                 .setRedirectUri(redirectUri)
                 .build();
         this.authorizationCodeUriRequest = this.spotifyApi.authorizationCodeUri()
@@ -50,8 +50,8 @@ public class ClientManager {
             AuthorizationCodeRequest authorizationCodeRequest = this.spotifyApi.authorizationCode(token)
                     .build();
             AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRequest.execute();
-            this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
-            this.spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken()); // database
+            this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); //TODO put user access token into database
+            this.spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken()); //TODO put user refresh token into database
         }
         catch (IOException | SpotifyWebApiException | ParseException e) { System.out.println(e);}
     }
@@ -61,7 +61,7 @@ public class ClientManager {
                 .build();
          try {
              AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRefreshRequest.execute();
-             this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
+             this.spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); //TODO, replace current access token in database NOTE: Refresh token does not change
          }
          catch (Exception e) { System.out.println(e); }
     }
