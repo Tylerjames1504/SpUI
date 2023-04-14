@@ -12,6 +12,7 @@ on:
   push:
     branches:
       - '*'
+      - !gui_implimentation
 
 jobs:
   build:
