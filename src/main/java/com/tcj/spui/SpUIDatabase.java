@@ -159,40 +159,4 @@ public class SpUIDatabase {
     this.response = response;
   }
 
-  // used for testing
-  public static void main(String[] args) throws Exception {
-
-    SpUIDatabase db = new SpUIDatabase();
-
-//    String testResponse = "[{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":2,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":3,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"},{\"user_id\":4,\"user_email\":\"user@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}]";
-    String testUser = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\":\"asldkfjawefj\"}";
-    String testUser2 = "{\"user_id\":1,\"user_email\":\"admin@gmail.com\",\"auth_code\":\"aslkdfjaio\",\"refresh_token\"";
-
-//    String req ="{\"user_email\": \"user@gmail.com\", \"auth_code\": \"aslkdfjaio\", \"refresh_token\":\"asldkfjawefj\"}";
-//    HttpResponse<String> response = db.client.send(HttpRequest.newBuilder().DELETE().uri(new URI(INITIAL_ENDPOINT + "/user?user_id=lte.3")).headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
-//        CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
-//    System.out.println(response.body());
-
-//    HttpResponse<String> responseUser = db.client.send(
-//        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/user"))
-//            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
-//                CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
-
-//    HttpResponse<String> responseMain = db.client.send(
-//        HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT))
-//            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
-//                CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
-//
-////    JSONObject jsonObject = new JSONObject(responseUser.body());
-//    JSONArray jsonArray = new JSONArray(responseMain.body());
-//
-//    System.out.println(jsonArray.get(2));
-//    System.out.println(stripResponse(testUser));
-//    System.out.println(db.deleteUser("snoopDog@wokesmeed.edu").statusCode());
-//    System.out.println(db.getUser("noUser"));
-
-    System.out.println(db.getUser(4));
-
-  }
-
 }
