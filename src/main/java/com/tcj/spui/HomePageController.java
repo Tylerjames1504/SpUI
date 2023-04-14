@@ -1,5 +1,5 @@
 package com.tcj.spui;
-
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,23 +9,41 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
+import se.michaelthelin.spotify.model_objects.miscellaneous.AudioAnalysis;
 import se.michaelthelin.spotify.model_objects.specification.*;
+import se.michaelthelin.spotify.requests.data.albums.GetAlbumRequest;
+import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import se.michaelthelin.spotify.requests.data.browse.GetListOfNewReleasesRequest;
 import se.michaelthelin.spotify.requests.data.browse.GetRecommendationsRequest;
+import se.michaelthelin.spotify.requests.data.browse.miscellaneous.GetAvailableGenreSeedsRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetAudioAnalysisForTrackRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
 
 import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.List;
 
 public class HomePageController {
     private SpotifyApi spotifyApi;
@@ -55,6 +73,11 @@ public class HomePageController {
     private String[] topSongPiecesMax = {"songHover", "topSongInfo", "topSongPopu","topSongImage","changeSongs"};
     private int[] topSongPiecesMaxSizes = {10, 10, 10, 10, -1};
     // per element hover functionality features top Songs full set
+
+    private String[] discovPieces = {"discovHover", "discovInfo","discovImage"};
+    private int[] discovPiecesSizes = {8, 8, 8};
+    private String[] discovPiecesMax = {"discovHover", "discovInfo","discovImage"}; //add refresh
+    private int[] discovPiecesMaxSizes = {8, 8, 8}; // add -1
     private Paging<Track> trackPaging;
     private Paging<Artist> artistPaging;
     private ArrayList<TrackSimplified> discoveryPool = new ArrayList();
@@ -84,27 +107,33 @@ public class HomePageController {
             if (i < 1 && i != trackPaging.getItems().length) tracksBuilder += ",";
         }
         final GetRecommendationsRequest getRecommendationsRequest = this.spotifyApi.getRecommendations()
-                .limit(15)
+                .limit(20)
                 .seed_artists(artistsBuilder)
                 .seed_tracks(tracksBuilder)
                 .build();
         final GetListOfNewReleasesRequest getListOfNewReleasesRequest = this.spotifyApi.getListOfNewReleases()
-                .limit(5)
+                .limit(10)
                 .build();
+        int size = 0;
         try {
-            Recommendations recommendations = getRecommendationsRequest.execute();
-            TrackSimplified[] recommendedTracks = recommendations.getTracks();
+            List<TrackSimplified> recommendedTracks = new ArrayList();
+            if (artistPaging.getItems().length > 0) {
+                Recommendations recommendations = getRecommendationsRequest.execute();
+                recommendedTracks = Arrays.asList(recommendations.getTracks());
+            }
             Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
             for (int i = 0; i < newReleases.getItems().length; i++) {
                 Paging<TrackSimplified> albumsTracks = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build().execute();
                 discoveryPool.add(albumsTracks.getItems()[0]);
             }
-            for (int i = 0; i < recommendedTracks.length; i++) {
-                discoveryPool.add(recommendedTracks[i]);
+            for (int i = 0; i < recommendedTracks.size(); i++) {
+                discoveryPool.add(recommendedTracks.get(i));
             }
+            int bound = discoveryPool.size();
+            size = bound;
             Random random = new Random();
-            int bound = 20;
-            for (int i = 0; i < discoveryShown.length; i++) {
+            for (int i = 0; i < size; i++) {
+                if (i == 8) break;
                 int index = random.nextInt(0,bound);
                 Track track = this.spotifyApi.getTrack(discoveryPool.get(index).getId()).build().execute();
                 this.discoveryShown[i] = track;
@@ -130,8 +159,14 @@ public class HomePageController {
 
         }
         catch (IOException | ParseException | SpotifyWebApiException  e) {
-            System.out.println(e);
+            throw new RuntimeException(e);
         }
+        ArrayList<String> disableSet = generateSet(0, size, discovPiecesSizes, discovPieces);
+        if (size == 0) {
+            disableSet = generateSet(0, size, discovPiecesMaxSizes, discovPiecesMax);
+            //errorLabelSongs.setText("Oops.. looks like there are no recommended songs or releases"); // error label
+        }
+        disableSet(disableSet);
     }
     public void initializeSongs() { // recent songs is default
         final GetUsersTopTracksRequest getUsersTopTracksRequest = this.spotifyApi.getUsersTopTracks()
@@ -295,13 +330,27 @@ public class HomePageController {
         App.session.getUser().getAuthManager().refreshAuthCode();
         String[] sourceInfo = parseSource(event.getSource());
         int index = Integer.parseInt(sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("linux")) {
+            try {
+                if (sourceInfo[1].toLowerCase().contains("song")) Runtime.getRuntime().exec("xdg-open " + trackPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("artist")) Runtime.getRuntime().exec("xdg-open " + artistPaging.getItems()[index].getExternalUrls().get("spotify"));
+                if (sourceInfo[1].toLowerCase().contains("discov")) {
+                    Runtime.getRuntime().exec("xdg-open " + discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify"));
+                    Runtime.getRuntime().exec("xdg-open " + discoveryShown[index].getExternalUrls().get("spotify"));
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
         try {
             App.session.getUser().getAuthManager().refreshAuthCode();
             if (sourceInfo[1].toLowerCase().contains("song")) Desktop.getDesktop().browse(new URI(trackPaging.getItems()[index].getExternalUrls().get("spotify")));
             if (sourceInfo[1].toLowerCase().contains("artist")) Desktop.getDesktop().browse(new URI(artistPaging.getItems()[index].getExternalUrls().get("spotify")));
             if (sourceInfo[1].toLowerCase().contains("discov")) {
-                Desktop.getDesktop().browse(new URI(discoveryShown[index].getExternalUrls().get("spotify")));
                 Desktop.getDesktop().browse(new URI(discoveryShown[index].getArtists()[0].getExternalUrls().get("spotify")));
+                Desktop.getDesktop().browse(new URI(discoveryShown[index].getExternalUrls().get("spotify")));
             }
         }
         catch (IOException | URISyntaxException e) {
@@ -403,8 +452,8 @@ public class HomePageController {
     }
     public void disableSet(ArrayList<String> set) {
         for (int i = 0; i < set.size(); i++) {
-             Node node = currentScene.lookup(set.get(i));
-             node.setDisable(true);
+            Node node = currentScene.lookup(set.get(i));
+            node.setDisable(true);
         }
     }
     public void enableSet(ArrayList<String> set) {
