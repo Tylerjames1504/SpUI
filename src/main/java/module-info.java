@@ -19,18 +19,5 @@ module com.tcj.spui {
 
     opens com.tcj.spui to javafx.fxml;
     exports com.tcj.spui;
-    exports;
-    opens to
-    exports;
-    opens to
-    exports;
-    opens to
-    exports;
-    opens to
-    exports;
-    opens to
-    exports;
-    opens to
-    exports;
-    opens to
+
 }

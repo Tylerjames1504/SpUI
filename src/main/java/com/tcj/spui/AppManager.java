@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import kotlin.reflect.KParameter;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -13,10 +12,8 @@ import se.michaelthelin.spotify.requests.authorization.authorization_code.Author
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -98,6 +95,7 @@ public class AppManager {
     public class GuiManager { // current Stages: login
         public StageManager stageManager;
         public GuiManager(Stage initialStage) {
+            stageManager = new StageManager();
             this.stageManager.buildAddStage("login", "Icon.png", "Login",true, false, null);
             stageManager.retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", "login.fxml", "login_style.css");
         }
@@ -138,13 +136,13 @@ public class AppManager {
                         loader = new FXMLLoader(getClass().getResource(fxmlSheet));
                         newScene = new Scene(loader.load());
                     }
-                    catch (NullPointerException e) { System.out.println(e + "fxmlSheet path is invalid"); }
-                    catch (IOException e) { System.out.println(e + "Error loading fxmlSheet"); }
+                    catch (NullPointerException e) { System.out.println(e); }
+                    catch (IOException e) { System.out.println(e); }
 
                     sceneSetOfStageSet.put(sceneName, newScene);
 
                     try { newScene.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource(styleSheet)).toExternalForm()); }
-                    catch (NullPointerException e) { System.out.println(e + "styleSheet path is invalid, ignore if empty styleSheet was provided"); }
+                    catch (NullPointerException e) { System.out.println(e); }
                 }
             }
 
