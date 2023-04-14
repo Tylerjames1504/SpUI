@@ -20,18 +20,18 @@ import java.util.Objects;
 public class AppManager {
     private AppUser user;
     private GuiManager guiManager;
-    public AppManager(Stage initialStage) {
-        AppUser user = new AppUser();
-        GuiManager guiManager = new GuiManager(initialStage);
+    public AppManager() {
+        this.user = new AppUser();
     }
-
     public AppUser getUser() {
         return user;
     }
     public GuiManager getGuiManager() {
         return guiManager;
     }
-
+    public void initializeGui() {
+        this.guiManager = new GuiManager();
+    }
     public class AppUser {
         private AuthorizationManager authManager;
         public AppUser() {
@@ -94,11 +94,12 @@ public class AppManager {
 
     public class GuiManager { // current Stages: login
         public StageManager stageManager;
-        public GuiManager(Stage initialStage) {
+        public GuiManager() {
             stageManager = new StageManager();
             this.stageManager.buildAddStage("login", "Icon.png", "Login",true, false, null);
             stageManager.retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", "login.fxml", "login_style.css");
         }
+
         public StageManager getStageManager() { return this.stageManager; }
         public class StageManager {
             private HashMap<String, SceneManager> stageSet = new HashMap();
@@ -110,7 +111,7 @@ public class AppManager {
                 SceneManager stageChild = new SceneManager(newStage);
                 stageSet.put(stageName, stageChild);
                 try { newStage.getIcons().add(new Image(getClass().getResourceAsStream(iconPath))); }
-                catch(Exception e) { System.out.println(e + "incorrect icon file path, ignore if empty icon string was provided"); }
+                catch(Exception e) { System.out.println(e); }
                 newStage.setTitle(title);
                 if (centerOnScreen) { newStage.centerOnScreen(); }
                 if (!(resizable)) { newStage.setResizable(false); }

@@ -1,5 +1,6 @@
 package com.tcj.spui;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -9,7 +10,8 @@ public class App extends Application {
     }
     @Override
     public void start(Stage initialStage) {
-        session = new AppManager(initialStage);
+        session = new AppManager();
+        session.initializeGui();
         // generate all scenes here in memory to avoid generating while the program is running
         AppManager.GuiManager.StageManager.SceneManager temp = session.getGuiManager()
                 .getStageManager()
