@@ -1,5 +1,4 @@
 package com.tcj.spui;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,5 +10,12 @@ public class AppMain extends Application {
     @Override
     public void start(Stage initialStage) {
         session = new AppManager(initialStage);
+        // generate all scenes here in memory to avoid generating while the program is running
+        AppManager.GuiManager.StageManager.SceneManager temp = session.getGuiManager()
+                .getStageManager()
+                .retrieveStageSubNetworkWithKey("login");
+        temp.getParentStage().setScene(temp.retrieveSceneWithKey("loginScene"));
+        temp.getParentStage().show();
+
     }
 }

@@ -5,7 +5,12 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import kotlin.reflect.KParameter;
+import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
+import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
+import se.michaelthelin.spotify.model_objects.credentials.AuthorizationCodeCredentials;
+import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRefreshRequest;
+import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 
 import java.io.FileNotFoundException;
@@ -36,7 +41,7 @@ public class AppManager {
             this.authManager = new AuthorizationManager();
         }
 
-        private AuthorizationManager getAuthManager() {
+        public AuthorizationManager getAuthManager() {
             return this.authManager;
         }
         public class AuthorizationManager {
@@ -67,6 +72,25 @@ public class AppManager {
             public String getAuthorizationCodeRequestLink() {
                 return this.authorizationCodeRequestLink;
             }
+            public void completeAuthorization(String token) {
+                try {
+                    AuthorizationCodeRequest authorizationCodeRequest = this.retrievedApi.authorizationCode(token)
+                            .build();
+                    AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRequest.execute();
+                    this.retrievedApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
+                    this.retrievedApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken()); // database
+                }
+                catch (IOException | SpotifyWebApiException | ParseException e) { System.out.println(e);}
+            }
+            public void refreshAuthCode() {
+                AuthorizationCodeRefreshRequest authorizationCodeRefreshRequest = this.retrievedApi.authorizationCodeRefresh()
+                        .build();
+                try {
+                    AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRefreshRequest.execute();
+                    this.retrievedApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
+                }
+                catch (IOException | SpotifyWebApiException | ParseException e) { System.out.println(e); }
+            }
 
         }
     }
@@ -75,7 +99,7 @@ public class AppManager {
         public StageManager stageManager;
         public GuiManager(Stage initialStage) {
             this.stageManager.buildAddStage("login", "Icon.png", "Login",true, false, null);
-            //stageManager.retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", );
+            stageManager.retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", "login.fxml", "login_style.css");
         }
         public StageManager getStageManager() { return this.stageManager; }
         public class StageManager {
@@ -102,6 +126,9 @@ public class AppManager {
                 }
                 public Stage getParentStage() {
                     return this.parentStage;
+                }
+                public Scene retrieveSceneWithKey(String sceneKey) {
+                    return sceneSetOfStageSet.get(sceneKey);
                 }
                 public void buildAddScene(String sceneName, String fxmlSheet, String styleSheet) {
                     FXMLLoader loader;

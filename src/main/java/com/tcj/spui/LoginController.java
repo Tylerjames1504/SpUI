@@ -1,17 +1,12 @@
 package com.tcj.spui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -22,15 +17,15 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         engine = webView.getEngine();
-        engine.load(App.session.getAuthRequestLink());
+        engine.load(AppMain.session.getUser().getAuthManager().getAuthorizationCodeRequestLink());
         webView.getEngine().locationProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.contains("callback?code=")) { //redirectURI must have /callback for this to work
                 String token = newValue.substring(newValue.indexOf("code")+5, newValue.indexOf("state")-1);
                 token = token.replaceAll("\\s.*", "");
-                App.session.initiateApp(token);
+                AppMain.session.getUser().getAuthManager().completeAuthorization(token);
                 webView.getEngine().getLoadWorker().cancel(); // stop the listener
                 ((Stage)webView.getScene().getWindow()).close();
-                FXMLLoader homePage = new FXMLLoader(getClass().getResource("home_page.fxml"));
+                /*FXMLLoader homePage = new FXMLLoader(getClass().getResource("home_page.fxml"));
                 Stage stage = new Stage();
                 // moves to and creates Home scene and stage
                 try { stage.setScene(new Scene(homePage.load()));}
@@ -40,7 +35,7 @@ public class LoginController implements Initializable {
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
                 stage.setTitle("Home");
                 stage.setResizable(false);
-                stage.show();
+                stage.show();*/
             }
         });
 

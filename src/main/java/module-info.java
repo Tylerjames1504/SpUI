@@ -25,4 +25,12 @@ module com.tcj.spui {
     opens to
     exports;
     opens to
+    exports;
+    opens to
+    exports;
+    opens to
+    exports;
+    opens to
+    exports;
+    opens to
 }
