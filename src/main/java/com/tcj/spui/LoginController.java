@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     @FXML
     private WebView webView;
+    @FXML
     private WebEngine engine;
 
     @Override
