@@ -407,6 +407,19 @@
     -fx-font-size: 14px;
 }
 
+#profileButtonText {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+#playlistManagerButtonText {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
 /*#buttonTest{
     -fx-background-size: cover;
     -fx-background-position: center;
