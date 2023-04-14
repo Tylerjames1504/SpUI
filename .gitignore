@@ -3,7 +3,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-maven.yml
 setup.txt
 refresh.txt
 playlistList.txt
