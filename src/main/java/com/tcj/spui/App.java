@@ -1,7 +1,7 @@
 package com.tcj.spui;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class App extends Application {
     public static AppManager session;
@@ -11,13 +11,22 @@ public class App extends Application {
     @Override
     public void start(Stage initialStage) {
         session = new AppManager();
-        session.initializeGui();
-        // generate all scenes here in memory to avoid generating while the program is running
-        AppManager.GuiManager.StageManager.SceneManager temp = session.getGuiManager()
-                .getStageManager()
-                .retrieveStageSubNetworkWithKey("login");
-        temp.getParentStage().setScene(temp.retrieveSceneWithKey("loginScene"));
-        temp.getParentStage().show();
-
+        initiateLogin();
+        loadAllStageSceneNetworks();
     }
+    public void loadAllStageSceneNetworks() { // loads all networks past the home page
+    }
+    public void initiateLogin() {
+        App.session.getGuiManager().getStageManager().buildAddStage("login", "Icon.png", "Login",true, false, StageStyle.UNDECORATED);
+        App.session.getGuiManager().getStageManager().retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", "login.fxml", "login_style.css");
+
+        Stage loginStage = App.session.getGuiManager().getStageManager()
+                .retrieveStageSubNetworkWithKey("login")
+                .getParentStage();
+
+        loginStage.setScene(App.session.getGuiManager().getStageManager().retrieveStageSubNetworkWithKey("login").retrieveSceneWithKey("loginScene"));
+
+        loginStage.show();
+    }
+
 }

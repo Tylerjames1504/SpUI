@@ -22,15 +22,13 @@ public class AppManager {
     private GuiManager guiManager;
     public AppManager() {
         this.user = new AppUser();
+        this.guiManager = new GuiManager();
     }
     public AppUser getUser() {
         return user;
     }
     public GuiManager getGuiManager() {
         return guiManager;
-    }
-    public void initializeGui() {
-        this.guiManager = new GuiManager();
     }
     public class AppUser {
         private AuthorizationManager authManager;
@@ -93,11 +91,9 @@ public class AppManager {
     }
 
     public class GuiManager { // current Stages: login
-        public StageManager stageManager;
+        private StageManager stageManager;
         public GuiManager() {
-            stageManager = new StageManager();
-            this.stageManager.buildAddStage("login", "Icon.png", "Login",true, false, null);
-            stageManager.retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", "login.fxml", "login_style.css");
+            this.stageManager = new StageManager();
         }
 
         public StageManager getStageManager() { return this.stageManager; }
