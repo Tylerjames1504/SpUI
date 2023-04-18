@@ -83,7 +83,7 @@ public class HomePageController {
     private ArrayList<TrackSimplified> discoveryPool = new ArrayList();
     private Track[] discoveryShown = new Track[8];
     public void initialize() {
-        this.spotifyApi = App.session.getUser().getAuthManager().getRetrievedApi();
+        this.spotifyApi = App.session.getUserAuthorizationManager().getRetrievedApi();
         topArtistsLabel.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null) {
                 this.currentScene = topArtistsLabel.getScene();
@@ -209,7 +209,7 @@ public class HomePageController {
         disableSet(disableSet);
     }
     public void populateSongs() { // recent songs is default
-        App.session.getUser().getAuthManager().refreshAuthCode();
+        App.session.getUserAuthorizationManager().refreshAuthCode();
         if (songButtonState.equals("short_term")) {
             songButtonState = "long_term";
             changeSongs.setText("Show Recent");
@@ -288,7 +288,7 @@ public class HomePageController {
         disableSet(disableSet);
     }
     public void populateArtists(ActionEvent event) {
-        App.session.getUser().getAuthManager().refreshAuthCode();
+        App.session.getUserAuthorizationManager().refreshAuthCode();
         if (artistButtonState.equals("short_term")) {
             artistButtonState = "long_term";
             changeArtists.setText("Show Recent");
@@ -327,7 +327,7 @@ public class HomePageController {
         enableSet(enableSet);
     }
     public void onClickExpandable(MouseEvent event) {
-        App.session.getUser().getAuthManager().refreshAuthCode();
+        App.session.getUserAuthorizationManager().refreshAuthCode();
         String[] sourceInfo = parseSource(event.getSource());
         int index = Integer.parseInt(sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
         String os = System.getProperty("os.name").toLowerCase();
@@ -345,7 +345,7 @@ public class HomePageController {
             return;
         }
         try {
-            App.session.getUser().getAuthManager().refreshAuthCode();
+            App.session.getUserAuthorizationManager().refreshAuthCode();
             if (sourceInfo[1].toLowerCase().contains("song")) Desktop.getDesktop().browse(new URI(trackPaging.getItems()[index].getExternalUrls().get("spotify")));
             if (sourceInfo[1].toLowerCase().contains("artist")) Desktop.getDesktop().browse(new URI(artistPaging.getItems()[index].getExternalUrls().get("spotify")));
             if (sourceInfo[1].toLowerCase().contains("discov")) {

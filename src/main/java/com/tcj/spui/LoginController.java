@@ -45,21 +45,20 @@ public class LoginController implements Initializable {
     }
     public void authorizeAndMoveToHome() {
         engine = webView.getEngine();
-        engine.load(App.session.getUser().getAuthManager().getAuthorizationCodeRequestLink());
+        engine.load(App.session.getUserAuthorizationManager().getAuthorizationCodeRequestLink());
         webView.getEngine().locationProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.contains("callback?code=")) { //redirectURI must have /callback for this to work
                 String token = newValue.substring(newValue.indexOf("code")+5, newValue.indexOf("state")-1);
                 token = token.replaceAll("\\s.*", "");
-                App.session.getUser().getAuthManager().completeAuthorization(token);
+                App.session.getUserAuthorizationManager().completeAuthorization(token);
                 webView.getEngine().getLoadWorker().cancel(); // stop the listener
                 ((Stage)webView.getScene().getWindow()).close();
-                App.session.getGuiManager().getStageManager().buildAddStage("home","Icon.png","Home",true,false,null);
-                App.session.getGuiManager().getStageManager().retrieveStageSubNetworkWithKey("home").buildAddScene("homeScene","home_page.fxml", "home_page_style.css");
-                Stage homeStage = App.session.getGuiManager()
-                        .getStageManager()
+                App.session.getStageManager().buildAddStage("home","Icon.png","Home",true,false,null);
+                App.session.getStageManager().retrieveStageSubNetworkWithKey("home").buildAddScene("homeScene","home_page.fxml", "home_page_style.css");
+                Stage homeStage = App.session.getStageManager()
                         .retrieveStageSubNetworkWithKey("home")
                         .getParentStage();
-                homeStage.setScene(App.session.getGuiManager().getStageManager().retrieveStageSubNetworkWithKey("home").retrieveSceneWithKey("homeScene"));
+                homeStage.setScene(App.session.getStageManager().retrieveStageSubNetworkWithKey("home").retrieveSceneWithKey("homeScene"));
                 homeStage.show();
             }
         });
