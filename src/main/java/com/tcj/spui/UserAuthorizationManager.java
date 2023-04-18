@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.net.URI;
 
 public class UserAuthorizationManager {
-    private final String clientId = "4076d474b9884c8f88f3c9cf40f80890";
-    private final URI redirectUri = URI.create("http://localhost:8080/callback");
-    private SpotifyApi retrievedApi;
-    private String authorizationCodeRequestLink;
+    private final SpotifyApi retrievedApi;
+    private final String authorizationCodeRequestLink;
     public UserAuthorizationManager() {
 
+        String clientId = "4076d474b9884c8f88f3c9cf40f80890"; // public info
+        URI redirectUri = URI.create("http://localhost:8080/callback");
         this.retrievedApi = new SpotifyApi.Builder()
                 .setClientId(clientId)
                 .setClientSecret("b604863adab94bfb947b81500e03c78e") // get from database, currently hardcoded

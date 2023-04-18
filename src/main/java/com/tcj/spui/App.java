@@ -12,14 +12,10 @@ public class App extends Application {
     public void start(Stage initialStage) {
         session = new AppManager();
         initiateLogin();
-        loadAllStageSceneNetworks();
-    }
-    public void loadAllStageSceneNetworks() { // loads all networks past the home page
     }
     public void initiateLogin() {
         App.session.getStageManager().buildAddStage("login", "Icon.png", "Login",true, false, StageStyle.UNDECORATED);
         App.session.getStageManager().retrieveStageSubNetworkWithKey("login").buildAddScene("loginScene", "login.fxml", "login_style.css");
-
         Stage loginStage = App.session.getStageManager()
                 .retrieveStageSubNetworkWithKey("login")
                 .getParentStage();

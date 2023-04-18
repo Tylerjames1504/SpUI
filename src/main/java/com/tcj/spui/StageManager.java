@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class StageManager {
-    private HashMap<String, SceneManager> stageSet = new HashMap();
+    private final HashMap<String, SceneManager> stageSet = new HashMap<>();
     public SceneManager retrieveStageSubNetworkWithKey(String stageKey) {
         return stageSet.get(stageKey);
     }
@@ -19,8 +19,7 @@ public class StageManager {
         Stage newStage = new Stage();
         SceneManager stageChild = new SceneManager(newStage);
         stageSet.put(stageName, stageChild);
-        try { newStage.getIcons().add(new Image(getClass().getResourceAsStream(iconPath))); }
-        catch(Exception e) { System.out.println(e); }
+        newStage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(iconPath))));
         newStage.setTitle(title);
         if (centerOnScreen) { newStage.centerOnScreen(); }
         if (!(resizable)) { newStage.setResizable(false); }
@@ -46,13 +45,12 @@ public class StageManager {
                 loader = new FXMLLoader(getClass().getResource(fxmlSheet));
                 newScene = new Scene(loader.load());
             }
-            catch (NullPointerException e) { System.out.println(e); }
-            catch (IOException e) { System.out.println(e); }
+            catch (NullPointerException | IOException e) { System.out.println(e); }
 
             sceneSetOfStageSet.put(sceneName, newScene);
 
-            try { newScene.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource(styleSheet)).toExternalForm()); }
-            catch (NullPointerException e) { System.out.println(e); }
+            newScene.getStylesheets().add(this.getClass().getResource(styleSheet).toExternalForm());
+
         }
     }
 

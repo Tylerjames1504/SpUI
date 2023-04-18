@@ -52,9 +52,8 @@ public class LoginController implements Initializable {
                 token = token.replaceAll("\\s.*", "");
                 App.session.getUserAuthorizationManager().completeAuthorization(token);
                 webView.getEngine().getLoadWorker().cancel(); // stop the listener
+                App.session.loadAllAPIDependentStageSceneNetworks(); // once the authorization is complete we use the token from the SpotifyApi object in the UserAuthorizationManager to load all of the information.
                 ((Stage)webView.getScene().getWindow()).close();
-                App.session.getStageManager().buildAddStage("home","Icon.png","Home",true,false,null);
-                App.session.getStageManager().retrieveStageSubNetworkWithKey("home").buildAddScene("homeScene","home_page.fxml", "home_page_style.css");
                 Stage homeStage = App.session.getStageManager()
                         .retrieveStageSubNetworkWithKey("home")
                         .getParentStage();
