@@ -25,12 +25,12 @@ public class LoginController implements Initializable {
                 App.session.getUser().getAuthManager().completeAuthorization(token);
                 webView.getEngine().getLoadWorker().cancel(); // stop the listener
                 ((Stage)webView.getScene().getWindow()).close();
-                /*FXMLLoader homePage = new FXMLLoader(getClass().getResource("home_page.fxml"));
+                /*FXMLLoader homePage = new FXMLLoader(getClass().getResource("home_page_old.fxml"));
                 Stage stage = new Stage();
                 // moves to and creates Home scene and stage
                 try { stage.setScene(new Scene(homePage.load()));}
                 catch (IOException e) { throw new RuntimeException(e);}
-                stage.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("home_page_style.css")).toExternalForm());
+                stage.getScene().getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("home_page_style_old.css")).toExternalForm());
                 stage.centerOnScreen();
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("Icon.png")));
                 stage.setTitle("Home");

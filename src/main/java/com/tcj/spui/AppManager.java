@@ -1,21 +1,19 @@
 package com.tcj.spui;
 
 public class AppManager {
-    final private UserAuthorizationManager userAuthorizationManager;
+    final private User appUser;
     final private StageManager stageManager;
     public AppManager() {
-        this.userAuthorizationManager = new UserAuthorizationManager();
+        this.appUser = new User();
         this.stageManager = new StageManager();
     }
-    public UserAuthorizationManager getUserAuthorizationManager() {
-        return this.userAuthorizationManager;
-    }
+    public User getAppUser() { return this.appUser; }
     public StageManager getStageManager() {
         return this.stageManager;
     }
     public void loadAllAPIDependentStageSceneNetworks() { // builds and sets up initial data for the scene -- threading?
-        App.session.getStageManager().buildAddStage("home","Icon.png","Home",true,false,null);
-        App.session.getStageManager().retrieveStageSubNetworkWithKey("home").buildAddScene("homeScene","home_page.fxml", "home_page_style.css");
+        this.getStageManager().buildAddStage("main","Icon.png","Home",true,false,null);
+        this.getStageManager().retrieveStageSubNetworkWithKey("main").buildAddScene("homeScene","home_page.fxml", "home_page_style.css");
     }
 
 }

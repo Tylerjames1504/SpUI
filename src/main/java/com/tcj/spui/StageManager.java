@@ -15,6 +15,9 @@ public class StageManager {
     public SceneManager retrieveStageSubNetworkWithKey(String stageKey) {
         return stageSet.get(stageKey);
     }
+    public Scene retrieveValidChildSceneFromStageParent(String stageKey, String sceneKey) {
+        return this.retrieveStageSubNetworkWithKey(stageKey).retrieveSceneWithKey(sceneKey);
+    }
     public void buildAddStage(String stageName, String iconPath, String title, Boolean centerOnScreen, Boolean resizable, StageStyle style) {
         Stage newStage = new Stage();
         SceneManager stageChild = new SceneManager(newStage);

@@ -19,9 +19,7 @@ public class App extends Application {
         Stage loginStage = App.session.getStageManager()
                 .retrieveStageSubNetworkWithKey("login")
                 .getParentStage();
-
-        loginStage.setScene(App.session.getStageManager().retrieveStageSubNetworkWithKey("login").retrieveSceneWithKey("loginScene"));
-
+        loginStage.setScene(App.session.getStageManager().retrieveValidChildSceneFromStageParent("login","loginScene"));
         loginStage.show();
     }
 

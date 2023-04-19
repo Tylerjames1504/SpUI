@@ -1,3 +1,17 @@
 .root{
     -fx-background-color: #000000;
 }
+#exitButton {
+    -fx-font-size: 15px;
+    -fx-text-fill: #FFFFFF;
+}
+#minimizeButton {
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFFFFF;
+}
+#exitButton:hover {
+    -fx-font-weight: bold;
+}
+#minimizeButton:hover {
+    -fx-font-weight: bold;
+}
