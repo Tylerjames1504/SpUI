@@ -3,7 +3,10 @@ package com.tcj.spui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import se.michaelthelin.spotify.SpotifyApi;
@@ -13,6 +16,8 @@ import java.util.ArrayList;
 public class SceneUtilities {
     @FXML
     public AnchorPane topBar;
+    @FXML
+    public Label minimizeButton;
     public double barDragX;
     public double barDragY;
     public Stage parentStage;
@@ -86,12 +91,67 @@ public class SceneUtilities {
             parentStage.setY(event.getScreenY() - barDragY);
         });
     }
-    public void close() { // logout??
-        parentStage.close();
-    }
-    public void minimize() { // known bug - hover stays on while minimized, so you have to re-hover to reset bold effect
+    public void close() { parentStage.close(); } // logout??
+    public void minimize() { // bug with button staying bold because of bad hover functionality
         parentStage.setIconified(true);
     }
+    public void underline(MouseEvent event) {
+        String[] sourceInfo = parseSource(event.getSource());
+        String type = sourceInfo[0];
+        String fxid = sourceInfo[1];
+        if (type.equals("Label")) {
+            Label label = (Label) currentScene.lookup(fxid);
+            label.setUnderline(true);
+        }
+        if (type.equals("ToggleButton")) {
+            ToggleButton toggleButton = (ToggleButton) currentScene.lookup(fxid);
+            toggleButton.setUnderline(true);
+        }
+        if (type.equals("Button")) {
+            Button button = (Button) currentScene.lookup(fxid);
+            button.setUnderline(true);
+        }
+
+    }
+    public void bold(MouseEvent event) {
+        String[] sourceInfo = parseSource(event.getSource());
+        String type = sourceInfo[0];
+        String fxid = sourceInfo[1];
+        if (type.equals("Label")) {
+            Label label = (Label) currentScene.lookup(fxid);
+            label.setStyle("-fx-font-weight: bold");
+        }
+        if (type.equals("ToggleButton")) {
+            ToggleButton toggleButton = (ToggleButton) currentScene.lookup(fxid);
+            toggleButton.setStyle("-fx-font-weight: bold");
+        }
+        if (type.equals("Button")) {
+            Button button = (Button) currentScene.lookup(fxid);
+            button.setStyle("-fx-font-weight: bold");
+        }
+
+    }
+    public void resetText(MouseEvent event) { //usage onMouseExited (add elements below if needed)
+        String[] sourceInfo = parseSource(event.getSource());
+        String type = sourceInfo[0];
+        String fxid = sourceInfo[1];
+        if (type.equals("Label")) {
+            Label label = (Label) currentScene.lookup(fxid);
+            label.setUnderline(false);
+            label.setStyle("-fx-font-weight: normal");
+        }
+        if (type.equals("ToggleButton")) {
+            ToggleButton toggleButton = (ToggleButton) currentScene.lookup(fxid);
+            toggleButton.setUnderline(false);
+            toggleButton.setStyle("-fx-font-weight: normal");
+        }
+        if (type.equals("Button")) {
+            Button button = (Button) currentScene.lookup(fxid);
+            button.setUnderline(false);
+            button.setStyle("-fx-font-weight: normal");
+        }
+    }
+
 
 
 }

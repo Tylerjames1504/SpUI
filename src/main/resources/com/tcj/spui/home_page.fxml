@@ -11,8 +11,8 @@
          <children>
             <HBox alignment="CENTER_RIGHT" minHeight="-Infinity" prefHeight="20.0" prefWidth="200.0" spacing="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="minimizeButton" onMouseClicked="#minimize" text="-" />
-                  <Label fx:id="exitButton" alignment="CENTER" onMouseClicked="#close" prefHeight="21.0" prefWidth="15.0" text="x" />
+                  <Label fx:id="minimizeButton" onMouseClicked="#minimize" onMouseEntered="#bold" onMouseExited="#resetText" text="-" />
+                  <Label fx:id="exitButton" alignment="CENTER" onMouseClicked="#close" onMouseEntered="#bold" onMouseExited="#resetText" prefHeight="21.0" prefWidth="15.0" text="x" />
                </children>
             </HBox>
          </children>

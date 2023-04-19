@@ -49,9 +49,7 @@ public class StageManager {
                 newScene = new Scene(loader.load());
             }
             catch (NullPointerException | IOException e) { System.out.println(e); }
-
             sceneSetOfStageSet.put(sceneName, newScene);
-
             newScene.getStylesheets().add(this.getClass().getResource(styleSheet).toExternalForm());
 
         }
