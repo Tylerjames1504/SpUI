@@ -20,17 +20,19 @@ public class SceneUtilities {
     public double barDragX;
     public double barDragY;
     public Stage parentStage;
+    public String parentStageKey;
     public Scene currentScene;
     public User appUser = App.session.getAppUser();
     public SpotifyApi spotifyApi = appUser.getUserAuthorizationManager().getRetrievedApi();
 
-
-    public void swapScene(Scene nextScene) {
-        parentStage.setScene(nextScene);
+    public void swapScene(String sceneKey, String nextTitle) {
+        if (nextTitle != null) parentStage.setTitle(nextTitle);
+        parentStage.setScene(App.session.getStageManager().retrieveValidChildSceneFromStageParent(parentStageKey,sceneKey));
     }
-    public void swapToStage(Boolean closeOldStage, Stage nextStage, Scene nextScene) {
+    public void swapToStage(Boolean closeOldStage, String stageKey, String sceneKey) {
         if (closeOldStage) parentStage.close();
-        nextStage.setScene(nextScene);
+        Stage nextStage = App.session.getStageManager().retrieveStageSubNetworkWithKey(stageKey).getParentStage();
+        nextStage.setScene(App.session.getStageManager().retrieveValidChildSceneFromStageParent(stageKey,sceneKey));
         nextStage.show();
     }
     public String[] parseSource(Object source) {

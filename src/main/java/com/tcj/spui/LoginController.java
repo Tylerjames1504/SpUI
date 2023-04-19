@@ -1,8 +1,6 @@
 package com.tcj.spui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -10,11 +8,11 @@ public class LoginController extends SceneUtilities {
     @FXML
     private WebView webView;
     public void initialize() { // initialize stage and scene if needed
-        this.parentStage = App.session.getStageManager().retrieveStageSubNetworkWithKey("login").getParentStage();
         setupWindowBarDrag();
-        authorizeAndMoveToHome();
+        this.parentStage = App.session.getStageManager().retrieveStageSubNetworkWithKey("login").getParentStage();
+        authorizeAndMoveToMainStage();
     }
-    public void authorizeAndMoveToHome() {
+    public void authorizeAndMoveToMainStage() {
         WebEngine engine = webView.getEngine();
         engine.load(App.session.getAppUser().getUserAuthorizationManager().getAuthorizationCodeRequestLink());
         webView.getEngine().locationProperty().addListener((observable, oldValue, newValue) -> {
@@ -25,9 +23,7 @@ public class LoginController extends SceneUtilities {
                 webView.getEngine().getLoadWorker().cancel(); // stop the listener
                 ((Stage)webView.getScene().getWindow()).close();
                 App.session.loadAllAPIDependentStageSceneNetworks(); // once the authorization is complete we use the token from the SpotifyApi object in the UserAuthorizationManager to load all the information.
-                this.swapToStage(true, App.session.getStageManager()
-                        .retrieveStageSubNetworkWithKey("main")
-                        .getParentStage(), App.session.getStageManager().retrieveValidChildSceneFromStageParent("main","homeScene"));
+                this.swapToStage(true, "main","homeScene");
             }
         });
     }
