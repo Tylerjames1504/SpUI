@@ -13,10 +13,6 @@ import java.util.ArrayList;
 public class SceneUtilities {
     @FXML
     public AnchorPane topBar;
-    @FXML
-    public Label minimizeButton;
-    @FXML
-    public Label exitButton;
     public double barDragX;
     public double barDragY;
     public Stage parentStage;
@@ -85,18 +81,15 @@ public class SceneUtilities {
             barDragX = event.getSceneX();
             barDragY = event.getSceneY();
         });
-
         topBar.setOnMouseDragged(event -> {
-            Stage stage = (Stage) topBar.getScene().getWindow();
-            stage.setX(event.getScreenX() - barDragX);
-            stage.setY(event.getScreenY() - barDragY);
+            parentStage.setX(event.getScreenX() - barDragX);
+            parentStage.setY(event.getScreenY() - barDragY);
         });
     }
-    public void close() {
+    public void close() { // logout??
         parentStage.close();
     }
-
-    public void minimize() {
+    public void minimize() { // known bug - hover stays on while minimized, so you have to re-hover to reset bold effect
         parentStage.setIconified(true);
     }
 
