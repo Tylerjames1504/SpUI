@@ -9,3 +9,188 @@
     -fx-font-size: 20px;
     -fx-text-fill: #FFFFFF;
 }
+#minimizeButton:hover {
+    -fx-font-weight: bold;
+}
+#exitButton:hover {
+    -fx-font-weight: bold;
+}
+#leftPane {
+    -fx-background-color: #181818;
+    -fx-background-radius: 10px;
+}
+#middlePane {
+    -fx-background-color: #181818;
+    -fx-background-radius: 10px;
+}
+#rightPane {
+    -fx-background-color: #181818;
+    -fx-background-radius: 10px;
+}
+#topSongsLabel {
+    -fx-font-family: Techno;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+#topArtistsLabel {
+    -fx-font-family: Techno;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+#middlePaneInner {
+    -fx-background-color: #191414;
+    -fx-background-radius: 10px;
+}
+#rightPaneInner {
+    -fx-background-color: #191414;
+    -fx-background-radius: 10px;
+}
+#songBackground0:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground1:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground2:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground3:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground4:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground5:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground6:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground7:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground8:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#songBackground9:hover {
+    -fx-background-color: #323436;
+    -fx-background-radius: 10px;
+}
+#topSongInfo0 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+#topSongInfo1 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo3 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo4 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo5 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo6 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo7 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo8 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongInfo9 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu0 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+#topSongPopu1{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu2 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu3 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu4 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu5 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu6 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu7 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu8 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#topSongPopu9 {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-size: 14px;
+}
+#errorLabelSongs{
+    -fx-background-color: transparent;
+    -fx-font-family: Techno;
+    -fx-font-size: 18px;
+}

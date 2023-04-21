@@ -50,37 +50,7 @@ public class SceneUtilities {
 
         return new String[] {type, "#" + fxid};
     }
-    public ArrayList<String> generateSet(int mode, int anchor, int[] basesSetSizes, String[] bases) { //mode 0; top is variable, mode not 0; top is set to value
-        ArrayList<String> outputSet = new ArrayList();
-        for (int i = 0; i < basesSetSizes.length; i++) {
-            if (basesSetSizes[i] == -1) outputSet.add("#" + bases[i]);
-            else {
-                if (mode == 0) {
-                    for (int j = anchor; j < basesSetSizes[i]; j++) {
-                        outputSet.add("#" + bases[i] + j);
-                    }
-                }
-                else {
-                    for (int j = anchor; j < mode; j++) {
-                        outputSet.add("#" + bases[i] + j);
-                    }
-                }
-            }
-        }
-        return outputSet;
-    }
-    public void disableSet(ArrayList<String> set) {
-        for (int i = 0; i < set.size(); i++) {
-            Node node = currentScene.lookup(set.get(i));
-            node.setDisable(true);
-        }
-    }
-    public void enableSet(ArrayList<String> set) {
-        for (int i = 0; i < set.size(); i++) {
-            Node node = currentScene.lookup(set.get(i));
-            node.setDisable(false);
-        }
-    }
+
     public void setupWindowBarDrag() {
         topBar.setOnMousePressed(event -> {
             barDragX = event.getSceneX();
@@ -92,65 +62,8 @@ public class SceneUtilities {
         });
     }
     public void close() { parentStage.close(); } // logout??
-    public void minimize() { // bug with button staying bold because of bad hover functionality
-        parentStage.setIconified(true);
-    }
-    public void underline(MouseEvent event) {
-        String[] sourceInfo = parseSource(event.getSource());
-        String type = sourceInfo[0];
-        String fxid = sourceInfo[1];
-        if (type.equals("Label")) {
-            Label label = (Label) currentScene.lookup(fxid);
-            label.setUnderline(true);
-        }
-        if (type.equals("ToggleButton")) {
-            ToggleButton toggleButton = (ToggleButton) currentScene.lookup(fxid);
-            toggleButton.setUnderline(true);
-        }
-        if (type.equals("Button")) {
-            Button button = (Button) currentScene.lookup(fxid);
-            button.setUnderline(true);
-        }
+    public void minimize() { parentStage.setIconified(true); } // bug with button staying bold because of bad hover functionality
 
-    }
-    public void bold(MouseEvent event) {
-        String[] sourceInfo = parseSource(event.getSource());
-        String type = sourceInfo[0];
-        String fxid = sourceInfo[1];
-        if (type.equals("Label")) {
-            Label label = (Label) currentScene.lookup(fxid);
-            label.setStyle("-fx-font-weight: bold");
-        }
-        if (type.equals("ToggleButton")) {
-            ToggleButton toggleButton = (ToggleButton) currentScene.lookup(fxid);
-            toggleButton.setStyle("-fx-font-weight: bold");
-        }
-        if (type.equals("Button")) {
-            Button button = (Button) currentScene.lookup(fxid);
-            button.setStyle("-fx-font-weight: bold");
-        }
-
-    }
-    public void resetText(MouseEvent event) { //usage onMouseExited (add elements below if needed)
-        String[] sourceInfo = parseSource(event.getSource());
-        String type = sourceInfo[0];
-        String fxid = sourceInfo[1];
-        if (type.equals("Label")) {
-            Label label = (Label) currentScene.lookup(fxid);
-            label.setUnderline(false);
-            label.setStyle("-fx-font-weight: normal");
-        }
-        if (type.equals("ToggleButton")) {
-            ToggleButton toggleButton = (ToggleButton) currentScene.lookup(fxid);
-            toggleButton.setUnderline(false);
-            toggleButton.setStyle("-fx-font-weight: normal");
-        }
-        if (type.equals("Button")) {
-            Button button = (Button) currentScene.lookup(fxid);
-            button.setUnderline(false);
-            button.setStyle("-fx-font-weight: normal");
-        }
-    }
 
 
 

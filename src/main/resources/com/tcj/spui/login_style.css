@@ -9,3 +9,9 @@
     -fx-font-size: 20px;
     -fx-text-fill: #FFFFFF;
 }
+#minimizeButton:hover {
+    -fx-font-weight: bold;
+}
+#exitButton:hover {
+    -fx-font-weight: bold;
+}
