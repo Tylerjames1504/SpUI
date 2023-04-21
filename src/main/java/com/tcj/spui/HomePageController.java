@@ -3,13 +3,16 @@ package com.tcj.spui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
+import se.michaelthelin.spotify.model_objects.specification.Artist;
 import se.michaelthelin.spotify.model_objects.specification.ArtistSimplified;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.Track;
+import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
 
 import java.io.IOException;
@@ -17,60 +20,70 @@ import java.io.IOException;
 public class HomePageController extends SceneUtilities {
     @FXML
     Label errorLabelSongs;
+    @FXML
+    Label errorLabelArtists;
+    @FXML
+    ToggleButton changeSongs;
+    @FXML
+    ToggleButton changeArtists;
+
+    private String songButtonState = "long_term";
+    private String artistButtonState = "long_term";
     public void initialize() {
         this.parentStageKey = "main";
         this.parentStage = App.session.getStageManager().retrieveStageSubNetworkWithKey(parentStageKey).getParentStage();
         setupWindowBarDrag();
+        loadSongs("short_term");
+        loadSongs("long_term");
+        loadArtists("short_term");
+        loadArtists("long_term");
         topBar.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null) {
                 this.currentScene = topBar.getScene();
-                initializeSongs("short_term");
-                initializeSongs("long_term");
+                displaySongs();
+                displayArtists();
             }
         });
     }
 
-    public void initializeSongs(String term) {
+    public void loadSongs(String term) { // defaults recent songs
         final GetUsersTopTracksRequest getUsersTopTracksRequest = this.spotifyApi.getUsersTopTracks()
                 .limit(10)
                 .offset(0)
                 .time_range(term)
                 .build();
-        int size = 0;
         User tempUser = App.session.getAppUser();
         try {
             if (term.equals("short_term")) {
                 tempUser.setTrackPagingShort(getUsersTopTracksRequest.execute());
-                size = tempUser.getTrackPagingShort().getItems().length;
             }
             if (term.equals("long_term")) {
                 tempUser.setTrackPagingLong(getUsersTopTracksRequest.execute());
-                size = tempUser.getTrackPagingLong().getItems().length;
             }
         } catch (IOException | ParseException | SpotifyWebApiException e) {
             throw new RuntimeException(e);
         }
-        for (int i = size; i < 10; i++) {
-            Node node = currentScene.lookup("#songBackground" + i);
-            node.setDisable(true);
-        }
-        if (size == 0) {
-            errorLabelSongs.setText("Oops.. looks like you have no top songs");
-        }
-        else if (term.equals("long_term")) displaySongs("long_term");
-
     }
-    public void displaySongs(String term) {
+
+    public void displaySongs() {
         User tempUser = App.session.getAppUser();
-        Paging<Track> trackPaging = null;
-        if (term.equals("short_term")) {
-            trackPaging = tempUser.getTrackPagingShort();
-        }
-        if (term.equals("long_term")) {
+        tempUser.getUserAuthorizationManager().refreshAuthCode();
+        Paging<Track> trackPaging;
+        if (songButtonState.equals("short_term")) {
             trackPaging = tempUser.getTrackPagingLong();
+            songButtonState = "long_term";
+            changeSongs.setText("Show Recent");
+        }
+        else {
+            trackPaging = tempUser.getTrackPagingShort();
+            songButtonState = "short_term";
+            changeSongs.setText("Show All Time");
         }
         int size = trackPaging.getItems().length;
-        if (size != 0) errorLabelSongs.setText("");
+        if (size != 0)  {
+            errorLabelSongs.setText("");
+            changeSongs.setDisable(false);
+        }
         for (int i = 0; i < size; i++) {
             Node node = currentScene.lookup("#songBackground" + i);
             node.setDisable(false);
@@ -92,6 +105,73 @@ public class HomePageController extends SceneUtilities {
             }
             ((Label) currentScene.lookup("#topSongInfo" + i)).setText("  " + trackName + "\n  " + allArtists);
             ((Label) currentScene.lookup("#topSongPopu" + i)).setText(popToString(track.getPopularity()));
+        }
+        for (int i = size; i < 10; i++) {
+            Node node = currentScene.lookup("#songBackground" + i);
+            node.setDisable(true);
+        }
+        if (size == 0) {
+            errorLabelSongs.setText("Oops.. looks like you have no top songs");
+            changeSongs.setDisable(true);
+        }
+    }
+    public void loadArtists(String term) { // defaults recent songs
+        final GetUsersTopArtistsRequest getUsersTopArtistsRequest = this.spotifyApi.getUsersTopArtists()
+                .limit(10)
+                .offset(0)
+                .time_range(term)
+                .build();
+        User tempUser = App.session.getAppUser();
+        try {
+            if (term.equals("short_term")) {
+                tempUser.setArtistPagingShort(getUsersTopArtistsRequest.execute());
+            }
+            if (term.equals("long_term")) {
+                tempUser.setArtistPagingLong(getUsersTopArtistsRequest.execute());
+            }
+        } catch (IOException | ParseException | SpotifyWebApiException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void displayArtists() {
+        User tempUser = App.session.getAppUser();
+        tempUser.getUserAuthorizationManager().refreshAuthCode();
+        Paging<Artist> artistPaging;
+        if (artistButtonState.equals("short_term")) {
+            artistPaging = tempUser.getArtistPagingLong();
+            artistButtonState = "long_term";
+            changeArtists.setText("Show Recent");
+        }
+        else {
+            artistPaging = tempUser.getArtistPagingShort();
+            artistButtonState = "short_term";
+            changeArtists.setText("Show All Time");
+        }
+        int size = artistPaging.getItems().length;
+        if (size != 0) {
+            errorLabelArtists.setText("");
+            changeArtists.setDisable(false);
+        }
+        for (int i = 0; i < size; i++) {
+            Node node = currentScene.lookup("#artistBackground" + i);
+            node.setDisable(false);
+            Artist artist = artistPaging.getItems()[i];
+            Image artistImage = new Image(artist.getImages()[0].getUrl(), 50,50, false, false);
+            ((ImageView) currentScene.lookup("#topArtistImage" + i)).setImage(artistImage);
+            String artistName = artist.getName();
+            if (artistName.length() > 20) {
+                artistName = artistName.substring(0,19) + "...";
+            }
+            ((Label) currentScene.lookup("#topArtistInfo" + i)).setText("  " + artistName);
+            ((Label) currentScene.lookup("#topArtistPopu" + i)).setText(popToString(artist.getPopularity()));
+        }
+        for (int i = size; i < 10; i++) {
+            Node node = currentScene.lookup("#artistBackground" + i);
+            node.setDisable(true);
+        }
+        if (size == 0) {
+            errorLabelArtists.setText("Oops.. looks like you have no top artists");
+            changeArtists.setDisable(true);
         }
     }
 
