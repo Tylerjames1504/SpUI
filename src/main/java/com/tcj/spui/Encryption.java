@@ -1,5 +1,6 @@
 package com.tcj.spui;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -70,8 +71,10 @@ public class Encryption {
     return new String(plainText);
   }
 
+
+
   public static void main(String[] args)
-      throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, SocketException, UnknownHostException {
+      throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException {
 
     System.out.println(GetNetworkAddress.GetAddress("mac"));
 

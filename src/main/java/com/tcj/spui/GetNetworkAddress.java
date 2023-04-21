@@ -8,13 +8,14 @@ import java.util.Enumeration;
 
 public class GetNetworkAddress {
 
+
   public static String GetAddress(String addressType) {
     String address = "";
     InetAddress lanIp = null;
     try {
 
       String ipAddress = null;
-      Enumeration<NetworkInterface> net = null;
+      Enumeration<NetworkInterface> net;
       net = NetworkInterface.getNetworkInterfaces();
 
       while (net.hasMoreElements()) {
