@@ -7,19 +7,13 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.Arrays;
 import java.util.Base64;
+import java.util.Enumeration;
+import java.util.Objects;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -47,59 +41,82 @@ public class Encryption {
     return new IvParameterSpec(iv);
   }
 
-  public static String encrypt(String algorithm, String input, SecretKey key,
-      IvParameterSpec iv) throws NoSuchPaddingException, NoSuchAlgorithmException,
+  public static String encrypt(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
       InvalidAlgorithmParameterException, InvalidKeyException,
-      BadPaddingException, IllegalBlockSizeException {
-
-    Cipher cipher = Cipher.getInstance(algorithm);
-    cipher.init(Cipher.ENCRYPT_MODE, key, iv);
+      BadPaddingException, IllegalBlockSizeException, InvalidKeySpecException {
+    SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
+        Objects.requireNonNull(getIPAddress()));
+    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    cipher.init(Cipher.ENCRYPT_MODE, key, generateIv());
     byte[] cipherText = cipher.doFinal(input.getBytes());
     return Base64.getEncoder()
         .encodeToString(cipherText);
   }
 
-  public static String decrypt(String algorithm, String cipherText, SecretKey key,
-      IvParameterSpec iv) throws NoSuchPaddingException, NoSuchAlgorithmException,
+  public static String decrypt(String cipherText) throws NoSuchPaddingException, NoSuchAlgorithmException,
       InvalidAlgorithmParameterException, InvalidKeyException,
-      BadPaddingException, IllegalBlockSizeException {
-
-    Cipher cipher = Cipher.getInstance(algorithm);
-    cipher.init(Cipher.DECRYPT_MODE, key, iv);
+      BadPaddingException, IllegalBlockSizeException, InvalidKeySpecException {
+    SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
+        Objects.requireNonNull(getIPAddress()));
+    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    cipher.init(Cipher.DECRYPT_MODE, key, generateIv());
     byte[] plainText = cipher.doFinal(Base64.getDecoder()
         .decode(cipherText));
     return new String(plainText);
   }
 
+  public static String getIPAddress() {
+    try {
+      InetAddress ip = InetAddress.getLocalHost();
+      return ip.getHostAddress();
+    } catch (UnknownHostException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
+  public static String getMACAddress() {
+
+    try {
+
+      Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+      while(networkInterfaces.hasMoreElements())
+      {
+        NetworkInterface network = networkInterfaces.nextElement();
+        byte[] mac = network.getHardwareAddress();
+        if(mac != null)
+        {
+          StringBuilder sb = new StringBuilder();
+          for (int i = 0; i < mac.length; i++) {
+            sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+          }
+          return sb.toString();
+
+        }
+      }
+    } catch (SocketException e){
+
+      e.printStackTrace();
+
+    }
+    return null;
+  }
 
   public static void main(String[] args)
       throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException {
 
-    System.out.println(GetNetworkAddress.GetAddress("mac"));
+    System.out.println(getIPAddress().length() - 1);
 
     String input = "baeldung";
-    SecretKey key = getKeyFromPassword("00:E0:4C:8A:1A:61", "00:E0:4C:8A:1A:61");
+    SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
+        Objects.requireNonNull(getIPAddress()));
     IvParameterSpec ivParameterSpec = Encryption.generateIv();
-    String algorithm = "AES/CBC/PKCS5Padding";
-    String cipherText = Encryption.encrypt(algorithm, input, key, ivParameterSpec);
-    String plainText = Encryption.decrypt(algorithm, cipherText, key, ivParameterSpec);
-    System.out.println(cipherText);
-    System.out.println(plainText);
-    System.out.println(input.equals(plainText));
+//    String cipherText = Encryption.encrypt(input);
+//    String plainText = Encryption.decrypt(cipherText);
+//    System.out.println(cipherText);
+//    System.out.println(plainText);
+//    System.out.println(input.equals(plainText));
 
-  }
-
-
-  public Encryption() {
-  }
-
-  public String encrypt(String input) {
-    return input;
-  }
-
-  public String decrypt(String input) {
-    return input;
   }
 
 }
