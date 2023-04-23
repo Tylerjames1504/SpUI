@@ -112,7 +112,7 @@ public class HomePageController extends SceneUtilities {
         }
         if (size == 0) {
             errorLabelSongs.setText("Oops.. looks like you have no top songs");
-            //changeSongs.setDisable(true);
+            //changeSongs.setDisable(true); bug fix --> change present on load artists, swapping between recent and all time, os dependent loading, top bar messed up for mac
         }
     }
     public void loadArtists(String term) { // defaults recent songs
