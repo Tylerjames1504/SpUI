@@ -112,7 +112,7 @@ public class HomePageController extends SceneUtilities {
         }
         if (size == 0) {
             errorLabelSongs.setText("Oops.. looks like you have no top songs");
-            changeSongs.setDisable(true);
+            //changeSongs.setDisable(true);
         }
     }
     public void loadArtists(String term) { // defaults recent songs
@@ -171,7 +171,7 @@ public class HomePageController extends SceneUtilities {
         }
         if (size == 0) {
             errorLabelArtists.setText("Oops.. looks like you have no top artists");
-            changeArtists.setDisable(true);
+            //changeArtists.setDisable(true);
         }
     }
 
