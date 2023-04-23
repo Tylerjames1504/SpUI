@@ -63,6 +63,13 @@ public class SpUIDatabase {
 
   }
 
+  public static void main(String[] args)
+      throws IOException, InterruptedException, URISyntaxException {
+    SpUIDatabase db = new SpUIDatabase();
+    System.out.println(db.initUser("user@gmail.com", "aslkdfjaio", "asldkfjawefj").statusCode());
+
+  }
+
   public HttpResponse<String> initConnect() throws IOException, InterruptedException {
 
     HttpResponse<String> response;
@@ -81,10 +88,9 @@ public class SpUIDatabase {
 
     switch (response.statusCode()) {
       case 401 -> {
-        throw new HttpConnectTimeoutException(
-            String.format(
-                "\nCode %d\nPermission Denied (headers were not passed in correctly)\nID: %s\nSecret: %s",
-                response.statusCode(), CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET));
+        throw new HttpConnectTimeoutException(String.format(
+            "\nCode %d\nPermission Denied (headers were not passed in correctly)\nID: %s\nSecret: %s",
+            response.statusCode(), CF_ACCESS_CLIENT_ID, CF_ACCESS_CLIENT_SECRET));
       }
       case 404 -> {
         throw new HttpConnectTimeoutException(
@@ -131,14 +137,12 @@ public class SpUIDatabase {
   public HttpResponse<String> initUser(String userEmail, String authCode, String refreshToken)
       throws URISyntaxException, IOException, InterruptedException {
 
-    return this.client.send(HttpRequest.newBuilder().POST(
-                HttpRequest.BodyPublishers.ofString(
-                    String.format("{\"user_email\":\"%s\",\"auth_code\":\"%s\",\"refresh_token\":\"%s\"}",
-                        userEmail, authCode, refreshToken)))
+    return this.client.send(HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(
+                String.format("{\"user_email\":\"%s\",\"auth_code\":\"%s\",\"refresh_token\":\"%s\"}",
+                    userEmail, authCode, refreshToken)))
             .uri(new URI(INITIAL_ENDPOINT + "/user?on_conflict=user_email"))
-            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID,
-                "CF-Access-Client-Secret", CF_ACCESS_CLIENT_SECRET, "Prefer",
-                "resolution=merge-duplicates").build(),
+            .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+                CF_ACCESS_CLIENT_SECRET, "Prefer", "resolution=merge-duplicates").build(),
         HttpResponse.BodyHandlers.ofString());
 
   }
@@ -160,3 +164,4 @@ public class SpUIDatabase {
   }
 
 }
+
