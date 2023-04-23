@@ -208,7 +208,7 @@ public class HomePageController {
         }
         disableSet(disableSet);
     }
-    public void populateSongs() { // recent songs is default
+    public void populateSongs() { // recent songs is default, can swap to long term
         App.session.refreshAuthCode();
         if (songButtonState.equals("short_term")) {
             songButtonState = "long_term";
