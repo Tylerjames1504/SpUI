@@ -3,9 +3,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-src/main/java/com/tcj/spui/CFServiceToken.java
-.github/workflows/maven.yml
-
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml

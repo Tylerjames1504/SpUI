@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@home_page_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tcj.spui.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@home_page_style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tcj.spui.HomePageController">
    <children>
       <Region fx:id="leftPane" layoutX="20.0" layoutY="10.0" prefHeight="700.0" prefWidth="274.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <Region fx:id="middleLeftPane" layoutX="290.0" layoutY="10.0" prefHeight="700.0" prefWidth="482.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="10.0" />
@@ -121,14 +119,26 @@
       <ImageView fx:id="discovImage5" fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="522.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="discovImage6" fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="581.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="discovImage7" fitHeight="50.0" fitWidth="50.0" layoutX="35.0" layoutY="640.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="discovInfo0" layoutX="111.0" layoutY="231.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable"/>
-      <Label fx:id="discovInfo1" layoutX="111.0" layoutY="290.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable"/>
-      <Label fx:id="discovInfo2" layoutX="111.0" layoutY="349.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable"/>
-      <Label fx:id="discovInfo3" layoutX="111.0" layoutY="408.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable"/>
-      <Label fx:id="discovInfo4" layoutX="111.0" layoutY="467.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable"/>
-      <Label fx:id="discovInfo5" layoutX="111.0" layoutY="526.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable"/>
-      <Label fx:id="discovInfo6" layoutX="111.0" layoutY="585.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable"/>
+      <Label fx:id="discovInfo0" layoutX="111.0" layoutY="231.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
+      <Label fx:id="discovInfo1" layoutX="111.0" layoutY="290.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
+      <Label fx:id="discovInfo2" layoutX="111.0" layoutY="349.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
+      <Label fx:id="discovInfo3" layoutX="111.0" layoutY="408.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
+      <Label fx:id="discovInfo4" layoutX="111.0" layoutY="467.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
+      <Label fx:id="discovInfo5" layoutX="111.0" layoutY="526.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
+      <Label fx:id="discovInfo6" layoutX="111.0" layoutY="585.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
       <Label fx:id="discovInfo7" layoutX="111.0" layoutY="644.0" onMouseClicked="#onClickExpandable" onMouseEntered="#onHoverExpandable" onMouseExited="#offHoverExpandable" />
+      <ImageView fx:id="profilePageImage" fitHeight="30.0" fitWidth="30.0" layoutX="50.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@profile_imageview.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="playlistManagerPageImage" fitHeight="30.0" fitWidth="30.0" layoutX="50.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@playlistmanager_imageview.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="profilePageLabel" layoutX="97.0" layoutY="58.0" stylesheets="@home_page_style.css" text="Profile" />
+      <Label fx:id="playlistManagerPageLabel" layoutX="97.0" layoutY="106.0" stylesheets="@home_page_style.css" text="Playlist Manager" />
 
    </children>
 </AnchorPane>

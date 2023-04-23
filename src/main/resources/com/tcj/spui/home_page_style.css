@@ -1,5 +1,5 @@
 .root{
-    -fx-background-color: #000000;
+    -fx-background-color: linear-gradient(to right, #FFFFFF, #000000);
 }
 #leftPane{
     -fx-background-color: #181818;
@@ -405,6 +405,19 @@
     -fx-text-fill: #FFFFFF;
     -fx-font-family: Techno;
     -fx-font-size: 14px;
+}
+
+#profilePageLabel {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+#playlistManagerPageLabel {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: Techno;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
 }
 
 /*#buttonTest{
