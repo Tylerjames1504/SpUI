@@ -2,6 +2,10 @@ package com.tcj.spui;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Objects;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 
 public class App extends Application {
@@ -17,7 +24,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage initialStage)
-      throws IOException, InterruptedException, URISyntaxException {
+      throws IOException, InterruptedException, URISyntaxException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
     session = new ClientManager();
     Parent base = loader.load();

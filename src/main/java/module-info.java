@@ -18,7 +18,7 @@ module com.tcj.spui {
     requires com.google.gson;
     requires java.net.http;
     requires org.json;
-
+    requires ascii85;
 
     opens com.tcj.spui to javafx.fxml;
     exports com.tcj.spui;

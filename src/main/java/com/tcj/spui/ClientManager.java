@@ -5,7 +5,14 @@ import static com.tcj.spui.SpUIDatabase.stripResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Objects;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -24,7 +31,8 @@ public class ClientManager {
   public SpUIDatabase db = new SpUIDatabase();
   public User user;
 
-  public ClientManager() throws IOException, InterruptedException, URISyntaxException {
+  public ClientManager()
+      throws IOException, InterruptedException, URISyntaxException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
     this.spotifyApi = new SpotifyApi.Builder()
         .setClientId(CLIENT_ID)
         .setClientSecret(db.getClientSecret())
@@ -59,13 +67,16 @@ public class ClientManager {
       String email = Objects.requireNonNull(
               stripResponse(spotifyApi.getCurrentUsersProfile().build().getJson())).get("email")
           .toString();
-      db.initUser(email, accessToken, refreshToken);
+      System.out.println(db.initUser(email, accessToken, refreshToken).statusCode());
+
       user = new User(email, db);
 
     } catch (IOException | SpotifyWebApiException | ParseException e) {
       e.printStackTrace();
     } catch (
-        URISyntaxException | InterruptedException e) {
+        URISyntaxException | InterruptedException | InvalidAlgorithmParameterException |
+        NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException |
+        BadPaddingException | InvalidKeySpecException | InvalidKeyException e) {
       throw new RuntimeException(e);
     }
   }

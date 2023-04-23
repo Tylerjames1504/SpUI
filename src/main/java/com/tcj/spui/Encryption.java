@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -17,14 +18,20 @@ import java.util.Objects;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import com.github.fzakaria.ascii85.Ascii85;
+
+
 
 public class Encryption {
+
+  public static IvParameterSpec iv = generateIv();
 
   public static SecretKey getKeyFromPassword(String password, String salt)
       throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -36,32 +43,36 @@ public class Encryption {
   }
 
   public static IvParameterSpec generateIv() {
-    byte[] iv = new byte[16];
-    new SecureRandom().nextBytes(iv);
+    byte[] iv = getMACBytes();
     return new IvParameterSpec(iv);
   }
 
   public static String encrypt(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
       InvalidAlgorithmParameterException, InvalidKeyException,
       BadPaddingException, IllegalBlockSizeException, InvalidKeySpecException {
+    if (input == null) {
+      return null;
+    }
     SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
         Objects.requireNonNull(getIPAddress()));
     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-    cipher.init(Cipher.ENCRYPT_MODE, key, generateIv());
+    cipher.init(Cipher.ENCRYPT_MODE, key, iv);
     byte[] cipherText = cipher.doFinal(input.getBytes());
-    return Base64.getEncoder()
-        .encodeToString(cipherText);
+    String out = Ascii85.encode(cipherText);
+    return out;
   }
 
   public static String decrypt(String cipherText) throws NoSuchPaddingException, NoSuchAlgorithmException,
       InvalidAlgorithmParameterException, InvalidKeyException,
       BadPaddingException, IllegalBlockSizeException, InvalidKeySpecException {
+    if (cipherText == null) {
+      return null;
+    }
     SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
         Objects.requireNonNull(getIPAddress()));
     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-    cipher.init(Cipher.DECRYPT_MODE, key, generateIv());
-    byte[] plainText = cipher.doFinal(Base64.getDecoder()
-        .decode(cipherText));
+    cipher.init(Cipher.DECRYPT_MODE, key, iv);
+    byte[] plainText = cipher.doFinal(Ascii85.decode(cipherText));
     return new String(plainText);
   }
 
@@ -102,20 +113,27 @@ public class Encryption {
     return null;
   }
 
+  public static byte[] getMACBytes() {
+    byte[] macBytes = getMACAddress().getBytes();
+    byte[] out = new byte[16];
+    if (macBytes.length - 1 >= 0)
+      System.arraycopy(macBytes, 0, out, 0, macBytes.length - 1);
+    return out;
+  }
+
   public static void main(String[] args)
       throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, IOException {
 
-    System.out.println(getIPAddress().length() - 1);
+
 
     String input = "baeldung";
     SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
         Objects.requireNonNull(getIPAddress()));
-    IvParameterSpec ivParameterSpec = Encryption.generateIv();
-//    String cipherText = Encryption.encrypt(input);
-//    String plainText = Encryption.decrypt(cipherText);
-//    System.out.println(cipherText);
-//    System.out.println(plainText);
-//    System.out.println(input.equals(plainText));
+    String cipherText = Encryption.encrypt(input);
+    String plainText = Encryption.decrypt(cipherText);
+    System.out.println(cipherText);
+    System.out.println(plainText);
+    System.out.println(input.equals(plainText));
 
   }
 

@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="SpUIDatabase" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
     <option name="MAIN_CLASS_NAME" value="com.tcj.spui.SpUIDatabase" />
     <module name="SpUI" />
     <option name="VM_PARAMETERS" value="-DCF_ACCESS_CLIENT_ID=f9cddd6e61dd8ba1d9d3ee54d865ecdf.access -DCF_ACCESS_CLIENT_SECRET=6d9f04156ab0028089d9284a55efa6fbc17a2d59ab0d2a50da93096e04b22640 -DCLIENT_SECRET=b604863adab94bfb947b81500e03c78e" />

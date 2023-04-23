@@ -8,8 +8,15 @@ import java.net.http.HttpConnectTimeoutException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
 import java.util.Objects;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,36 +38,47 @@ public class SpUIDatabase {
 
   }
 
-  public static Map<String, Object> stripResponse(HttpResponse<String> response) {
+  public static Map<String, Object> stripResponse(HttpResponse<String> response)
+      throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
 
     JSONArray jsonArray;
+    Map<String, Object> json;
     if (response.body().charAt(0) == '[') {
       jsonArray = new JSONArray(response.body());
       if (jsonArray.length() < 1) {
         return null;
       } else {
-        return jsonArray.getJSONObject(0).toMap();
+        json = jsonArray.getJSONObject(0).toMap();
       }
     } else {
-      return new JSONObject(response.body()).toMap();
+      json = new JSONObject(response.body()).toMap();
     }
+
+    json.replace("auth_code", Encryption.decrypt((String) json.get("auth_code")));
+    json.replace("refresh_token", Encryption.decrypt((String) json.get("refresh_token")));
+    return  json;
 
   }
 
-  public static Map<String, Object> stripResponse(String response) {
+  public static Map<String, Object> stripResponse(String response)
+      throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
 
     JSONArray jsonArray = null;
+    Map<String, Object> json;
     if (response.charAt(0) == '[') {
       jsonArray = new JSONArray(response);
       if (jsonArray.length() < 1) {
         return null;
       } else {
-        return jsonArray.getJSONObject(0).toMap();
+        json = jsonArray.getJSONObject(0).toMap();
       }
     } else {
-      return new JSONObject(response).toMap();
+      json = new JSONObject(response).toMap();
     }
 
+    json.replace("auth_code", json.get("auth_code"));
+    json.replace("refresh_token", json.get("refresh_token"));
+    return  json;
   }
 
   public HttpResponse<String> initConnect() throws IOException, InterruptedException {
@@ -97,7 +115,8 @@ public class SpUIDatabase {
     }
   }
 
-  public String getClientSecret() throws URISyntaxException, IOException, InterruptedException {
+  public String getClientSecret()
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
 
     return (String) Objects.requireNonNull(stripResponse(this.client.send(
         HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/app"))
@@ -107,7 +126,7 @@ public class SpUIDatabase {
   }
 
   public Map<String, Object> getUser(String usersEmail)
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
 
     HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
         .uri(new URI(INITIAL_ENDPOINT + "/user" + "?user_email=eq." + usersEmail))
@@ -118,7 +137,7 @@ public class SpUIDatabase {
   }
 
   public Map<String, Object> getUser(int userId)
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
 
     HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
         .uri(new URI(INITIAL_ENDPOINT + "/user" + "?user_id=eq." + userId))
@@ -129,7 +148,7 @@ public class SpUIDatabase {
   }
 
   public HttpResponse<String> initUser(String userEmail, String authCode, String refreshToken)
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
 
     return this.client.send(HttpRequest.newBuilder().POST(
                 HttpRequest.BodyPublishers.ofString(
@@ -157,6 +176,23 @@ public class SpUIDatabase {
 
   public void setResponse(HttpResponse<String> response) {
     this.response = response;
+  }
+
+
+  public static void main(String[] args)
+      throws IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, URISyntaxException, NoSuchAlgorithmException, BadPaddingException, InvalidKeySpecException, InvalidKeyException {
+    SpUIDatabase db = new SpUIDatabase();
+    System.out.println(db.client.send(HttpRequest.newBuilder().GET()
+        .uri(new URI(INITIAL_ENDPOINT + "/user"))
+        .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+            CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString()));
+    System.out.println(db.getUser("test"));
+    System.out.println(db.initUser("testUser", "testAuthCode2", "testRefreshToken2").statusCode());
+////    System.out.println(db.getUser("tylerturner1504@gmail.com").get("auth_code"));
+    User user = new User("testUser", db);
+    System.out.println(user.getAuthCode());
+
+
   }
 
 }

@@ -20,6 +20,7 @@ module com.example.demo {
     requires org.json;
     requires com.tcj.spui;
     requires org.junit.jupiter;
+    requires com.github.fzakaria;
 
 
     opens com.example.demo to javafx.fxml;
