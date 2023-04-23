@@ -41,7 +41,8 @@ public class Encryption {
     return new IvParameterSpec(iv);
   }
 
-  public static String encrypt(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
+  public static String encrypt(String input)
+      throws NoSuchPaddingException, NoSuchAlgorithmException,
       InvalidAlgorithmParameterException, InvalidKeyException,
       BadPaddingException, IllegalBlockSizeException, InvalidKeySpecException {
     SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
@@ -53,7 +54,8 @@ public class Encryption {
         .encodeToString(cipherText);
   }
 
-  public static String decrypt(String cipherText) throws NoSuchPaddingException, NoSuchAlgorithmException,
+  public static String decrypt(String cipherText)
+      throws NoSuchPaddingException, NoSuchAlgorithmException,
       InvalidAlgorithmParameterException, InvalidKeyException,
       BadPaddingException, IllegalBlockSizeException, InvalidKeySpecException {
     SecretKey key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
@@ -80,12 +82,10 @@ public class Encryption {
     try {
 
       Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
-      while(networkInterfaces.hasMoreElements())
-      {
+      while (networkInterfaces.hasMoreElements()) {
         NetworkInterface network = networkInterfaces.nextElement();
         byte[] mac = network.getHardwareAddress();
-        if(mac != null)
-        {
+        if (mac != null) {
           StringBuilder sb = new StringBuilder();
           for (int i = 0; i < mac.length; i++) {
             sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
@@ -94,7 +94,7 @@ public class Encryption {
 
         }
       }
-    } catch (SocketException e){
+    } catch (SocketException e) {
 
       e.printStackTrace();
 
