@@ -44,19 +44,22 @@ public class HomePageController extends SceneUtilities {
     this.parentStageKey = "main";
     this.parentStage = App.session.getStageManager().retrieveStageSubNetworkWithKey(parentStageKey)
         .getParentStage();
-    setupWindowBarDrag();
     loadSongs("short_term");
     loadSongs("long_term");
     loadArtists("short_term");
     loadArtists("long_term");
     topBar.sceneProperty().addListener((observable, oldScene, newScene) -> {
       if (newScene != null) {
+        setupWindowBarDrag();
         this.currentScene = topBar.getScene();
         displaySongs();
         displayArtists();
         displayDiscovery();
       }
     });
+  }
+  public void swapScene(){
+    swapScene("playlistScene", "Playlist Manager");
   }
 
   public void loadDiscovery() {

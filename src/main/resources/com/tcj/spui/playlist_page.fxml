@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@playlist_page_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tcj.spui.PlaylistController">
+  <children>
+    <AnchorPane fx:id="topBar" prefHeight="20.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <HBox alignment="CENTER_RIGHT" minHeight="-Infinity" prefHeight="20.0" prefWidth="200.0" spacing="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Label fx:id="minimizeButton" onMouseClicked="#minimize" text="-" />
+            <Label fx:id="exitButton" alignment="CENTER" onMouseClicked="#close" prefHeight="21.0" prefWidth="15.0" text="x" />
+          </children>
+        </HBox>
+      </children>
+    </AnchorPane>
+    <HBox prefHeight="720.0" prefWidth="1280.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <children>
+        <Pane fx:id="leftPane" prefHeight="220.0" prefWidth="245.0">
+          <HBox.margin>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+          </HBox.margin>
+               <children>
+                  <Pane fx:id="leftPaneInnerTop" layoutX="26.0" layoutY="14.0" prefHeight="100.0" prefWidth="190.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="190.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="30.0" />
+                                 </HBox.margin>
+                                 <image>
+                                    <Image url="@profile_imageview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="swapSceneLabel" onMouseClicked="#swapScene" prefHeight="30.0" prefWidth="62.0" text="Profile">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="35.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+               </children>
+        </Pane>
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>

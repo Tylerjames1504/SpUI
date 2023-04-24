@@ -1,0 +1,43 @@
+.root {
+  -fx-background-color: linear-gradient(to top, #000000, #191414);
+}
+
+#exitButton {
+  -fx-font-size: 15px;
+  -fx-text-fill: #FFFFFF;
+}
+
+#minimizeButton {
+  -fx-font-size: 20px;
+  -fx-text-fill: #FFFFFF;
+}
+
+#minimizeButton:hover {
+  -fx-font-weight: bold;
+}
+
+#exitButton:hover {
+  -fx-font-weight: bold;
+}
+#leftPaneInnerTop {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
+
+#leftPane {
+  -fx-background-color: #181818;
+  -fx-background-radius: 10px;
+}
+
+#swapSceneLabel {
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 18px;
+  -fx-font-weight: bold;
+}
+#swapSceneLabel:hover {
+  -fx-underline: true;
+}
+
+
+
