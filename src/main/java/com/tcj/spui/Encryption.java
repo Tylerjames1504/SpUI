@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Enumeration;
 import java.util.Objects;
@@ -31,8 +32,8 @@ public class Encryption {
 
   static {
     try {
-      key = generateKey(128);
-    } catch (NoSuchAlgorithmException e) {
+      key = getKeyFromPassword();
+    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
       throw new RuntimeException(e);
     }
   }
@@ -45,18 +46,18 @@ public class Encryption {
     return keyGenerator.generateKey();
   }
 
-  public static SecretKey getKeyFromPassword(String password, String salt)
+  public static SecretKey getKeyFromPassword()
       throws NoSuchAlgorithmException, InvalidKeySpecException {
 
     SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-    KeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), 65536, 256);
+    KeySpec spec = new PBEKeySpec(Objects.requireNonNull(getMACAddress()).toCharArray(),
+        Objects.requireNonNull(getMACBytes()), 65536, 256);
     return new SecretKeySpec(factory.generateSecret(spec)
         .getEncoded(), "AES");
   }
 
   public static IvParameterSpec generateIv() {
-    byte[] iv = new byte[16];
-    new SecureRandom().nextBytes(iv);
+    byte[] iv = getMACBytes();
     return new IvParameterSpec(iv);
   }
 
@@ -118,26 +119,12 @@ public class Encryption {
     return null;
   }
 
-  public static byte[] getMACAddressBytes() {
-
-    try {
-
-      Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
-      while (networkInterfaces.hasMoreElements()) {
-        NetworkInterface network = networkInterfaces.nextElement();
-        byte[] mac = network.getHardwareAddress();
-        if (mac != null) {
-          byte[] macBytes = new byte[16];
-          System.arraycopy(mac, 0, macBytes, 0, macBytes.length);
-          return macBytes;
-        }
-      }
-    } catch (SocketException e) {
-
-      e.printStackTrace();
-
-    }
-    return null;
+  public static byte[] getMACBytes() {
+    byte[] macBytes = Objects.requireNonNull(getMACAddress()).getBytes();
+    byte[] out = new byte[16];
+    if (macBytes.length - 1 >= 0)
+      System.arraycopy(macBytes, 0, out, 0, macBytes.length - 1);
+    return out;
   }
 
   public static void main(String[] args)
