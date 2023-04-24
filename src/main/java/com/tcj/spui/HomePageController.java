@@ -99,9 +99,9 @@ public class HomePageController extends SceneUtilities {
       StringBuilder allArtists = new StringBuilder("- ");
       for (int k = 0; k < artists.length; k++) {
         allArtists.append(artists[k].getName());
-          if (k != artists.length - 1) {
-              allArtists.append(", ");
-          }
+        if (k != artists.length - 1) {
+          allArtists.append(", ");
+        }
       }
       if (allArtists.length() > 20) {
         allArtists = new StringBuilder(allArtists.substring(0, 19) + "...");
@@ -182,15 +182,15 @@ public class HomePageController extends SceneUtilities {
   }
 
   public String popToString(int popularity) {
-      if (popularity >= 90) {
-          return "Very Popular";
-      } else if (popularity >= 67) {
-          return "Popular";
-      } else if (popularity >= 45) {
-          return "Less Popular";
-      } else {
-          return "Not That Popular";
-      }
+    if (popularity >= 90) {
+      return "Very Popular";
+    } else if (popularity >= 67) {
+      return "Popular";
+    } else if (popularity >= 45) {
+      return "Less Popular";
+    } else {
+      return "Not That Popular";
+    }
   }
 
 }
