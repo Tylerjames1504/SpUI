@@ -132,12 +132,14 @@ public class Encryption {
 
     System.out.println(getIPAddress().length() - 1);
 
-    String input = "baeldung";
-    String cipherText = Encryption.encrypt(input);
-    String plainText = Encryption.decrypt(cipherText);
-    System.out.println(cipherText);
+    String input = "6QZtJ6QQaa0a6p2BF+jNRhujUdg7ptCYjoLU86UpWSntNJFmQwKN87kWUwuLcuSZK7EPULNYx/udW9UuNeMnFBk+SSTXxm4Ug6DsuCAuRSPjftt+u2Gno62+EtVXCtLdzbgXGqf/98IHE1ZMYvFS4j4+ZW6Qd2YgUtJ833z8cOvWrVpVgWKPuhzqTDKs3dEHM4CAJOajVEbMDfqpkmKpNBJpdcZ2zBRlpNLdGztr1DaQtr2nqSoEnGXLJIMG141aq6FPfi/7FBFzybE03h08qgfm3ns7M3Ywk0zLU5PV31oUaYzfEGN0307iNcAgFPaByC7UZ2ju44s/B6VjbnhpwisirOoGmFK9LTZMVcK0GnY=";
+//    String cipherText = Encryption.encrypt(input);
+    String plainText = Encryption.decrypt(input);
+//    System.out.println(cipherText);
     System.out.println(plainText);
-    System.out.println(input.equals(plainText));
+//    System.out.println(input.equals(plainText));
+
+
 
   }
 
