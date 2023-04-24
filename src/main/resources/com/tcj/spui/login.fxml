@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.web.WebView?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-  prefHeight="860.0" prefWidth="650.0" stylesheets="@login_style.css"
-  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+  minWidth="-Infinity" prefHeight="892.0" prefWidth="650.0"
+  stylesheets="@login_style.css" xmlns="http://javafx.com/javafx/19"
   fx:controller="com.tcj.spui.LoginController">
   <children>
-    <WebView fx:id="webView" layoutX="78.0" layoutY="162.0" prefHeight="549.0" prefWidth="419.0"
-      AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
-      AnchorPane.topAnchor="5.0"/>
+    <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" layoutX="5.0" layoutY="7.0"
+      prefHeight="20.0" prefWidth="650.0" fx:id="topBar">
+      <children>
+        <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0"
+          alignment="CENTER_RIGHT" layoutY="6.0" minHeight="-Infinity"
+          prefHeight="20.0" prefWidth="640.0" spacing="12.0">
+          <children>
+            <Label alignment="TOP_LEFT" onMouseClicked="#minimize" prefHeight="21.0"
+              prefWidth="0.0" text="-" fx:id="minimizeButton"/>
+            <Label alignment="CENTER" onMouseClicked="#close" prefHeight="21.0" prefWidth="18.0"
+              text="x" fx:id="exitButton"/>
+          </children>
+          <padding>
+            <Insets right="5.0"/>
+          </padding>
+        </HBox>
+      </children>
+    </AnchorPane>
+    <WebView AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" layoutX="78.0"
+      layoutY="162.0" prefHeight="549.0" prefWidth="419.0"
+      fx:id="webView"/>
   </children>
 </AnchorPane>

@@ -1,37 +1,38 @@
 .root {
-  -fx-background-color: linear-gradient(to right, #FFFFFF, #000000);
+  -fx-background-color: linear-gradient(to top, #000000, #191414);
+}
+
+#exitButton {
+  -fx-font-size: 15px;
+  -fx-text-fill: #FFFFFF;
+}
+
+#minimizeButton {
+  -fx-font-size: 20px;
+  -fx-text-fill: #FFFFFF;
+}
+
+#minimizeButton:hover {
+  -fx-font-weight: bold;
+}
+
+#exitButton:hover {
+  -fx-font-weight: bold;
 }
 
 #leftPane {
   -fx-background-color: #181818;
-  -fx-background-radius: 20px;
-}
-
-#middleLeftPane {
-  -fx-background-color: #181818;
-  -fx-background-radius: 20px;
-}
-
-#middleRightPane {
-  -fx-background-color: #181818;
-  -fx-background-radius: 20px;
-}
-
-#myTopArtistsInnerPane {
-  -fx-background-color: #191414;
   -fx-background-radius: 10px;
 }
 
-#myTopSongsInnerPane {
-  -fx-background-color: #191414;
+#middlePane {
+  -fx-background-color: #181818;
   -fx-background-radius: 10px;
 }
 
-#topArtistsLabel {
-  -fx-font-family: Techno;
-  -fx-text-fill: #FFFFFF;
-  -fx-font-size: 20px;
-  -fx-font-weight: bold;
+#rightPane {
+  -fx-background-color: #181818;
+  -fx-background-radius: 10px;
 }
 
 #topSongsLabel {
@@ -41,232 +42,71 @@
   -fx-font-weight: bold;
 }
 
-#changeArtists {
+#topArtistsLabel {
   -fx-font-family: Techno;
   -fx-text-fill: #FFFFFF;
-  -fx-font-size: 14px;
-  -fx-background-color: #181818;
-}
-
-#errorLabelArtists {
-  -fx-background-color: transparent;
-  -fx-font-family: Techno;
-  -fx-font-size: 18px;
-}
-
-#artistHover0 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover1 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover2 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover3 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover4 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover5 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover6 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover7 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover8 {
-  -fx-background-radius: 5px;
-}
-
-#artistHover9 {
-  -fx-background-radius: 5px;
-}
-
-#topArtistInfo0 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 16px;
+  -fx-font-size: 20px;
   -fx-font-weight: bold;
 }
 
-#topArtistInfo1 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#middlePaneInner {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo2 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#rightPaneInner {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo3 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground0:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo4 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground1:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo5 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground2:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo6 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground3:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo7 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground4:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo8 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground5:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistInfo9 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground6:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistPopu0 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 16px;
-  -fx-font-weight: bold;
+#songBackground7:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistPopu1 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
+#songBackground8:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
-#topArtistPopu2 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#topArtistPopu3 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#topArtistPopu4 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#topArtistPopu5 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#topArtistPopu6 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#topArtistPopu7 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#topArtistPopu8 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#topArtistPopu9 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#changeSongs {
-  -fx-font-family: Techno;
-  -fx-text-fill: #FFFFFF;
-  -fx-font-size: 14px;
-  -fx-background-color: #181818;
-}
-
-#errorLabelSongs {
-  -fx-background-color: transparent;
-  -fx-font-family: Techno;
-  -fx-font-size: 18px;
-}
-
-#songHover0 {
-  -fx-background-radius: 5px;
-}
-
-#songHover1 {
-  -fx-background-radius: 5px;
-}
-
-#songHover2 {
-  -fx-background-radius: 5px;
-}
-
-#songHover3 {
-  -fx-background-radius: 5px;
-}
-
-#songHover4 {
-  -fx-background-radius: 5px;
-}
-
-#songHover5 {
-  -fx-background-radius: 5px;
-}
-
-#songHover6 {
-  -fx-background-radius: 5px;
-}
-
-#songHover7 {
-  -fx-background-radius: 5px;
-}
-
-#songHover8 {
-  -fx-background-radius: 5px;
-}
-
-#songHover9 {
-  -fx-background-radius: 5px;
+#songBackground9:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
 
 #topSongInfo0 {
@@ -391,128 +231,208 @@
   -fx-font-size: 14px;
 }
 
-
-#topLeftMenuPane {
-  -fx-background-color: #191414;
-  -fx-background-radius: 10px;
-}
-
-#bottomLeftMenuPane {
-  -fx-background-color: #191414;
-  -fx-background-radius: 10px;
-}
-
-#discoveryColumnLabel {
+#errorLabelSongs {
+  -fx-background-color: transparent;
   -fx-font-family: Techno;
-  -fx-text-fill: #FFFFFF;
-  -fx-font-size: 20px;
-  -fx-font-weight: bold;
-}
-
-#discovHover0 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover1 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover2 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover3 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover4 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover5 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover6 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover7 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover8 {
-  -fx-background-radius: 5px;
-}
-
-#discovHover9 {
-  -fx-background-radius: 5px;
-}
-
-#discovInfo0 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#discovInfo1 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#discovInfo2 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#discovInfo3 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#discovInfo4 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#discovInfo5 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#discovInfo6 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#discovInfo7 {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-size: 14px;
-}
-
-#profilePageLabel {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-family: Techno;
-  -fx-font-weight: bold;
   -fx-font-size: 18px;
 }
 
-#playlistManagerPageLabel {
+#changeSongs {
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 14px;
+  -fx-background-color: #181818;
+}
+
+#changeSongs:hover {
+  -fx-font-weight: bold;
+}
+
+#artistBackground0:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground1:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground2:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground3:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground4:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground5:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground6:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground7:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground8:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#artistBackground9:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#topArtistInfo0 {
   -fx-text-fill: #FFFFFF;
   -fx-font-family: Techno;
+  -fx-font-size: 16px;
   -fx-font-weight: bold;
+}
+
+#topArtistInfo1 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo2 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo3 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo4 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo5 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo6 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo7 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo8 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistInfo9 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu0 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+}
+
+#topArtistPopu1 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu2 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu3 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu4 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu5 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu6 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu7 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu8 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#topArtistPopu9 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#errorLabelArtists {
+  -fx-background-color: transparent;
+  -fx-font-family: Techno;
   -fx-font-size: 18px;
 }
 
-/*#buttonTest{
-    -fx-background-size: cover;
-    -fx-background-position: center;
-    -fx-background-image: url("https://media.geeksforgeeks.org/wp-content/uploads/20190314004249/sample-image2.png");
-}*/
+#changeArtists {
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 14px;
+  -fx-background-color: #181818;
+}
+
+#changeArtists:hover {
+  -fx-font-weight: bold;
+}
