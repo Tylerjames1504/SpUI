@@ -7,20 +7,20 @@ import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 
 import java.util.ArrayList;
 
-public class User {
-    final private UserAuthorizationManager userAuthorizationManager;
+public class SpotifyUser {
+    final private SpotifyUserAuthorizationManager spotifyUserAuthorizationManager;
     private Paging<Track> trackPagingShort;
     private Paging<Track> trackPagingLong;
     private Paging<Artist> artistPagingShort;
     private Paging<Artist> artistPagingLong;
 
-    private ArrayList<TrackSimplified> discoveryPool = new ArrayList();
-    private Track[] discoveryShown = new Track[8];
+    private final ArrayList<TrackSimplified> discoveryPool = new ArrayList<>();
+    private final Track[] discoveryShown = new Track[8];
 
-    public User() {
-        this.userAuthorizationManager = new UserAuthorizationManager();
+    public SpotifyUser() {
+        this.spotifyUserAuthorizationManager = new SpotifyUserAuthorizationManager();
     }
-    public UserAuthorizationManager getUserAuthorizationManager() { return this.userAuthorizationManager; }
+    public SpotifyUserAuthorizationManager getUserAuthorizationManager() { return this.spotifyUserAuthorizationManager; }
 
     public void setTrackPagingShort(Paging<Track> trackPagingShort) {this.trackPagingShort = trackPagingShort; }
     public void setArtistPagingShort(Paging<Artist> artistPagingShort) {this.artistPagingShort = artistPagingShort; }

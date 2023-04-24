@@ -32,7 +32,7 @@ public class HomePageControllerOld {
     private SpotifyApi spotifyApi;
     private Scene currentScene;
     @FXML
-    private Label topArtistsLabel;
+    public Label topArtistsLabel;
     @FXML
     private ToggleButton changeArtists;
     @FXML
@@ -43,28 +43,28 @@ public class HomePageControllerOld {
     private Label errorLabelSongs;
     private String artistButtonState = "short_term";
     private String songButtonState = "short_term";
-    private String[] topArtistPieces = {"artistHover", "topArtistInfo", "topArtistPopu","topArtistImage"};
-    private int[] topArtistPiecesSizes = {10, 10, 10, 10};
+    private final String[] topArtistPieces = {"artistHover", "topArtistInfo", "topArtistPopu","topArtistImage"};
+    private final int[] topArtistPiecesSizes = {10, 10, 10, 10};
     // per element hover functionality features top Artists
-    private String[] topArtistPiecesMax = {"artistHover", "topArtistInfo", "topArtistPopu","topArtistImage","changeArtists"};
-    private int[] topArtistPiecesMaxSizes = {10, 10, 10, 10, -1};
+    private final String[] topArtistPiecesMax = {"artistHover", "topArtistInfo", "topArtistPopu","topArtistImage","changeArtists"};
+    private final int[] topArtistPiecesMaxSizes = {10, 10, 10, 10, -1};
     // per element hover functionality features top Artists full set
 
-    private String[] topSongPieces = {"songHover", "topSongInfo", "topSongPopu","topSongImage"};
-    private int[] topSongPiecesSizes = {10, 10, 10, 10};
+    private final String[] topSongPieces = {"songHover", "topSongInfo", "topSongPopu","topSongImage"};
+    private final int[] topSongPiecesSizes = {10, 10, 10, 10};
     // per element hover functionality features top Songs
-    private String[] topSongPiecesMax = {"songHover", "topSongInfo", "topSongPopu","topSongImage","changeSongs"};
-    private int[] topSongPiecesMaxSizes = {10, 10, 10, 10, -1};
+    private final String[] topSongPiecesMax = {"songHover", "topSongInfo", "topSongPopu","topSongImage","changeSongs"};
+    private final int[] topSongPiecesMaxSizes = {10, 10, 10, 10, -1};
     // per element hover functionality features top Songs full set
 
-    private String[] discovPieces = {"discovHover", "discovInfo","discovImage"};
-    private int[] discovPiecesSizes = {8, 8, 8};
-    private String[] discovPiecesMax = {"discovHover", "discovInfo","discovImage"}; //add refresh
-    private int[] discovPiecesMaxSizes = {8, 8, 8}; // add -1
+    private final String[] discovPieces = {"discovHover", "discovInfo","discovImage"};
+    private final int[] discovPiecesSizes = {8, 8, 8};
+    private final String[] discovPiecesMax = {"discovHover", "discovInfo","discovImage"}; //add refresh
+    private final int[] discovPiecesMaxSizes = {8, 8, 8}; // add -1
     private Paging<Track> trackPaging;
     private Paging<Artist> artistPaging;
-    private ArrayList<TrackSimplified> discoveryPool = new ArrayList();
-    private Track[] discoveryShown = new Track[8];
+    private final ArrayList<TrackSimplified> discoveryPool = new ArrayList<>();
+    private final Track[] discoveryShown = new Track[8];
     public void initialize() {
         this.spotifyApi = App.session.getAppUser().getUserAuthorizationManager().getRetrievedApi();
         topArtistsLabel.sceneProperty().addListener((observable, oldScene, newScene) -> {
@@ -77,29 +77,29 @@ public class HomePageControllerOld {
         });
     }
     public void initializeDiscovery() {
-        String artistsBuilder = "";
-        String tracksBuilder = "";
+        StringBuilder artistsBuilder = new StringBuilder();
+        StringBuilder tracksBuilder = new StringBuilder();
         for (int i = 0; i < artistPaging.getItems().length; i++) {
             if (i == 3) break;
-            artistsBuilder += artistPaging.getItems()[i].getId();
-            if (i < 2 && i != artistPaging.getItems().length) artistsBuilder += ",";
+            artistsBuilder.append(artistPaging.getItems()[i].getId());
+            if (i < 2 && i != artistPaging.getItems().length) artistsBuilder.append(",");
         }
         for (int i = 0; i < trackPaging.getItems().length; i++) {
             if (i == 2) break;
-            tracksBuilder += trackPaging.getItems()[i].getId();
-            if (i < 1 && i != trackPaging.getItems().length) tracksBuilder += ",";
+            tracksBuilder.append(trackPaging.getItems()[i].getId());
+            if (i < 1 && i != trackPaging.getItems().length) tracksBuilder.append(",");
         }
         final GetRecommendationsRequest getRecommendationsRequest = this.spotifyApi.getRecommendations()
                 .limit(20)
-                .seed_artists(artistsBuilder)
-                .seed_tracks(tracksBuilder)
+                .seed_artists(artistsBuilder.toString())
+                .seed_tracks(tracksBuilder.toString())
                 .build();
         final GetListOfNewReleasesRequest getListOfNewReleasesRequest = this.spotifyApi.getListOfNewReleases()
                 .limit(10)
                 .build();
         int size = 0;
         try {
-            List<TrackSimplified> recommendedTracks = new ArrayList();
+            List<TrackSimplified> recommendedTracks = new ArrayList<>();
             if (artistPaging.getItems().length > 0) {
                 Recommendations recommendations = getRecommendationsRequest.execute();
                 recommendedTracks = Arrays.asList(recommendations.getTracks());
@@ -109,9 +109,7 @@ public class HomePageControllerOld {
                 Paging<TrackSimplified> albumsTracks = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build().execute();
                 discoveryPool.add(albumsTracks.getItems()[0]);
             }
-            for (int i = 0; i < recommendedTracks.size(); i++) {
-                discoveryPool.add(recommendedTracks.get(i));
-            }
+            discoveryPool.addAll(recommendedTracks);
             int bound = discoveryPool.size();
             size = bound;
             Random random = new Random();
@@ -127,13 +125,13 @@ public class HomePageControllerOld {
                     trackName = trackName.substring(0,19) + "...";
                 }
                 ArtistSimplified[] artists = track.getArtists();
-                String allArtists = "- ";
+                StringBuilder allArtists = new StringBuilder("- ");
                 for (int k = 0; k < artists.length; k++) {
-                    allArtists += artists[k].getName();
-                    if (k != artists.length - 1) allArtists += ", ";
+                    allArtists.append(artists[k].getName());
+                    if (k != artists.length - 1) allArtists.append(", ");
                 }
                 if (allArtists.length() > 20) {
-                    allArtists = allArtists.substring(0,19) + "...";
+                    allArtists = new StringBuilder(allArtists.substring(0, 19) + "...");
                 }
                 ((Label) currentScene.lookup("#discovInfo" + i)).setText(trackName + "\n" + allArtists);
                 discoveryPool.remove(index);
@@ -170,13 +168,13 @@ public class HomePageControllerOld {
                     trackName = trackName.substring(0,19) + "...";
                 }
                 ArtistSimplified[] artists = track.getArtists();
-                String allArtists = "- ";
+                StringBuilder allArtists = new StringBuilder("- ");
                 for (int k = 0; k < artists.length; k++) {
-                    allArtists += artists[k].getName();
-                    if (k != artists.length - 1) allArtists += ", ";
+                    allArtists.append(artists[k].getName());
+                    if (k != artists.length - 1) allArtists.append(", ");
                 }
                 if (allArtists.length() > 20) {
-                    allArtists = allArtists.substring(0,19) + "...";
+                    allArtists = new StringBuilder(allArtists.substring(0, 19) + "...");
                 }
                 ((Label) currentScene.lookup("#topSongInfo" + i)).setText(trackName + "\n" + allArtists);
                 ((Label) currentScene.lookup("#topSongPopu" + i)).setText(popToString(track.getPopularity()));
@@ -218,13 +216,13 @@ public class HomePageControllerOld {
                     trackName = trackName.substring(0,19) + "...";
                 }
                 ArtistSimplified[] artists = track.getArtists();
-                String allArtists = "- ";
+                StringBuilder allArtists = new StringBuilder("- ");
                 for (int k = 0; k < artists.length; k++) {
-                    allArtists += artists[k].getName();
-                    if (k != artists.length - 1) allArtists += ", ";
+                    allArtists.append(artists[k].getName());
+                    if (k != artists.length - 1) allArtists.append(", ");
                 }
                 if (allArtists.length() > 20) {
-                    allArtists = allArtists.substring(0,19) + "...";
+                    allArtists = new StringBuilder(allArtists.substring(0, 19) + "...");
                 }
                 ((Label) currentScene.lookup("#topSongInfo" + i)).setText(trackName + "\n" + allArtists);
                 ((Label) currentScene.lookup("#topSongPopu" + i)).setText(popToString(track.getPopularity()));
@@ -245,7 +243,7 @@ public class HomePageControllerOld {
                 .offset(0)
                 .time_range(artistButtonState)
                 .build();
-        int size = 0;
+        int size;
         try {
             this.artistPaging = getUsersTopArtistsRequest.execute();
             size = artistPaging.getItems().length;
@@ -312,7 +310,7 @@ public class HomePageControllerOld {
     public void onClickExpandable(MouseEvent event) {
         App.session.getAppUser().getUserAuthorizationManager().refreshAuthCode();
         String[] sourceInfo = parseSource(event.getSource());
-        int index = Integer.parseInt(sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
+        int index = Integer.parseInt(sourceInfo[1].substring(sourceInfo[1].length() - 1));
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("linux")) {
             try {
@@ -344,7 +342,7 @@ public class HomePageControllerOld {
         if (sourceInfo[1].toLowerCase().contains("song")) type = "song";
         if (sourceInfo[1].toLowerCase().contains("artist")) type = "artist";
         if (sourceInfo[1].toLowerCase().contains("discov")) type = "discov";
-        Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
+        Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1));
         selected.setStyle("-fx-background-color: #323436");
     }
     public void offHoverExpandable(MouseEvent event) {
@@ -353,7 +351,7 @@ public class HomePageControllerOld {
         if (sourceInfo[1].toLowerCase().contains("song")) type = "song";
         if (sourceInfo[1].toLowerCase().contains("artist")) type = "artist";
         if (sourceInfo[1].toLowerCase().contains("discov")) type = "discov";
-        Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1, sourceInfo[1].length()));
+        Region selected = (Region) currentScene.lookup("#" + type + "Hover" + sourceInfo[1].substring(sourceInfo[1].length() - 1));
         selected.setStyle("-fx-background-color: transparent");
     }
     public void underline(MouseEvent event) {
@@ -413,7 +411,7 @@ public class HomePageControllerOld {
         return new String[] {type, "#" + fxid};
     }
     public ArrayList<String> generateSet(int mode, int anchor, int[] basesSetSizes, String[] bases) { //mode 0; top is variable, mode not 0; top is set to value
-        ArrayList<String> outputSet = new ArrayList();
+        ArrayList<String> outputSet = new ArrayList<>();
         for (int i = 0; i < basesSetSizes.length; i++) {
             if (basesSetSizes[i] == -1) outputSet.add("#" + bases[i]);
             else {
@@ -432,14 +430,14 @@ public class HomePageControllerOld {
         return outputSet;
     }
     public void disableSet(ArrayList<String> set) {
-        for (int i = 0; i < set.size(); i++) {
-            Node node = currentScene.lookup(set.get(i));
+        for (String s : set) {
+            Node node = currentScene.lookup(s);
             node.setDisable(true);
         }
     }
     public void enableSet(ArrayList<String> set) {
-        for (int i = 0; i < set.size(); i++) {
-            Node node = currentScene.lookup(set.get(i));
+        for (String s : set) {
+            Node node = currentScene.lookup(s);
             node.setDisable(false);
         }
     }

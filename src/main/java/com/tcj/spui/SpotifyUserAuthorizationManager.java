@@ -11,10 +11,10 @@ import se.michaelthelin.spotify.requests.authorization.authorization_code.Author
 import java.io.IOException;
 import java.net.URI;
 
-public class UserAuthorizationManager {
+public class SpotifyUserAuthorizationManager {
     private final SpotifyApi retrievedApi;
     private final String authorizationCodeRequestLink;
-    public UserAuthorizationManager() {
+    public SpotifyUserAuthorizationManager() {
 
         String clientId = "4076d474b9884c8f88f3c9cf40f80890"; // public info
         URI redirectUri = URI.create("http://localhost:8080/callback");
@@ -47,7 +47,7 @@ public class UserAuthorizationManager {
             this.retrievedApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
             this.retrievedApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken()); // database
         }
-        catch (IOException | SpotifyWebApiException | ParseException e) { System.out.println(e);}
+        catch (IOException | SpotifyWebApiException | ParseException e) { e.printStackTrace();}
     }
     public void refreshAuthCode() {
         AuthorizationCodeRefreshRequest authorizationCodeRefreshRequest = this.retrievedApi.authorizationCodeRefresh()
@@ -56,7 +56,7 @@ public class UserAuthorizationManager {
             AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRefreshRequest.execute();
             this.retrievedApi.setAccessToken(authorizationCodeCredentials.getAccessToken()); // database
         }
-        catch (IOException | SpotifyWebApiException | ParseException e) { System.out.println(e); }
+        catch (IOException | SpotifyWebApiException | ParseException e) { e.printStackTrace(); }
     }
 
 }

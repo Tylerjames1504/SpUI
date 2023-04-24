@@ -3,13 +3,13 @@ package com.tcj.spui;
 import javafx.stage.StageStyle;
 
 public class AppManager {
-    final private User appUser;
+    final private SpotifyUser appSpotifyUser;
     final private StageManager stageManager;
     public AppManager() {
-        this.appUser = new User();
+        this.appSpotifyUser = new SpotifyUser();
         this.stageManager = new StageManager();
     }
-    public User getAppUser() { return this.appUser; }
+    public SpotifyUser getAppUser() { return this.appSpotifyUser; }
     public StageManager getStageManager() {
         return this.stageManager;
     }

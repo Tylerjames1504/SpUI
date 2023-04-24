@@ -28,9 +28,9 @@ public class StageManager {
         if (!(resizable)) { newStage.setResizable(false); }
         if (style != null) { newStage.initStyle(style); }
     }
-    public class SceneManager {
-        private HashMap<String, Scene> sceneSetOfStageSet = new HashMap();
-        private Stage parentStage;
+    public static class SceneManager {
+        private final HashMap<String, Scene> sceneSetOfStageSet = new HashMap<>();
+        private final Stage parentStage;
         public SceneManager(Stage stage) {
             this.parentStage = stage;
         }
@@ -48,9 +48,11 @@ public class StageManager {
                 loader = new FXMLLoader(getClass().getResource(fxmlSheet));
                 newScene = new Scene(loader.load());
             }
-            catch (NullPointerException | IOException e) { System.out.println(e); }
+            catch (NullPointerException | IOException e) { e.printStackTrace(); }
             sceneSetOfStageSet.put(sceneName, newScene);
-            newScene.getStylesheets().add(this.getClass().getResource(styleSheet).toExternalForm());
+            assert newScene != null;
+            newScene.getStylesheets().add(
+                Objects.requireNonNull(this.getClass().getResource(styleSheet)).toExternalForm());
 
         }
     }

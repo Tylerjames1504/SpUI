@@ -52,13 +52,13 @@ public class HomePageController extends SceneUtilities {
                 .offset(0)
                 .time_range(term)
                 .build();
-        User tempUser = App.session.getAppUser();
+        SpotifyUser tempSpotifyUser = App.session.getAppUser();
         try {
             if (term.equals("short_term")) {
-                tempUser.setTrackPagingShort(getUsersTopTracksRequest.execute());
+                tempSpotifyUser.setTrackPagingShort(getUsersTopTracksRequest.execute());
             }
             if (term.equals("long_term")) {
-                tempUser.setTrackPagingLong(getUsersTopTracksRequest.execute());
+                tempSpotifyUser.setTrackPagingLong(getUsersTopTracksRequest.execute());
             }
         } catch (IOException | ParseException | SpotifyWebApiException e) {
             throw new RuntimeException(e);
@@ -66,16 +66,16 @@ public class HomePageController extends SceneUtilities {
     }
 
     public void displaySongs() {
-        User tempUser = App.session.getAppUser();
-        tempUser.getUserAuthorizationManager().refreshAuthCode();
+        SpotifyUser tempSpotifyUser = App.session.getAppUser();
+        tempSpotifyUser.getUserAuthorizationManager().refreshAuthCode();
         Paging<Track> trackPaging;
         if (songButtonState.equals("short_term")) {
-            trackPaging = tempUser.getTrackPagingLong();
+            trackPaging = tempSpotifyUser.getTrackPagingLong();
             songButtonState = "long_term";
             changeSongs.setText("Show Recent");
         }
         else {
-            trackPaging = tempUser.getTrackPagingShort();
+            trackPaging = tempSpotifyUser.getTrackPagingShort();
             songButtonState = "short_term";
             changeSongs.setText("Show All Time");
         }
@@ -95,13 +95,13 @@ public class HomePageController extends SceneUtilities {
                 trackName = trackName.substring(0,19) + "...";
             }
             ArtistSimplified[] artists = track.getArtists();
-            String allArtists = "- ";
+            StringBuilder allArtists = new StringBuilder("- ");
             for (int k = 0; k < artists.length; k++) {
-                allArtists += artists[k].getName();
-                if (k != artists.length - 1) allArtists += ", ";
+                allArtists.append(artists[k].getName());
+                if (k != artists.length - 1) allArtists.append(", ");
             }
             if (allArtists.length() > 20) {
-                allArtists = allArtists.substring(0,19) + "...";
+                allArtists = new StringBuilder(allArtists.substring(0, 19) + "...");
             }
             ((Label) currentScene.lookup("#topSongInfo" + i)).setText("  " + trackName + "\n  " + allArtists);
             ((Label) currentScene.lookup("#topSongPopu" + i)).setText(popToString(track.getPopularity()));
@@ -121,29 +121,29 @@ public class HomePageController extends SceneUtilities {
                 .offset(0)
                 .time_range(term)
                 .build();
-        User tempUser = App.session.getAppUser();
+        SpotifyUser tempSpotifyUser = App.session.getAppUser();
         try {
             if (term.equals("short_term")) {
-                tempUser.setArtistPagingShort(getUsersTopArtistsRequest.execute());
+                tempSpotifyUser.setArtistPagingShort(getUsersTopArtistsRequest.execute());
             }
             if (term.equals("long_term")) {
-                tempUser.setArtistPagingLong(getUsersTopArtistsRequest.execute());
+                tempSpotifyUser.setArtistPagingLong(getUsersTopArtistsRequest.execute());
             }
         } catch (IOException | ParseException | SpotifyWebApiException e) {
             throw new RuntimeException(e);
         }
     }
     public void displayArtists() {
-        User tempUser = App.session.getAppUser();
-        tempUser.getUserAuthorizationManager().refreshAuthCode();
+        SpotifyUser tempSpotifyUser = App.session.getAppUser();
+        tempSpotifyUser.getUserAuthorizationManager().refreshAuthCode();
         Paging<Artist> artistPaging;
         if (artistButtonState.equals("short_term")) {
-            artistPaging = tempUser.getArtistPagingLong();
+            artistPaging = tempSpotifyUser.getArtistPagingLong();
             artistButtonState = "long_term";
             changeArtists.setText("Show Recent");
         }
         else {
-            artistPaging = tempUser.getArtistPagingShort();
+            artistPaging = tempSpotifyUser.getArtistPagingShort();
             artistButtonState = "short_term";
             changeArtists.setText("Show All Time");
         }

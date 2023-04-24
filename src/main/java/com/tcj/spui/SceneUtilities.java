@@ -1,17 +1,11 @@
 package com.tcj.spui;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import se.michaelthelin.spotify.SpotifyApi;
-
-import java.util.ArrayList;
 
 public class SceneUtilities {
     @FXML
@@ -23,8 +17,8 @@ public class SceneUtilities {
     public Stage parentStage;
     public String parentStageKey;
     public Scene currentScene;
-    public User appUser = App.session.getAppUser();
-    public SpotifyApi spotifyApi = appUser.getUserAuthorizationManager().getRetrievedApi();
+    public SpotifyUser appSpotifyUser = App.session.getAppUser();
+    public SpotifyApi spotifyApi = appSpotifyUser.getUserAuthorizationManager().getRetrievedApi();
 
     public void swapScene(String sceneKey, String nextTitle) {
         if (nextTitle != null) parentStage.setTitle(nextTitle);
