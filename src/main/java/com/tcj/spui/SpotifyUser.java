@@ -56,11 +56,7 @@ public class SpotifyUser {
     this.artistPagingLong = artistPagingLong;
   }
 
-  public ArrayList<TrackSimplified> getDiscoveryPool() {
-    return this.discoveryPool;
-  }
+  public ArrayList<TrackSimplified> getDiscoveryPool() { return this.discoveryPool; }
 
-  public Track[] getDiscoveryShown() {
-    return this.discoveryShown;
-  }
+  public Track[] getDiscoveryShown() { return this.discoveryShown; }
 }

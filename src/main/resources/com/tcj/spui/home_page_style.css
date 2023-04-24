@@ -48,6 +48,15 @@
   -fx-font-size: 20px;
   -fx-font-weight: bold;
 }
+#discoveryColumnLabel {
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+}
+#discoveryColumnLabel:hover {
+  -fx-underline: true;
+}
 
 #middlePaneInner {
   -fx-background-color: #191414;
@@ -55,6 +64,10 @@
 }
 
 #rightPaneInner {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
+#leftPaneInner {
   -fx-background-color: #191414;
   -fx-background-radius: 10px;
 }
@@ -436,3 +449,92 @@
 #changeArtists:hover {
   -fx-font-weight: bold;
 }
+
+#discovBackground0:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovBackground1:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovBackground2:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovBackground3:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovBackground4:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovBackground5:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovBackground6:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovBackground7:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+
+#discovInfo0 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#discovInfo1 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#discovInfo2 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#discovInfo3 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#discovInfo4 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#discovInfo5 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#discovInfo6 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+
+#discovInfo7 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
+

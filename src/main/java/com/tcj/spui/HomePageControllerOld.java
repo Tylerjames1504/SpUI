@@ -141,7 +141,7 @@ public class HomePageControllerOld {
         int index = random.nextInt(0, bound);
         Track track = this.spotifyApi.getTrack(discoveryPool.get(index).getId()).build().execute();
         this.discoveryShown[i] = track;
-        Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 50, 50, false,
+        Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 57, 57, false,
             false);
         ((ImageView) currentScene.lookup("#discovImage" + i)).setImage(trackImage);
         String trackName = track.getName();
