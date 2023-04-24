@@ -9,6 +9,7 @@ module com.tcj.spui {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires se.michaelthelin.spotify;
     requires org.fusesource.jansi;
@@ -18,4 +19,5 @@ module com.tcj.spui {
 
     opens com.tcj.spui to javafx.fxml;
     exports com.tcj.spui;
+
 }

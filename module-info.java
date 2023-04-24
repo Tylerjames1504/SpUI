@@ -1,4 +1,4 @@
-module com.tcj.spui {
+module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -10,12 +10,12 @@ module com.tcj.spui {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
-    requires se.michaelthelin.spotify;
     requires org.fusesource.jansi;
+    requires se.michaelthelin.spotify;
+    requires com.google.gson;
     requires nv.i18n;
     requires org.apache.httpcomponents.core5.httpcore5;
-    requires com.google.gson;
 
-    opens com.tcj.spui to javafx.fxml;
-    exports com.tcj.spui;
+    opens com.example.demo to javafx.fxml;
+    exports com.example.demo;
 }
