@@ -8,331 +8,260 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="720.0" prefWidth="1280.0"
-  stylesheets="@home_page_style.css" xmlns="http://javafx.com/javafx/19"
-  fx:controller="com.tcj.spui.HomePageController">
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@home_page_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tcj.spui.HomePageController">
   <children>
-    <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" prefHeight="20.0"
-      prefWidth="200.0" fx:id="topBar">
+    <AnchorPane fx:id="topBar" prefHeight="20.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-        <HBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" alignment="CENTER_RIGHT"
-          minHeight="-Infinity" prefHeight="20.0" prefWidth="200.0"
-          spacing="12.0">
+        <HBox alignment="CENTER_RIGHT" minHeight="-Infinity" prefHeight="20.0" prefWidth="200.0" spacing="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
           <children>
-            <Label onMouseClicked="#minimize" text="-" fx:id="minimizeButton"/>
-            <Label alignment="CENTER" onMouseClicked="#close" prefHeight="21.0" prefWidth="15.0"
-              text="x" fx:id="exitButton"/>
+            <Label fx:id="minimizeButton" onMouseClicked="#minimize" text="-" />
+            <Label fx:id="exitButton" alignment="CENTER" onMouseClicked="#close" prefHeight="21.0" prefWidth="15.0" text="x" />
           </children>
         </HBox>
       </children>
     </AnchorPane>
-    <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0"
-      prefHeight="720.0" prefWidth="1280.0" spacing="10.0">
+    <HBox prefHeight="720.0" prefWidth="1280.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
       <children>
-        <Pane prefHeight="680.0" prefWidth="320.0" fx:id="leftPane">
+        <Pane fx:id="leftPane" prefHeight="680.0" prefWidth="320.0">
           <HBox.margin>
-            <Insets bottom="10.0" left="10.0" top="10.0"/>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
           </HBox.margin>
         </Pane>
-        <Pane prefHeight="680.0" prefWidth="460.0" stylesheets="@home_page_style.css"
-          fx:id="middlePane">
+        <Pane fx:id="middlePane" prefHeight="680.0" prefWidth="460.0" stylesheets="@home_page_style.css">
           <HBox.margin>
-            <Insets bottom="10.0" top="10.0"/>
+            <Insets bottom="10.0" top="10.0" />
           </HBox.margin>
           <children>
-            <Label layoutX="16.0" layoutY="14.0" text="My Top Songs" fx:id="topSongsLabel"/>
-            <Pane layoutX="20.0" layoutY="56.0" prefHeight="610.0" prefWidth="420.0"
-              fx:id="middlePaneInner">
+            <Label fx:id="topSongsLabel" layoutX="16.0" layoutY="14.0" text="My Top Songs" />
+            <Pane fx:id="middlePaneInner" layoutX="20.0" layoutY="56.0" prefHeight="610.0" prefWidth="420.0">
               <children>
-                <Label layoutX="50.0" layoutY="20.0" fx:id="errorLabelSongs"/>
+                <Label fx:id="errorLabelSongs" layoutX="50.0" layoutY="20.0" textFill="WHITE" />
                 <VBox prefHeight="610.0" prefWidth="420.0" spacing="5.5">
                   <children>
-                    <Pane prefHeight="100.0" prefWidth="410.0" fx:id="songBackground0">
+                    <Pane fx:id="songBackground0" prefHeight="100.0" prefWidth="410.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5" top="2.5"/>
+                        <Insets left="2.5" right="2.5" top="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage0"/>
-                        <Label layoutX="100.0" prefHeight="100.0" prefWidth="165.0"
-                          fx:id="topSongInfo0"/>
-                        <Label layoutX="280.0" prefHeight="100.0" prefWidth="132.0"
-                          fx:id="topSongPopu0"/>
+                        <ImageView fx:id="topSongImage0" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo0" layoutX="100.0" prefHeight="100.0" prefWidth="165.0" />
+                        <Label fx:id="topSongPopu0" layoutX="280.0" prefHeight="100.0" prefWidth="132.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground1">
+                    <Pane fx:id="songBackground1" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage1"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo1"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu1"/>
+                        <ImageView fx:id="topSongImage1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo1" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu1" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground2">
+                    <Pane fx:id="songBackground2" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage2"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo2"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu2"/>
+                        <ImageView fx:id="topSongImage2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo2" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu2" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground3">
+                    <Pane fx:id="songBackground3" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage3"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo3"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu3"/>
+                        <ImageView fx:id="topSongImage3" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo3" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu3" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground4">
+                    <Pane fx:id="songBackground4" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage4"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo4"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu4"/>
+                        <ImageView fx:id="topSongImage4" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo4" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu4" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground5">
+                    <Pane fx:id="songBackground5" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage5"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo5"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu5"/>
+                        <ImageView fx:id="topSongImage5" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo5" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu5" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground6">
+                    <Pane fx:id="songBackground6" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage6"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo6"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu6"/>
+                        <ImageView fx:id="topSongImage6" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo6" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu6" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground7">
+                    <Pane fx:id="songBackground7" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage7"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo7"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu7"/>
+                        <ImageView fx:id="topSongImage7" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo7" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu7" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground8">
+                    <Pane fx:id="songBackground8" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage8"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo8"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu8"/>
+                        <ImageView fx:id="topSongImage8" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo8" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu8" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="songBackground9">
+                    <Pane fx:id="songBackground9" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets bottom="2.5" left="2.5" right="2.5"/>
+                        <Insets bottom="2.5" left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topSongImage9"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topSongInfo9"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topSongPopu9"/>
+                        <ImageView fx:id="topSongImage9" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topSongInfo9" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topSongPopu9" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
                   </children>
                 </VBox>
               </children>
             </Pane>
-            <ToggleButton layoutX="314.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#displaySongs"
-              text="Show All Time" fx:id="changeSongs"/>
+            <ToggleButton fx:id="changeSongs" layoutX="314.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#changeButtonState" text="Show All Time" />
           </children>
         </Pane>
-        <Pane prefHeight="680.0" prefWidth="460.0" fx:id="rightPane">
+        <Pane fx:id="rightPane" prefHeight="680.0" prefWidth="460.0">
           <HBox.margin>
-            <Insets bottom="10.0" right="10.0" top="10.0"/>
+            <Insets bottom="10.0" right="10.0" top="10.0" />
           </HBox.margin>
           <children>
-            <Label layoutX="16.0" layoutY="14.0" text="My Top Artists" fx:id="topArtistsLabel"/>
-            <Pane layoutX="20.0" layoutY="56.0" prefHeight="610.0" prefWidth="420.0"
-              fx:id="rightPaneInner">
+            <Label fx:id="topArtistsLabel" layoutX="16.0" layoutY="14.0" text="My Top Artists" />
+            <Pane fx:id="rightPaneInner" layoutX="20.0" layoutY="56.0" prefHeight="610.0" prefWidth="420.0">
               <children>
-                <Label layoutX="50.0" layoutY="20.0" fx:id="errorLabelArtists"/>
+                <Label fx:id="errorLabelArtists" layoutX="50.0" layoutY="20.0" textFill="WHITE" />
                 <VBox prefHeight="610.0" prefWidth="420.0" spacing="5.5">
                   <children>
-                    <Pane prefHeight="100.0" prefWidth="410.0" fx:id="artistBackground0">
+                    <Pane fx:id="artistBackground0" prefHeight="100.0" prefWidth="410.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5" top="2.5"/>
+                        <Insets left="2.5" right="2.5" top="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage0"/>
-                        <Label layoutX="100.0" prefHeight="100.0" prefWidth="165.0"
-                          fx:id="topArtistInfo0"/>
-                        <Label layoutX="280.0" prefHeight="100.0" prefWidth="132.0"
-                          fx:id="topArtistPopu0"/>
+                        <ImageView fx:id="topArtistImage0" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo0" layoutX="100.0" prefHeight="100.0" prefWidth="165.0" />
+                        <Label fx:id="topArtistPopu0" layoutX="280.0" prefHeight="100.0" prefWidth="132.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground1">
+                    <Pane fx:id="artistBackground1" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage1"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo1"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu1"/>
+                        <ImageView fx:id="topArtistImage1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo1" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu1" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground2">
+                    <Pane fx:id="artistBackground2" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage2"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo2"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu2"/>
+                        <ImageView fx:id="topArtistImage2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo2" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu2" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground3">
+                    <Pane fx:id="artistBackground3" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage3"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo3"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu3"/>
+                        <ImageView fx:id="topArtistImage3" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo3" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu3" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground4">
+                    <Pane fx:id="artistBackground4" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage4"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo4"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu4"/>
+                        <ImageView fx:id="topArtistImage4" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo4" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu4" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground5">
+                    <Pane fx:id="artistBackground5" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage5"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo5"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu5"/>
+                        <ImageView fx:id="topArtistImage5" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo5" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu5" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground6">
+                    <Pane fx:id="artistBackground6" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage6"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo6"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu6"/>
+                        <ImageView fx:id="topArtistImage6" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo6" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu6" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground7">
+                    <Pane fx:id="artistBackground7" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage7"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo7"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu7"/>
+                        <ImageView fx:id="topArtistImage7" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo7" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu7" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground8">
+                    <Pane fx:id="artistBackground8" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets left="2.5" right="2.5"/>
+                        <Insets left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage8"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo8"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu8"/>
+                        <ImageView fx:id="topArtistImage8" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo8" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu8" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
-                    <Pane prefHeight="50.0" prefWidth="200.0" fx:id="artistBackground9">
+                    <Pane fx:id="artistBackground9" prefHeight="50.0" prefWidth="200.0">
                       <VBox.margin>
-                        <Insets bottom="2.5" left="2.5" right="2.5"/>
+                        <Insets bottom="2.5" left="2.5" right="2.5" />
                       </VBox.margin>
                       <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-                          preserveRatio="true" fx:id="topArtistImage9"/>
-                        <Label layoutX="50.0" prefHeight="50.0" prefWidth="225.0"
-                          fx:id="topArtistInfo9"/>
-                        <Label layoutX="280.0" prefHeight="50.0" prefWidth="130.0"
-                          fx:id="topArtistPopu9"/>
+                        <ImageView fx:id="topArtistImage9" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="topArtistInfo9" layoutX="50.0" prefHeight="50.0" prefWidth="225.0" />
+                        <Label fx:id="topArtistPopu9" layoutX="280.0" prefHeight="50.0" prefWidth="130.0" />
                       </children>
                     </Pane>
                   </children>
                 </VBox>
               </children>
             </Pane>
-            <ToggleButton layoutX="314.0" layoutY="17.0" mnemonicParsing="false"
-              onMouseClicked="#displayArtists" text="Show All Time" fx:id="changeArtists"/>
+            <ToggleButton fx:id="changeArtists" layoutX="314.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#changeButtonState" text="Show All Time" />
           </children>
         </Pane>
       </children>
