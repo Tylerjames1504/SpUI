@@ -17,6 +17,7 @@ import java.util.Objects;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -30,15 +31,19 @@ public class Encryption {
 
   static {
     try {
-      key = getKeyFromPassword(Objects.requireNonNull(getMACAddress()),
-          Objects.requireNonNull(getIPAddress()));
-    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+      key = generateKey(128);
+    } catch (NoSuchAlgorithmException e) {
       throw new RuntimeException(e);
     }
   }
 
   public static IvParameterSpec ivParameterSpec = Encryption.generateIv();
 
+  public static SecretKey generateKey(int n) throws NoSuchAlgorithmException {
+    KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+    keyGenerator.init(n);
+    return keyGenerator.generateKey();
+  }
 
   public static SecretKey getKeyFromPassword(String password, String salt)
       throws NoSuchAlgorithmException, InvalidKeySpecException {
