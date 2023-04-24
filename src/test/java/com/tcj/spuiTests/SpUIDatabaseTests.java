@@ -22,8 +22,7 @@ public class SpUIDatabaseTests {
   public void successfulGetOnInitEndpointTest()
       throws IOException, InterruptedException {
 
-    SpUIDatabase db = new SpUIDatabase();
-    Assertions.assertEquals(200, db.getResponse().statusCode());
+    Assertions.assertEquals(200, this.db.getResponse().statusCode());
 
   }
 
@@ -111,6 +110,5 @@ public class SpUIDatabaseTests {
     Assertions.assertNull(db.getUser("testUser"));
 
   }
-
 
 }
