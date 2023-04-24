@@ -1,0 +1,131 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class App {
++{Static}session: ClientManager
++start(): void
++{Static}main(): void
+}
+class ClientManager {
+-clientId: String
+-redirectUri: URI
+-spotifyApi: SpotifyApi
+-authorizationCodeUriRequest: AuthorizationCodeUriRequest
++grabApi(): SpotifyApi
++getAuthRequestLink(): String
++initiateApp(): void
+refreshAuthCode(): void
+}
+class LoginController {
+-webView: WebView
+-engine: WebEngine
++initialize(): void
+}
+class HomePageController {
+-spotifyApi: SpotifyApi
+-currentScene: Scene
+-topArtistsLabel: Label
+-changeArtists: ToggleButton
+-changeSongs: ToggleButton
+-errorLabelArtists: Label
+-errorLabelSongs: Label
+-artistButtonState: String
+-songButtonState: String
+-topArtistPieces: String[]
+-topArtistPiecesSizes: int[]
+-topArtistPiecesMax: String[]
+-topArtistPiecesMaxSizes: int[]
+-topSongPieces: String[]
+-topSongPiecesSizes: int[]
+-topSongPiecesMax: String[]
+-topSongPiecesMaxSizes: int[]
+-discovPieces: String[]
+-discovPiecesSizes: int[]
+-discovPiecesMax: String[]
+-discovPiecesMaxSizes: int[]
+-trackPaging: Paging<Track>
+-artistPaging: Paging<Artist>
+-discoveryPool: ArrayList<TrackSimplified>
+-discoveryShown: Track[]
++initialize(): void
++initializeDiscovery(): void
++initializeSongs(): void
++populateSongs(): void
++initializeArtists(): void
++populateArtists(): void
++onClickExpandable(): void
++onHoverExpandable(): void
++offHoverExpandable(): void
++underline(): void
++resetUnderline(): void
++popToString(): String
++parseSource(): String[]
++generateSet(): ArrayList<String>
++disableSet(): void
++enableSet(): void
+}
+class User {
+-id: int
+-email: String
+-authCode: String
+-refreshToken: String
++getId(): int
++setId(): void
++getEmail(): String
++setEmail(): void
++getAuthCode(): String
++getAuthCode(): void
++getRefreshToken(): String
++setRefreshToken(): void
++toString(): String
+}
+skinparam class {
+BackgroundColor red
+}
+class SpUIDatabase {
++{Static}INITIAL_ENDPOINT: String
++{Static}CF_ACCESS_CLIENT_ID: String
++{Static}CF_ACCESS_CLIENT_SECRET: String
++Client: HttpClient
++response: HttpResponse<String>
++{Static}stripResponse: Map<String, Object>
++initConnect: HttpResponse<String>
++getClientSecret: String
++getUser: Map<String, Object>
++getUsers: HashMap<Integer, HashMap<String,String>>
++initUser: HttpResponse<String>
++deleteUser: HttpResponse<String>
++getResponse: HttpResponse<String>
++setResponse: void
+}
+
+
+App "1 " --> "1 " ClientManager: Instantiates a...
+HomePageController "1 " o--> "1 "App : Accesses Session
+LoginController "1 " o--> "1 "App: Accesses Session
+SpUIDatabase "1  " <--> "1   " App: SpUIDatabase Accesses Session, App creates and accesses from SpUIDatabase
+User "1 " o--> "1 " SpUIDatabase: Created From
+/'abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+'/
+@enduml
