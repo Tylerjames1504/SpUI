@@ -1,362 +1,438 @@
-.root{
-    -fx-background-color:linear-gradient(to top, #000000, #191414);
+.root {
+  -fx-background-color: linear-gradient(to top, #000000, #191414);
 }
+
 #exitButton {
-    -fx-font-size: 15px;
-    -fx-text-fill: #FFFFFF;
+  -fx-font-size: 15px;
+  -fx-text-fill: #FFFFFF;
 }
+
 #minimizeButton {
-    -fx-font-size: 20px;
-    -fx-text-fill: #FFFFFF;
+  -fx-font-size: 20px;
+  -fx-text-fill: #FFFFFF;
 }
+
 #minimizeButton:hover {
-    -fx-font-weight: bold;
+  -fx-font-weight: bold;
 }
+
 #exitButton:hover {
-    -fx-font-weight: bold;
+  -fx-font-weight: bold;
 }
+
 #leftPane {
-    -fx-background-color: #181818;
-    -fx-background-radius: 10px;
+  -fx-background-color: #181818;
+  -fx-background-radius: 10px;
 }
+
 #middlePane {
-    -fx-background-color: #181818;
-    -fx-background-radius: 10px;
+  -fx-background-color: #181818;
+  -fx-background-radius: 10px;
 }
+
 #rightPane {
-    -fx-background-color: #181818;
-    -fx-background-radius: 10px;
+  -fx-background-color: #181818;
+  -fx-background-radius: 10px;
 }
+
 #topSongsLabel {
-    -fx-font-family: Techno;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
 }
+
 #topArtistsLabel {
-    -fx-font-family: Techno;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
 }
+
 #middlePaneInner {
-    -fx-background-color: #191414;
-    -fx-background-radius: 10px;
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
 }
+
 #rightPaneInner {
-    -fx-background-color: #191414;
-    -fx-background-radius: 10px;
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
 }
+
 #songBackground0:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground1:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground2:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground3:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground4:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground5:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground6:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground7:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground8:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #songBackground9:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #topSongInfo0 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
 }
+
 #topSongInfo1 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo2 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo3 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo4 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo5 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo6 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo7 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo8 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongInfo9 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu0 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
 }
-#topSongPopu1{
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+
+#topSongPopu1 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu2 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu3 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu4 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu5 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu6 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu7 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu8 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topSongPopu9 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
-#errorLabelSongs{
-    -fx-background-color: transparent;
-    -fx-font-family: Techno;
-    -fx-font-size: 18px;
+
+#errorLabelSongs {
+  -fx-background-color: transparent;
+  -fx-font-family: Techno;
+  -fx-font-size: 18px;
 }
-#changeSongs{
-    -fx-font-family: Techno;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 14px;
-    -fx-background-color: #181818;
+
+#changeSongs {
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 14px;
+  -fx-background-color: #181818;
 }
+
 #changeSongs:hover {
-    -fx-font-weight: bold;
+  -fx-font-weight: bold;
 }
 
 #artistBackground0:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground1:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground2:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground3:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground4:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground5:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground6:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground7:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground8:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #artistBackground9:hover {
-    -fx-background-color:linear-gradient(to right, #323436, #5A5A5A);
-    -fx-background-radius: 10px;
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
 }
+
 #topArtistInfo0 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
 }
+
 #topArtistInfo1 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo2 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo3 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo4 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo5 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo6 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo7 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo8 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistInfo9 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu0 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
 }
-#topArtistPopu1{
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+
+#topArtistPopu1 {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu2 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu3 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu4 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu5 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu6 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu7 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu8 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
+
 #topArtistPopu9 {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: Techno;
-    -fx-font-size: 14px;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
 }
-#errorLabelArtists{
-    -fx-background-color: transparent;
-    -fx-font-family: Techno;
-    -fx-font-size: 18px;
+
+#errorLabelArtists {
+  -fx-background-color: transparent;
+  -fx-font-family: Techno;
+  -fx-font-size: 18px;
 }
-#changeArtists{
-    -fx-font-family: Techno;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 14px;
-    -fx-background-color: #181818;
+
+#changeArtists {
+  -fx-font-family: Techno;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 14px;
+  -fx-background-color: #181818;
 }
+
 #changeArtists:hover {
-    -fx-font-weight: bold;
+  -fx-font-weight: bold;
 }
