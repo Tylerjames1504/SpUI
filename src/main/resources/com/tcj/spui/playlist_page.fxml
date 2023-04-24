@@ -48,6 +48,7 @@
                         </HBox>
                      </children>
                   </Pane>
+                  <Pane fx:id="leftPaneInner" layoutX="28.0" layoutY="129.0" prefHeight="537.0" prefWidth="190.0" />
                </children>
         </Pane>
       </children>

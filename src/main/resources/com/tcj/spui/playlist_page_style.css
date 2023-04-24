@@ -23,6 +23,10 @@
   -fx-background-color: #191414;
   -fx-background-radius: 10px;
 }
+#leftPaneInner {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
 
 #leftPane {
   -fx-background-color: #181818;

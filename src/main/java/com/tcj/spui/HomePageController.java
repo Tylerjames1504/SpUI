@@ -152,7 +152,7 @@ public class HomePageController extends SceneUtilities {
     }
   }
 
-  public void loadSongs(String term) { // defaults recent songs
+  public void loadSongs(String term) {
     final GetUsersTopTracksRequest getUsersTopTracksRequest = this.spotifyApi.getUsersTopTracks()
         .limit(10)
         .offset(0)
@@ -244,7 +244,7 @@ public class HomePageController extends SceneUtilities {
     }
   }
 
-  public void loadArtists(String term) { // defaults recent songs
+  public void loadArtists(String term) {
     final GetUsersTopArtistsRequest getUsersTopArtistsRequest = this.spotifyApi.getUsersTopArtists()
         .limit(10)
         .offset(0)
@@ -327,8 +327,6 @@ public class HomePageController extends SceneUtilities {
           }
         }
         if (sourceInfo[1].toLowerCase().contains("discov")) {
-          /*Runtime.getRuntime().exec(
-                  "xdg-open " + App.session.getAppUser().getDiscoveryShown()[index].getArtists()[0].getExternalUrls().get("spotify"));*/ // shows the artist
           Runtime.getRuntime()
                   .exec("xdg-open " + App.session.getAppUser().getDiscoveryShown()[index].getExternalUrls().get("spotify"));
         }
@@ -357,8 +355,6 @@ public class HomePageController extends SceneUtilities {
           }
         }
         if (sourceInfo[1].toLowerCase().contains("discov")) {
-          /*Desktop.getDesktop().browse(
-                  new URI(App.session.getAppUser().getDiscoveryShown()[index].getArtists()[0].getExternalUrls().get("spotify")));*/ // shows the artist
           Desktop.getDesktop()
                   .browse(new URI(App.session.getAppUser().getDiscoveryShown()[index].getExternalUrls().get("spotify")));
         }
