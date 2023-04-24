@@ -5,7 +5,13 @@ import static com.tcj.spui.SpUIDatabase.stripResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -24,7 +30,8 @@ public class ClientManager {
   public SpUIDatabase db = new SpUIDatabase();
   public User user;
 
-  public ClientManager() throws IOException, InterruptedException, URISyntaxException {
+  public ClientManager()
+      throws IOException, InterruptedException, URISyntaxException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
     this.spotifyApi = new SpotifyApi.Builder()
         .setClientId(CLIENT_ID)
         .setClientSecret(db.getClientSecret())
@@ -65,7 +72,9 @@ public class ClientManager {
     } catch (IOException | SpotifyWebApiException | ParseException e) {
       e.printStackTrace();
     } catch (
-        URISyntaxException | InterruptedException e) {
+        URISyntaxException | InterruptedException | InvalidAlgorithmParameterException |
+        NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException |
+        BadPaddingException | InvalidKeyException e) {
       throw new RuntimeException(e);
     }
   }

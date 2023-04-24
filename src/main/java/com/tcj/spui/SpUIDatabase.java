@@ -8,8 +8,14 @@ import java.net.http.HttpConnectTimeoutException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Objects;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,42 +37,55 @@ public class SpUIDatabase {
 
   }
 
-  public static Map<String, Object> stripResponse(HttpResponse<String> response) {
+  public static Map<String, Object> stripResponse(HttpResponse<String> response)
+      throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
     JSONArray jsonArray;
+    Map<String, Object> json;
     if (response.body().charAt(0) == '[') {
       jsonArray = new JSONArray(response.body());
       if (jsonArray.length() < 1) {
         return null;
       } else {
-        return jsonArray.getJSONObject(0).toMap();
+        json = jsonArray.getJSONObject(0).toMap();
       }
     } else {
-      return new JSONObject(response.body()).toMap();
+      json = new JSONObject(response.body()).toMap();
     }
+
+    if (json.get("auth_code") != null) {
+      json.replace("auth_code", Encryption.decrypt((String) json.get("auth_code")));
+    }
+    if (json.get("refresh_token") != null) {
+      json.replace("refresh_token", Encryption.decrypt((String) json.get("refresh_token")));
+    }
+    return json;
 
   }
 
-  public static Map<String, Object> stripResponse(String response) {
+  public static Map<String, Object> stripResponse(String response)
+      throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
     JSONArray jsonArray = null;
+    Map<String, Object> json;
     if (response.charAt(0) == '[') {
       jsonArray = new JSONArray(response);
       if (jsonArray.length() < 1) {
         return null;
       } else {
-        return jsonArray.getJSONObject(0).toMap();
+        json = jsonArray.getJSONObject(0).toMap();
       }
     } else {
-      return new JSONObject(response).toMap();
+      json = new JSONObject(response).toMap();
     }
 
-  }
-
-  public static void main(String[] args)
-      throws IOException, InterruptedException, URISyntaxException {
-    SpUIDatabase db = new SpUIDatabase();
-    System.out.println(db.initUser("user@gmail.com", "aslkdfjaio", "asldkfjawefj").statusCode());
+    if (json.get("auth_code") != null) {
+      json.replace("auth_code", Encryption.decrypt((String) json.get("auth_code")));
+    }
+    if (json.get("refresh_token") != null) {
+      json.replace("refresh_token", Encryption.decrypt((String) json.get("refresh_token")));
+    }
+    return json;
 
   }
 
@@ -103,7 +122,8 @@ public class SpUIDatabase {
     }
   }
 
-  public String getClientSecret() throws URISyntaxException, IOException, InterruptedException {
+  public String getClientSecret()
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
     return (String) Objects.requireNonNull(stripResponse(this.client.send(
         HttpRequest.newBuilder().GET().uri(new URI(INITIAL_ENDPOINT + "/app"))
@@ -113,7 +133,7 @@ public class SpUIDatabase {
   }
 
   public Map<String, Object> getUser(String usersEmail)
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
     HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
         .uri(new URI(INITIAL_ENDPOINT + "/user" + "?user_email=eq." + usersEmail))
@@ -124,7 +144,7 @@ public class SpUIDatabase {
   }
 
   public Map<String, Object> getUser(int userId)
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
     HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
         .uri(new URI(INITIAL_ENDPOINT + "/user" + "?user_id=eq." + userId))
@@ -135,11 +155,11 @@ public class SpUIDatabase {
   }
 
   public HttpResponse<String> initUser(String userEmail, String authCode, String refreshToken)
-      throws URISyntaxException, IOException, InterruptedException {
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
     return this.client.send(HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(
                 String.format("{\"user_email\":\"%s\",\"auth_code\":\"%s\",\"refresh_token\":\"%s\"}",
-                    userEmail, authCode, refreshToken)))
+                    userEmail, Encryption.encrypt(authCode), Encryption.encrypt(refreshToken))))
             .uri(new URI(INITIAL_ENDPOINT + "/user?on_conflict=user_email"))
             .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
                 CF_ACCESS_CLIENT_SECRET, "Prefer", "resolution=merge-duplicates").build(),

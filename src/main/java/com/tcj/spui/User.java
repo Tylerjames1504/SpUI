@@ -2,8 +2,14 @@ package com.tcj.spui;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 public class User {
 
@@ -13,7 +19,7 @@ public class User {
   private String refreshToken;
 
   public User(String email, SpUIDatabase db)
-      throws NoSuchElementException, URISyntaxException, IOException, InterruptedException {
+      throws NoSuchElementException, URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
     Map<String, Object> userMap = db.getUser(email);
     if (userMap == null) {
