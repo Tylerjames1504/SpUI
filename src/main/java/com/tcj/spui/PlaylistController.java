@@ -11,6 +11,7 @@ import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
+import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -48,12 +49,13 @@ public class PlaylistController extends SceneUtilities {
                 Image image = new Image(playlistHead.block[i].thisPlaylist.getImages()[0].getUrl(), 128, 128, false, false);
                 ((ImageView)currentScene.lookup("#playListImage" + i)).setImage(image);
                 String text = " " + playlistHead.block[i].thisPlaylist.getName();
-                if (text.length() > 30) {
-                    text = text.substring(0, 30);
-                    text += "...";
-                }
                 text += "\n Mostly " + playlistHead.block[i].topGenre;
-                text += "\n " + playlistHead.block[i].thisPlaylist.getTracks().getItems().length + " songs";
+                int amount = playlistHead.block[i].thisPlaylist.getTracks().getItems().length;
+                if (amount > 99) {
+                    text += "\n 99+ songs";
+                } else {
+                    text += "\n " + playlistHead.block[i].thisPlaylist.getTracks().getItems().length + " songs";
+                }
                 ((Label)currentScene.lookup("#playlistInfo" + i)).setText(text);
             }
             else {

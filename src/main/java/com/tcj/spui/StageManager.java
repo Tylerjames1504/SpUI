@@ -68,10 +68,10 @@ public class StageManager {
         e.printStackTrace();
       }
       sceneSetOfStageSet.put(sceneName, newScene);
-      assert newScene != null;
-      newScene.getStylesheets().add(
-          Objects.requireNonNull(this.getClass().getResource(styleSheet)).toExternalForm());
-
+      if (styleSheet != null) {
+        newScene.getStylesheets().add(
+                Objects.requireNonNull(this.getClass().getResource(styleSheet)).toExternalForm());
+      }
     }
   }
 

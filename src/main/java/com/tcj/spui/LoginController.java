@@ -29,9 +29,14 @@ public class LoginController extends SceneUtilities {
         token = token.replaceAll("\\s.*", "");
         App.session.getAppUser().getUserAuthorizationManager().completeAuthorization(token);
         engine.getLoadWorker().cancel(); // stop the listener
-        this.parentStage.close();
-        App.session.loadAllAPIDependentStageSceneNetworks(); // once the authorization is complete we use the token from the SpotifyApi object in the UserAuthorizationManager to load all the information.
-        this.swapToStage(false, "main", "homeScene");
+        App.session.getStageManager().retrieveStageSubNetworkWithKey("login")
+                .buildAddScene("loading", "loading.fxml", "loading.css");
+        App.session.getStageManager().retrieveStageSubNetworkWithKey("login")
+                .getParentStage()
+                .setScene(App.session.getStageManager().retrieveValidChildSceneFromStageParent("login","loading"));
+        this.parentStage.centerOnScreen();
+        App.session.loadAllAPIDependentStageSceneNetworks();
+        this.swapToStage(true, "main", "homeScene");
       }
     });
   }
