@@ -130,9 +130,6 @@ public class HomePageController extends SceneUtilities {
         Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 57, 57, false, false);
         ((ImageView) currentScene.lookup("#discovImage" + i)).setImage(trackImage);
         String trackName = track.getName();
-        if (trackName.length() > 20) {
-          trackName = trackName.substring(0, 19) + "...";
-        }
         ArtistSimplified[] artists = track.getArtists();
         StringBuilder allArtists = new StringBuilder("- ");
         for (int k = 0; k < artists.length; k++) {
@@ -140,9 +137,6 @@ public class HomePageController extends SceneUtilities {
           if (k != artists.length - 1) {
             allArtists.append(", ");
           }
-        }
-        if (allArtists.length() > 20) {
-          allArtists = new StringBuilder(allArtists.substring(0, 19) + "...");
         }
         ((Label) currentScene.lookup("#discovInfo" + i)).setText("  " + trackName + "\n  " + allArtists);
         App.session.getAppUser().getDiscoveryPool().remove(index);
@@ -218,9 +212,6 @@ public class HomePageController extends SceneUtilities {
       Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 50, 50, false, false);
       ((ImageView) currentScene.lookup("#topSongImage" + i)).setImage(trackImage);
       String trackName = track.getName();
-      if (trackName.length() > 20) {
-        trackName = trackName.substring(0, 19) + "...";
-      }
       ArtistSimplified[] artists = track.getArtists();
       StringBuilder allArtists = new StringBuilder("- ");
       for (int k = 0; k < artists.length; k++) {
@@ -228,9 +219,6 @@ public class HomePageController extends SceneUtilities {
         if (k != artists.length - 1) {
           allArtists.append(", ");
         }
-      }
-      if (allArtists.length() > 20) {
-        allArtists = new StringBuilder(allArtists.substring(0, 19) + "...");
       }
       ((Label) currentScene.lookup("#topSongInfo" + i)).setText("  " + trackName + "\n  " + allArtists);
       ((Label) currentScene.lookup("#topSongPopu" + i)).setText(popToString(track.getPopularity()));
@@ -286,9 +274,6 @@ public class HomePageController extends SceneUtilities {
       Image artistImage = new Image(artist.getImages()[0].getUrl(), 50, 50, false, false);
       ((ImageView) currentScene.lookup("#topArtistImage" + i)).setImage(artistImage);
       String artistName = artist.getName();
-      if (artistName.length() > 20) {
-        artistName = artistName.substring(0, 19) + "...";
-      }
       ((Label) currentScene.lookup("#topArtistInfo" + i)).setText("  " + artistName);
       ((Label) currentScene.lookup("#topArtistPopu" + i)).setText(popToString(artist.getPopularity()));
     }

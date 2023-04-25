@@ -21,19 +21,22 @@ public class PlaylistData {
 
     public void refresh() {
         updatePlaylist();
-        //calculateTopGenre();
+        calculateTopGenre();
     }
     public void calculateTopGenre() {
         HashMap<String, Integer> genreMap = new HashMap<>();
-        String max = "";
+        String max = topGenre;
         int maxAmount = 0;
         try {
             SpotifyApi spotifyApi = App.session.getAppUser()
                     .getUserAuthorizationManager()
                     .getRetrievedApi();
+            int k = 0;
             for (PlaylistTrack track : this.thisPlaylist.getTracks().getItems()) {
                 Track track1 = spotifyApi.getTrack(track.getTrack().getId()).build().execute();
                 List<ArtistSimplified> artistSimplifiedList = List.of(track1.getArtists());
+                if (k == 20) break;
+                k++;
                 for (ArtistSimplified artistSimplified : artistSimplifiedList) {
                     Artist artist = spotifyApi.getArtist(artistSimplified.getId()).build().execute();
                     List<String> genreList = List.of(artist.getGenres());
