@@ -13,7 +13,7 @@ import java.util.List;
 public class PlaylistData {
     private String playlistId;
     public Playlist thisPlaylist;
-    public String topGenre;
+    public String topGenre = "Miscellaneous";
     public PlaylistData(String playlistId) {
         this.playlistId = playlistId;
         refresh();
@@ -21,11 +21,9 @@ public class PlaylistData {
 
     public void refresh() {
         updatePlaylist();
-        calculateTopGenre();
+        //calculateTopGenre();
     }
     public void calculateTopGenre() {
-        System.out.println(this.thisPlaylist.getName());
-        System.out.println(this.thisPlaylist.getId());
         HashMap<String, Integer> genreMap = new HashMap<>();
         String max = "";
         int maxAmount = 0;
@@ -34,11 +32,9 @@ public class PlaylistData {
                     .getUserAuthorizationManager()
                     .getRetrievedApi();
             for (PlaylistTrack track : this.thisPlaylist.getTracks().getItems()) {
-                System.out.println(track.getTrack().getId());
                 Track track1 = spotifyApi.getTrack(track.getTrack().getId()).build().execute();
                 List<ArtistSimplified> artistSimplifiedList = List.of(track1.getArtists());
                 for (ArtistSimplified artistSimplified : artistSimplifiedList) {
-                    System.out.println("II");
                     Artist artist = spotifyApi.getArtist(artistSimplified.getId()).build().execute();
                     List<String> genreList = List.of(artist.getGenres());
                     for (String genre : genreList) {
@@ -59,9 +55,6 @@ public class PlaylistData {
             e.printStackTrace();
         }
         this.topGenre = max;
-        if (this.topGenre.equals("")) {
-            this.topGenre = "Miscellaneous";
-        }
     }
 
     public void updatePlaylist() {

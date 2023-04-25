@@ -98,7 +98,6 @@ public class HomePageController extends SceneUtilities {
         Recommendations recommendations = getRecommendationsRequest.execute();
         recommendedTracks = Arrays.asList(recommendations.getTracks());
       }
-      System.out.println("here");
       Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
       for (int i = 0; i < newReleases.getItems().length; i++) {
         GetAlbumsTracksRequest getAlbumsTracksRequest = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build();
@@ -109,7 +108,6 @@ public class HomePageController extends SceneUtilities {
     } catch (IOException | ParseException | SpotifyWebApiException e) {
       throw new RuntimeException(e);
     }
-    System.out.println("here");
   }
 
   public void displayDiscovery() {
