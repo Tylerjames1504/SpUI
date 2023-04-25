@@ -85,12 +85,12 @@ public class HomePageController extends SceneUtilities {
       }
     }
     final GetRecommendationsRequest getRecommendationsRequest = this.spotifyApi.getRecommendations()
-            .limit(1)
+            .limit(20)
             .seed_artists(artistsBuilder.toString())
             .seed_tracks(tracksBuilder.toString())
             .build();
     final GetListOfNewReleasesRequest getListOfNewReleasesRequest = this.spotifyApi.getListOfNewReleases()
-            .limit(1)
+            .limit(10)
             .build();
     try {
       List<TrackSimplified> recommendedTracks = new ArrayList<>();
