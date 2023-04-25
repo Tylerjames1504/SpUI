@@ -33,7 +33,7 @@ public class LoginController implements Initializable {
         ((Stage) webView.getScene().getWindow()).close();
         FXMLLoader homePage = new FXMLLoader(getClass().getResource("home_page.fxml"));
         Stage stage = new Stage();
-        // moves to and creates Home scene and stage
+        // moves to and creates Home scene and  stage
         try {
           stage.setScene(new Scene(homePage.load()));
         } catch (IOException e) {
