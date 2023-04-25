@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@playlist_page_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tcj.spui.PlaylistController">
+  <children>
+    <AnchorPane fx:id="topBar" prefHeight="20.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <HBox alignment="CENTER_RIGHT" minHeight="-Infinity" prefHeight="20.0" prefWidth="200.0" spacing="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Label fx:id="minimizeButton" onMouseClicked="#minimize" text="-" />
+            <Label fx:id="exitButton" alignment="CENTER" onMouseClicked="#close" prefHeight="21.0" prefWidth="15.0" text="x" />
+          </children>
+        </HBox>
+      </children>
+    </AnchorPane>
+    <HBox prefHeight="720.0" prefWidth="1280.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <children>
+        <Pane fx:id="leftPane" prefHeight="591.0" prefWidth="437.0">
+          <HBox.margin>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+          </HBox.margin>
+               <children>
+                  <Pane fx:id="leftPaneInnerTop" layoutX="45.0" layoutY="14.0" prefHeight="100.0" prefWidth="190.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="190.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="30.0" />
+                                 </HBox.margin>
+                                 <image>
+                                    <Image url="@profile_imageview.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="swapSceneLabel" onMouseClicked="#swapScene" prefHeight="30.0" prefWidth="62.0" text="Profile">
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="35.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="leftPaneInner" layoutX="48.0" layoutY="130.0" prefHeight="537.0" prefWidth="342.0">
+                     <children>
+                        <VBox prefHeight="537.0" prefWidth="342.0" spacing="5.0">
+                           <children>
+                              <Pane fx:id="playlistBackground0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage0" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo0" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
+                              <Pane fx:id="playlistBackground1" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage1" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo1" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
+                              <Pane fx:id="playlistBackground2" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage2" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo2" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
+                              <Pane fx:id="playlistBackground3" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage3" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo3" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <ImageView fx:id="rightButton" fitHeight="20.0" fitWidth="20.0" layoutX="403.0" layoutY="387.0" onMouseClicked="#movePage" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@right_arrow_static.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="leftButton" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="389.0" onMouseClicked="#movePage" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@left_arrow_static.png" />
+                     </image>
+                  </ImageView>
+               </children>
+        </Pane>
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>

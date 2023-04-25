@@ -25,6 +25,8 @@ public class AppManager {
         .buildAddStage("main", "Icon.png", "Home", true, false, StageStyle.UNDECORATED);
     this.getStageManager().retrieveStageSubNetworkWithKey("main")
         .buildAddScene("homeScene", "home_page.fxml", "home_page_style.css");
+    this.getStageManager().retrieveStageSubNetworkWithKey("main")
+            .buildAddScene("playlistScene", "playlist_page.fxml", "playlist_page_style.css");
   }
 
 }
