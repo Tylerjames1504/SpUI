@@ -17,6 +17,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import org.apache.hc.core5.concurrent.CompletedFuture;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -44,6 +45,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class HomePageController {
     private SpotifyApi spotifyApi;
@@ -116,15 +118,25 @@ public class HomePageController {
                 .build();
         int size = 0;
         try {
-            List<TrackSimplified> recommendedTracks = new ArrayList();
+            List<TrackSimplified> recommendedTracks = new ArrayList<>();
             if (artistPaging.getItems().length > 0) {
                 Recommendations recommendations = getRecommendationsRequest.execute();
                 recommendedTracks = Arrays.asList(recommendations.getTracks());
             }
-            Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
+            final Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
+            System.out.println(newReleases.getItems().length + "\n");
+
             for (int i = 0; i < newReleases.getItems().length; i++) {
-                Paging<TrackSimplified> albumsTracks = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build().execute();
-                discoveryPool.add(albumsTracks.getItems()[0]);
+                System.out.println(newReleases.getItems()[i].getName());
+                System.out.println(newReleases.getItems()[i].getId());
+
+//                final GetAlbumRequest getAlbumRequest = this.spotifyApi.getAlbum(newReleases.getItems()[i].getId()).build();
+//                final Album album = getAlbumRequest.execute();
+//                System.out.println(album.getTracks().getItems()[0].getName());
+//                try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
+
+
+
             }
             for (int i = 0; i < recommendedTracks.size(); i++) {
                 discoveryPool.add(recommendedTracks.get(i));
