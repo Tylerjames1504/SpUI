@@ -79,7 +79,6 @@ public class PlaylistController extends SceneUtilities {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
             int k = 0;
             for (int i = 0; i < playlistSimplifiedPaging.getItems().length; i++) {
-                System.out.println("here");
                 PlaylistData tempData = new PlaylistData(playlistSimplifiedPaging.getItems()[i].getId());
                 temp.block[k] = tempData;
                 k++;

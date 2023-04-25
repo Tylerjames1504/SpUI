@@ -34,29 +34,29 @@ public class PlaylistData {
                     .getUserAuthorizationManager()
                     .getRetrievedApi();
             for (PlaylistTrack track : this.thisPlaylist.getTracks().getItems()) {
-                if (track.getTrack().getId() != null){
-                    Track track1 = spotifyApi.getTrack(track.getTrack().getId()).build().execute();
-                    List<ArtistSimplified> artistSimplifiedList = List.of(track1.getArtists());
-                    for (ArtistSimplified artistSimplified : artistSimplifiedList) {
-                        Artist artist = spotifyApi.getArtist(artistSimplified.getId()).build().execute();
-                        List<String> genreList = List.of(artist.getGenres());
-                        for (String genre : genreList) {
-                            if (genreMap.containsKey(genre)) {
-                                int count = genreMap.get(genre) + 1;
-                                genreMap.put(genre, genreMap.get(genre) + 1);
-                                if (count > maxAmount) {
-                                    maxAmount = count;
-                                    max = genre;
-                                }
-                            } else {
-                                genreMap.put(genre, 1);
+                System.out.println(track.getTrack().getId());
+                Track track1 = spotifyApi.getTrack(track.getTrack().getId()).build().execute();
+                List<ArtistSimplified> artistSimplifiedList = List.of(track1.getArtists());
+                for (ArtistSimplified artistSimplified : artistSimplifiedList) {
+                    System.out.println("II");
+                    Artist artist = spotifyApi.getArtist(artistSimplified.getId()).build().execute();
+                    List<String> genreList = List.of(artist.getGenres());
+                    for (String genre : genreList) {
+                        if (genreMap.containsKey(genre)) {
+                            int count = genreMap.get(genre) + 1;
+                            genreMap.put(genre, genreMap.get(genre) + 1);
+                            if (count > maxAmount) {
+                                maxAmount = count;
+                                max = genre;
                             }
+                        } else {
+                            genreMap.put(genre, 1);
                         }
                     }
                 }
             }
         } catch (IOException | SpotifyWebApiException | ParseException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         this.topGenre = max;
         if (this.topGenre.equals("")) {

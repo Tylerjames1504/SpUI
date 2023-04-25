@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.*;
+import se.michaelthelin.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import se.michaelthelin.spotify.requests.data.browse.GetListOfNewReleasesRequest;
 import se.michaelthelin.spotify.requests.data.browse.GetRecommendationsRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
@@ -84,12 +85,12 @@ public class HomePageController extends SceneUtilities {
       }
     }
     final GetRecommendationsRequest getRecommendationsRequest = this.spotifyApi.getRecommendations()
-            .limit(20)
+            .limit(1)
             .seed_artists(artistsBuilder.toString())
             .seed_tracks(tracksBuilder.toString())
             .build();
     final GetListOfNewReleasesRequest getListOfNewReleasesRequest = this.spotifyApi.getListOfNewReleases()
-            .limit(10)
+            .limit(1)
             .build();
     try {
       List<TrackSimplified> recommendedTracks = new ArrayList<>();
@@ -97,16 +98,18 @@ public class HomePageController extends SceneUtilities {
         Recommendations recommendations = getRecommendationsRequest.execute();
         recommendedTracks = Arrays.asList(recommendations.getTracks());
       }
+      System.out.println("here");
       Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
       for (int i = 0; i < newReleases.getItems().length; i++) {
-        Paging<TrackSimplified> albumsTracks = this.spotifyApi.getAlbumsTracks(
-                newReleases.getItems()[i].getId()).build().execute();
+        GetAlbumsTracksRequest getAlbumsTracksRequest = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build();
+        Paging<TrackSimplified> albumsTracks = getAlbumsTracksRequest.execute();
         App.session.getAppUser().getDiscoveryPool().add(albumsTracks.getItems()[0]);
       }
       App.session.getAppUser().getDiscoveryPool().addAll(recommendedTracks);
     } catch (IOException | ParseException | SpotifyWebApiException e) {
       throw new RuntimeException(e);
     }
+    System.out.println("here");
   }
 
   public void displayDiscovery() {
