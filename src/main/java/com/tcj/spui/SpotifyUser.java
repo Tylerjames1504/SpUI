@@ -1,10 +1,8 @@
 package com.tcj.spui;
 
 import java.util.ArrayList;
-import se.michaelthelin.spotify.model_objects.specification.Artist;
-import se.michaelthelin.spotify.model_objects.specification.Paging;
-import se.michaelthelin.spotify.model_objects.specification.Track;
-import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
+
+import se.michaelthelin.spotify.model_objects.specification.*;
 
 public class SpotifyUser {
 
@@ -15,6 +13,7 @@ public class SpotifyUser {
   private Paging<Track> trackPagingLong;
   private Paging<Artist> artistPagingShort;
   private Paging<Artist> artistPagingLong;
+  private PlaylistBlockCycle playlistHead;
 
   public SpotifyUser() {
     this.spotifyUserAuthorizationManager = new SpotifyUserAuthorizationManager();
@@ -59,4 +58,7 @@ public class SpotifyUser {
   public ArrayList<TrackSimplified> getDiscoveryPool() { return this.discoveryPool; }
 
   public Track[] getDiscoveryShown() { return this.discoveryShown; }
+
+  public void setPlaylistHead(PlaylistBlockCycle playlistHead) { this.playlistHead = playlistHead; }
+  public PlaylistBlockCycle getPlaylistHead() { return this.playlistHead; }
 }

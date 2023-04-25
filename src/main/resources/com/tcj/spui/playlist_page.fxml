@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@playlist_page_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tcj.spui.PlaylistController">
   <children>
@@ -22,12 +23,12 @@
     </AnchorPane>
     <HBox prefHeight="720.0" prefWidth="1280.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
       <children>
-        <Pane fx:id="leftPane" prefHeight="220.0" prefWidth="245.0">
+        <Pane fx:id="leftPane" prefHeight="591.0" prefWidth="437.0">
           <HBox.margin>
             <Insets bottom="10.0" left="10.0" top="10.0" />
           </HBox.margin>
                <children>
-                  <Pane fx:id="leftPaneInnerTop" layoutX="26.0" layoutY="14.0" prefHeight="100.0" prefWidth="190.0">
+                  <Pane fx:id="leftPaneInnerTop" layoutX="45.0" layoutY="14.0" prefHeight="100.0" prefWidth="190.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="190.0">
                            <children>
@@ -48,7 +49,31 @@
                         </HBox>
                      </children>
                   </Pane>
-                  <Pane fx:id="leftPaneInner" layoutX="28.0" layoutY="129.0" prefHeight="537.0" prefWidth="190.0" />
+                  <Pane fx:id="leftPaneInner" layoutX="48.0" layoutY="130.0" prefHeight="537.0" prefWidth="342.0">
+                     <children>
+                        <VBox prefHeight="537.0" prefWidth="342.0" spacing="5.0">
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <ImageView fx:id="rightButton" fitHeight="20.0" fitWidth="20.0" layoutX="403.0" layoutY="387.0" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@right_arrow_static.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="leftButton" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="389.0" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@left_arrow_static.png" />
+                     </image>
+                  </ImageView>
                </children>
         </Pane>
       </children>
