@@ -11,6 +11,7 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import javax.crypto.BadPaddingException;
@@ -154,6 +155,39 @@ public class SpUIDatabase {
 
   }
 
+  public int getLengthOfUsers()
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+
+    HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
+        .uri(new URI(INITIAL_ENDPOINT + "/user"))
+        .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+            CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+    return new JSONArray(response).length();
+
+  }
+
+  public String checkUsers()
+      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+
+    HttpResponse<String> response = this.client.send(HttpRequest.newBuilder().GET()
+        .uri(new URI(INITIAL_ENDPOINT + "/user"))
+        .headers("CF-Access-Client-Id", CF_ACCESS_CLIENT_ID, "CF-Access-Client-Secret",
+            CF_ACCESS_CLIENT_SECRET).build(), HttpResponse.BodyHandlers.ofString());
+    JSONArray jsonArray = new JSONArray(response.body());
+    for (Object jsonObject: jsonArray) {
+      try {
+        return Encryption.decrypt((String) ((JSONObject) jsonObject).get("refresh_token"));
+      } catch (BadPaddingException e) {
+        continue;
+      }
+    }
+
+    return null;
+
+  }
+
+
+
   public HttpResponse<String> initUser(String userEmail, String authCode, String refreshToken)
       throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
@@ -183,5 +217,13 @@ public class SpUIDatabase {
     this.response = response;
   }
 
+  public static void main(String[] args)
+      throws IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, URISyntaxException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    SpUIDatabase db = new SpUIDatabase();
+
+    System.out.println(db.checkUsers());
+  }
+
 }
+
 
