@@ -53,10 +53,42 @@
                      <children>
                         <VBox prefHeight="537.0" prefWidth="342.0" spacing="5.0">
                            <children>
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Pane fx:id="playlistBackground0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage0" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo0" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
+                              <Pane fx:id="playlistBackground1" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage1" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo1" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
+                              <Pane fx:id="playlistBackground2" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage2" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo2" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
+                              <Pane fx:id="playlistBackground3" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox prefHeight="128.0" prefWidth="332.0">
+                                       <children>
+                                          <ImageView fx:id="playListImage3" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Label fx:id="playlistInfo3" prefHeight="141.0" prefWidth="209.0" />
+                                       </children>
+                                    </HBox>
+                                 </children></Pane>
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -64,12 +96,12 @@
                         </VBox>
                      </children>
                   </Pane>
-                  <ImageView fx:id="rightButton" fitHeight="20.0" fitWidth="20.0" layoutX="403.0" layoutY="387.0" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="rightButton" fitHeight="20.0" fitWidth="20.0" layoutX="403.0" layoutY="387.0" onMouseClicked="#movePage" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@right_arrow_static.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="leftButton" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="389.0" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="leftButton" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="389.0" onMouseClicked="#movePage" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@left_arrow_static.png" />
                      </image>

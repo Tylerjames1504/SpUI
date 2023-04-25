@@ -24,6 +24,8 @@ public class PlaylistData {
         calculateTopGenre();
     }
     public void calculateTopGenre() {
+        System.out.println(this.thisPlaylist.getName());
+        System.out.println(this.thisPlaylist.getId());
         HashMap<String, Integer> genreMap = new HashMap<>();
         String max = "";
         int maxAmount = 0;
@@ -32,21 +34,23 @@ public class PlaylistData {
                     .getUserAuthorizationManager()
                     .getRetrievedApi();
             for (PlaylistTrack track : this.thisPlaylist.getTracks().getItems()) {
-                Track track1 = spotifyApi.getTrack(track.getTrack().getId()).build().execute();
-                List<ArtistSimplified> artistSimplifiedList = List.of(track1.getArtists());
-                for (ArtistSimplified artistSimplified : artistSimplifiedList) {
-                    Artist artist = spotifyApi.getArtist(artistSimplified.getId()).build().execute();
-                    List<String> genreList = List.of(artist.getGenres());
-                    for (String genre : genreList) {
-                        if (genreMap.containsKey(genre)) {
-                            int count = genreMap.get(genre) + 1;
-                            genreMap.put(genre, genreMap.get(genre) + 1);
-                            if (count > maxAmount) {
-                                maxAmount = count;
-                                max = genre;
+                if (track.getTrack().getId() != null){
+                    Track track1 = spotifyApi.getTrack(track.getTrack().getId()).build().execute();
+                    List<ArtistSimplified> artistSimplifiedList = List.of(track1.getArtists());
+                    for (ArtistSimplified artistSimplified : artistSimplifiedList) {
+                        Artist artist = spotifyApi.getArtist(artistSimplified.getId()).build().execute();
+                        List<String> genreList = List.of(artist.getGenres());
+                        for (String genre : genreList) {
+                            if (genreMap.containsKey(genre)) {
+                                int count = genreMap.get(genre) + 1;
+                                genreMap.put(genre, genreMap.get(genre) + 1);
+                                if (count > maxAmount) {
+                                    maxAmount = count;
+                                    max = genre;
+                                }
+                            } else {
+                                genreMap.put(genre, 1);
                             }
-                        } else {
-                            genreMap.put(genre, 1);
                         }
                     }
                 }
@@ -55,6 +59,9 @@ public class PlaylistData {
             System.out.println(e);
         }
         this.topGenre = max;
+        if (this.topGenre.equals("")) {
+            this.topGenre = "Miscellaneous";
+        }
     }
 
     public void updatePlaylist() {

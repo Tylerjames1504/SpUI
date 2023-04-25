@@ -42,7 +42,46 @@
 #swapSceneLabel:hover {
   -fx-underline: true;
 }
-
+#playlistBackground0:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#playlistBackground1:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#playlistBackground2:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#playlistBackground3:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#playlistInfo0{
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+}
+#playlistInfo1{
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+}
+#playlistInfo2{
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+}
+#playlistInfo3{
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+}
 
 
 

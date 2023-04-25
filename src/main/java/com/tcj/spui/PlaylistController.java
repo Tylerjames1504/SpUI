@@ -1,6 +1,8 @@
 package com.tcj.spui;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,12 +34,38 @@ public class PlaylistController extends SceneUtilities {
                 setupWindowBarDrag();
                 this.currentScene = topBar.getScene();
                 // display info
+                displayPlaylists();
             }
         });
     }
+    public void displayPlaylists() {
+        for (int i = 0; i < 4; i++) {
+            if (playlistHead.block[i] != null) {
+                Node node = currentScene.lookup("#playlistBackground" + i);;
+                node.setDisable(false);
+                node.setVisible(true);
 
+                Image image = new Image(playlistHead.block[i].thisPlaylist.getImages()[0].getUrl(), 128, 128, false, false);
+                ((ImageView)currentScene.lookup("#playListImage" + i)).setImage(image);
+                String text = " " + playlistHead.block[i].thisPlaylist.getName();
+                if (text.length() > 30) {
+                    text = text.substring(0, 30);
+                    text += "...";
+                }
+                text += "\n Mostly " + playlistHead.block[i].topGenre;
+                text += "\n " + playlistHead.block[i].thisPlaylist.getTracks().getItems().length + " songs";
+                ((Label)currentScene.lookup("#playlistInfo" + i)).setText(text);
+            }
+            else {
+                Node node = currentScene.lookup("#playlistBackground" + i);
+                node.setDisable(true);
+                node.setVisible(false);
+            }
+        }
+
+    }
     public void loadPlaylists() {
-        // no playlist error --> incomplete pages too
+        // no playlist error --> incomplete pages too & disabling arrow buttons
         // refresh playlists using hashmap for genre and using playlist id
         // central storage of playlist chain may not be necessary as scenes using stage manager are never unloaded
         try {
@@ -51,6 +79,7 @@ public class PlaylistController extends SceneUtilities {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
             int k = 0;
             for (int i = 0; i < playlistSimplifiedPaging.getItems().length; i++) {
+                System.out.println("here");
                 PlaylistData tempData = new PlaylistData(playlistSimplifiedPaging.getItems()[i].getId());
                 temp.block[k] = tempData;
                 k++;
@@ -104,6 +133,7 @@ public class PlaylistController extends SceneUtilities {
         if (sourceInfo[1].toLowerCase().contains("right")) {
             playlistHead = playlistHead.next;
         }
+        displayPlaylists();
     }
 
 
