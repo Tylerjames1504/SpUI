@@ -11,7 +11,6 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import javax.crypto.BadPaddingException;
@@ -217,13 +216,5 @@ public class SpUIDatabase {
     this.response = response;
   }
 
-  public static void main(String[] args)
-      throws IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, URISyntaxException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
-    SpUIDatabase db = new SpUIDatabase();
-
-    System.out.println(db.checkUsers());
-  }
-
 }
-
 
