@@ -4,3 +4,7 @@
 #background2 {
     -fx-background-color: #FFFFFF;
 }
+#loadingLabel {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}

@@ -32,7 +32,18 @@
   -fx-background-color: #181818;
   -fx-background-radius: 10px;
 }
-
+#rightTopPane {
+  -fx-background-color: #181818;
+  -fx-background-radius: 10px;
+}
+#rightBottomPane {
+  -fx-background-color: #181818;
+  -fx-background-radius: 10px;
+}
+.selected {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
 #swapSceneLabel {
   -fx-font-family: Techno;
   -fx-text-fill: #FFFFFF;
@@ -82,6 +93,87 @@
   -fx-font-size: 16px;
   -fx-font-weight: bold;
 }
+#changeEditedPane0 {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
+#changeEditedPane1 {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
+#changeEditedPane2 {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
 
+#newPlaylistPane0 {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
+#newPlaylistPane1 {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
+#newPlaylistPane2 {
+  -fx-background-color: #191414;
+  -fx-background-radius: 10px;
+}
+#genreSpliceDesc {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+}
+#randomizeDesc {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+}
+#topartistsLabel {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+}
+
+#discoveryLabel {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+}
+#newreleasesLabel {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+}
+#topsongsLabels {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+}
+
+#topartistsPane:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#discoveryPane:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#newreleasesPane:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#topsongsPane:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#randomizeBackground:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#genreSpliceBackground:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+.text {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: Techno;
+  -fx-font-size: 14px;
+}
 
 

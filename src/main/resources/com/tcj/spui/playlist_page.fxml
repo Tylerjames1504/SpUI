@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@playlist_page_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tcj.spui.PlaylistController">
   <children>
@@ -53,7 +54,7 @@
                      <children>
                         <VBox prefHeight="537.0" prefWidth="275.0" spacing="5.0">
                            <children>
-                              <Pane fx:id="playlistBackground0" prefHeight="200.0" prefWidth="200.0">
+                              <Pane fx:id="playlistBackground0" onMouseClicked="#setSelected" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <HBox prefHeight="128.0" prefWidth="266.0">
                                        <children>
@@ -62,7 +63,7 @@
                                        </children>
                                     </HBox>
                                  </children></Pane>
-                              <Pane fx:id="playlistBackground1" prefHeight="200.0" prefWidth="200.0">
+                              <Pane fx:id="playlistBackground1" onMouseClicked="#setSelected" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <HBox prefHeight="128.0" prefWidth="266.0">
                                        <children>
@@ -71,7 +72,7 @@
                                        </children>
                                     </HBox>
                                  </children></Pane>
-                              <Pane fx:id="playlistBackground2" prefHeight="200.0" prefWidth="200.0">
+                              <Pane fx:id="playlistBackground2" onMouseClicked="#setSelected" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <HBox prefHeight="128.0" prefWidth="266.0">
                                        <children>
@@ -80,7 +81,7 @@
                                        </children>
                                     </HBox>
                                  </children></Pane>
-                              <Pane fx:id="playlistBackground3" prefHeight="200.0" prefWidth="200.0">
+                              <Pane fx:id="playlistBackground3" onMouseClicked="#setSelected" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <HBox prefHeight="128.0" prefWidth="266.0">
                                        <children>
@@ -96,18 +97,377 @@
                         </VBox>
                      </children>
                   </Pane>
-                  <ImageView fx:id="rightButton" fitHeight="20.0" fitWidth="20.0" layoutX="341.0" layoutY="389.0" onMouseClicked="#movePage" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="rightButton" fitHeight="20.0" fitWidth="20.0" layoutX="341.0" layoutY="389.0" onMouseClicked="#movePage" onMouseEntered="#hover" onMouseExited="#hover" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@right_arrow_static.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="leftButton" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="389.0" onMouseClicked="#movePage" onMouseEntered="#hoverArrowImage" onMouseExited="#hoverArrowImage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="leftButton" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="389.0" onMouseClicked="#movePage" onMouseEntered="#hover" onMouseExited="#hover" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@left_arrow_static.png" />
                      </image>
                   </ImageView>
                </children>
         </Pane>
+            <VBox prefHeight="700.0" prefWidth="875.0" spacing="10.0">
+               <children>
+                  <Pane fx:id="rightTopPane" prefHeight="350.0" prefWidth="875.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <HBox prefHeight="335.0" prefWidth="875.0" spacing="5.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <Pane prefHeight="325.0" prefWidth="211.0" />
+                              <Pane fx:id="changeEditedPane0" prefHeight="325.0" prefWidth="212.0">
+                                 <children>
+                                    <VBox prefHeight="325.0" prefWidth="192.0" spacing="5.0">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <children>
+                                          <Pane fx:id="randomizeBackground" onMouseClicked="#handleEditSelection" prefHeight="158.0" prefWidth="182.0">
+                                             <children>
+                                                <Pane layoutX="11.0" layoutY="14.0" prefHeight="129.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
+                                                   <children>
+                                                      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="30.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@pngtree-shuffle-icon-vector-design-templates-white-on-background-png-image_4966514.jpg" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="genreSpliceBackground" onMouseClicked="#handleEditSelection" prefHeight="155.0" prefWidth="239.0">
+                                             <children>
+                                                <Pane layoutX="11.0" layoutY="13.0" prefHeight="129.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
+                                                   <children>
+                                                      <ImageView fitHeight="67.0" fitWidth="80.0" layoutX="47.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@extract.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                 </children></Pane>
+                              <Pane fx:id="changeEditedPane1" prefHeight="325.0" prefWidth="408.0">
+                                 <children>
+                                    <VBox prefHeight="325.0" prefWidth="388.0">
+                                       <children>
+                                          <Label prefHeight="50.0" prefWidth="388.0" style="-fx-font-weight: bold;" text="                                          Preview" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox prefHeight="325.0" prefWidth="388.0">
+                                             <children>
+                                                <VBox prefHeight="325.0" prefWidth="194.0" spacing="5.0">
+                                                   <children>
+                                                      <Pane fx:id="topPreview0" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage0" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo0" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="topPreview1" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage1" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo1" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="topPreview2" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage2" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo2" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="topPreview3" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage3" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo3" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <VBox prefHeight="325.0" prefWidth="194.0" spacing="5.0">
+                                                   <children>
+                                                      <Pane fx:id="topPreview4" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage4" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo4" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="topPreview5" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage5" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo5" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="topPreview6" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage6" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo6" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="topPreview7" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="topPreviewImage7" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo7" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children></Pane>
+                              <Pane fx:id="changeEditedPane2" prefHeight="325.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fx:id="plusbutton0" fitHeight="59.0" fitWidth="55.0" layoutX="13.0" layoutY="135.0" onMouseClicked="#buildTopPlaylist" onMouseEntered="#hover" onMouseExited="#hover" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@add_static.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children></Pane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="rightBottomPane" prefHeight="350.0" prefWidth="875.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <HBox prefHeight="335.0" prefWidth="875.0" spacing="5.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <Pane fx:id="newPlaylistPane0" prefHeight="325.0" prefWidth="408.0">
+                                 <children>
+                                    <VBox prefHeight="325.0" prefWidth="388.0" spacing="5.0">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <children>
+                                          <Pane fx:id="topartistsPane" onMouseClicked="#handleSelection" prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label fx:id="topartistsLabel" prefHeight="75.0" prefWidth="138.0" text="  Top Artists" textFill="WHITE" />
+                                                <Label layoutX="119.0" prefHeight="75.0" prefWidth="258.0" text="Creates a playlist from your top artists" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="10.0" />
+                                                   </font></Label>
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="discoveryPane" onMouseClicked="#handleSelection" prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label fx:id="discoveryLabel" prefHeight="75.0" prefWidth="138.0" text="  Discovery" textFill="WHITE" />
+                                                <Label layoutX="119.0" prefHeight="75.0" prefWidth="258.0" text="Creates a playlist from your discovery " textFill="WHITE">
+                                                   <font>
+                                                      <Font size="10.0" />
+                                                   </font></Label>
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="newreleasesPane" onMouseClicked="#handleSelection" prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label fx:id="newreleasesLabel" prefHeight="75.0" prefWidth="138.0" text="  New Releases" textFill="WHITE" />
+                                                <Label layoutX="119.0" prefHeight="75.0" prefWidth="258.0" text="Creates a playlist from new releases" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="10.0" />
+                                                   </font></Label>
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="topsongsPane" onMouseClicked="#handleSelection" prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label fx:id="topsongsLabels" prefHeight="75.0" prefWidth="138.0" text="  Top Songs" textFill="WHITE" />
+                                                <Label layoutX="119.0" prefHeight="75.0" prefWidth="258.0" text="Creates a playlist from your top songs" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="10.0" />
+                                                   </font></Label>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="newPlaylistPane1" prefHeight="325.0" prefWidth="408.0">
+                                 <children>
+                                    <VBox prefHeight="325.0" prefWidth="388.0">
+                                       <children>
+                                          <Label prefHeight="50.0" prefWidth="388.0" style="-fx-font-weight: bold;" text="                                          Preview" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox prefHeight="325.0" prefWidth="388.0">
+                                             <children>
+                                                <VBox prefHeight="325.0" prefWidth="194.0" spacing="5.0">
+                                                   <children>
+                                                      <Pane fx:id="bottomPreview0" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage0" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel0" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="bottomPreview1" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage1" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel1" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="bottomPreview2" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage2" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel2" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="bottomPreview3" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage3" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel3" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <VBox prefHeight="325.0" prefWidth="194.0" spacing="5.0">
+                                                   <children>
+                                                      <Pane fx:id="bottomPreview4" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage4" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel4" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="bottomPreview5" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage5" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel5" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="bottomPreview6" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage6" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel6" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane fx:id="bottomPreview7" prefHeight="200.0" prefWidth="200.0">
+                                                         <children>
+                                                            <HBox prefHeight="67.0" prefWidth="179.0">
+                                                               <children>
+                                                                  <ImageView fx:id="bottomPreviewImage7" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="bottomPreviewLabel7" prefHeight="69.0" prefWidth="112.0" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="newPlaylistPane2" prefHeight="325.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fx:id="plusbutton1" fitHeight="59.0" fitWidth="55.0" layoutX="13.0" layoutY="133.0" onMouseClicked="#buildBottomPlaylist" onMouseEntered="#hover" onMouseExited="#hover" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@add_static.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children></Pane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
       </children>
     </HBox>
   </children>
