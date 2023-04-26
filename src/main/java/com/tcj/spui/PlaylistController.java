@@ -15,9 +15,11 @@ import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.special.SnapshotResult;
 import se.michaelthelin.spotify.model_objects.specification.*;
 import se.michaelthelin.spotify.requests.data.artists.GetArtistsTopTracksRequest;
-import se.michaelthelin.spotify.requests.data.playlists.AddItemsToPlaylistRequest;
 import se.michaelthelin.spotify.requests.data.playlists.CreatePlaylistRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
+import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
+import se.michaelthelin.spotify.requests.data.playlists.ReorderPlaylistsItemsRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,10 +30,15 @@ public class PlaylistController extends SceneUtilities {
     ImageView rightButton;
     @FXML
     ImageView leftButton;
+    @FXML
+    Label genreSpliceDesc;
+    @FXML
+    Label randomizeDesc;
     private PlaylistBlockCycle playlistHead;
     private PlaylistBlockCycle absoluteHead;
     private PlaylistData currentSelected;
     private String currentPlaylistState = "";
+    private String currentPlaylistEditState = "";
     private Track[] artistTrack;
     private ArrayList<Track> discoveryPlaylistPool = new ArrayList();
     private ArrayList<Track> newReleasesPool = new ArrayList();
@@ -61,6 +68,8 @@ public class PlaylistController extends SceneUtilities {
                 if (!(playlistHead.block[i].selected)) {
                     pane.getStyleClass().remove("selected");
                 } else {
+                    randomizeDesc.setText("Randomizes the order of the songs in:\n\n" + this.currentSelected.thisPlaylist.getName());
+                    genreSpliceDesc.setText("Extracts a playlist consisting only of \nsongs that are of the top genre of:\n\n" + this.currentSelected.thisPlaylist.getName());
                     pane.getStyleClass().add("selected");
                 }
                 Image image = new Image(playlistHead.block[i].thisPlaylist.getImages()[0].getUrl(), 128, 128, false, false);
@@ -94,6 +103,7 @@ public class PlaylistController extends SceneUtilities {
                     .getUserAuthorizationManager()
                     .getRetrievedApi()
                     .getListOfCurrentUsersPlaylists()
+                    .limit(35)
                     .build();
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
             int k = 0;
@@ -187,6 +197,15 @@ public class PlaylistController extends SceneUtilities {
             }
         }
         this.currentSelected = playlistHead.block[index];
+        randomizeDesc.setText("Randomizes the order of the songs in:\n\n" + this.currentSelected.thisPlaylist.getName());
+        genreSpliceDesc.setText("Extracts a playlist consisting only of \nsongs that are of the top genre of:\n\n" + this.currentSelected.thisPlaylist.getName());
+        if (currentPlaylistEditState.equals("randomize")) {
+            buildRandomization();
+        }
+        if (currentPlaylistEditState.equals("genre")) {
+            buildGenreSplicing();
+        }
+
 
         PlaylistBlockCycle temp = playlistHead.next;
         while (temp != playlistHead && temp != null) {
@@ -420,7 +439,7 @@ public class PlaylistController extends SceneUtilities {
                     throw new RuntimeException(e);
                 }
                 this.discoveryPlaylistPool.add(track);
-                Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 57, 57, false, false);
+                Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 67, 67, false, false);
                 ((ImageView) currentScene.lookup("#bottomPreviewImage" + i)).setImage(trackImage);
                 String trackName = track.getName();
                 ArtistSimplified[] artists = track.getArtists();
@@ -471,7 +490,7 @@ public class PlaylistController extends SceneUtilities {
                     throw new RuntimeException(e);
                 }
                 this.newReleasesPool.add(track);
-                Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 57, 57, false, false);
+                Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 67, 67, false, false);
                 ((ImageView) currentScene.lookup("#bottomPreviewImage" + i)).setImage(trackImage);
                 String trackName = track.getName();
                 ArtistSimplified[] artists = track.getArtists();
@@ -507,7 +526,7 @@ public class PlaylistController extends SceneUtilities {
                 node.setVisible(true);
 
                 Track track = tracks.getItems()[i];
-                Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 57, 57, false, false);
+                Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 67, 67, false, false);
                 ((ImageView) currentScene.lookup("#bottomPreviewImage" + i)).setImage(trackImage);
                 String trackName = track.getName();
                 ArtistSimplified[] artists = track.getArtists();
@@ -530,6 +549,146 @@ public class PlaylistController extends SceneUtilities {
                 node.setVisible(false);
             }
 
+        }
+    }
+    public void buildTopPlaylist() {
+        if (currentPlaylistEditState.equals("randomize")) {
+            this.currentSelected.reorderItems();
+            buildRandomization();
+        }
+        if (currentPlaylistEditState.equals("genre")) {
+
+        }
+
+    }
+    public void buildGenreSplicing() {
+        GetPlaylistsItemsRequest getPlaylistsItemsRequest = spotifyApi
+                .getPlaylistsItems(this.currentSelected.playlistId)
+                .limit(30)
+                .build();
+
+        Paging<PlaylistTrack> tracks;
+        try {
+            tracks = getPlaylistsItemsRequest.execute();
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        int size = tracks.getItems().length;
+        for (int i = 0; i < size; i++) {
+            if (i == 8) {
+                break;
+            }
+            Node node = currentScene.lookup("#topPreview" + i);
+            node.setDisable(false);
+            node.setVisible(true);
+            PlaylistTrack simpleTrack = tracks.getItems()[i];
+            Track track = null;
+            try {
+                track = spotifyApi.getTrack(simpleTrack.getTrack().getId())
+                        .build()
+                        .execute();
+            } catch (IOException | ParseException | SpotifyWebApiException e) {
+                throw new RuntimeException(e);
+            }
+
+            Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 67, 67, false, false);
+            ((ImageView) currentScene.lookup("#topPreviewImage" + i)).setImage(trackImage);
+            String trackName = track.getName();
+            ArtistSimplified[] artists = track.getArtists();
+            StringBuilder allArtists = new StringBuilder("- ");
+            for (int k = 0; k < artists.length; k++) {
+                allArtists.append(artists[k].getName());
+                if (k != artists.length - 1) {
+                    allArtists.append(", ");
+                }
+            }
+            Label label = ((Label) currentScene.lookup("#topPreviewInfo" + i));
+            if (!(label.getStyleClass().contains("text"))){
+                label.getStyleClass().add("text");
+            }
+            label.setText("  " + trackName + "\n  " + allArtists);
+        }
+        for (int i = size; i < 8; i++) {
+            Node node = currentScene.lookup("#topPreview" + i);
+            node.setDisable(true);
+            node.setVisible(false);
+        }
+    }
+
+
+    public void buildRandomization() {
+
+        GetPlaylistsItemsRequest getPlaylistsItemsRequest = spotifyApi
+                .getPlaylistsItems(this.currentSelected.playlistId)
+                .limit(8)
+                .build();
+
+        Paging<PlaylistTrack> tracks;
+        try {
+            tracks = getPlaylistsItemsRequest.execute();
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        int size = tracks.getItems().length;
+        for (int i = 0; i < size; i++) {
+            if (i == 8) {
+                break;
+            }
+            Node node = currentScene.lookup("#topPreview" + i);
+            node.setDisable(false);
+            node.setVisible(true);
+            PlaylistTrack simpleTrack = tracks.getItems()[i];
+            Track track = null;
+            try {
+                track = spotifyApi.getTrack(simpleTrack.getTrack().getId())
+                        .build()
+                        .execute();
+            } catch (IOException | ParseException | SpotifyWebApiException e) {
+                throw new RuntimeException(e);
+            }
+
+            Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 67, 67, false, false);
+            ((ImageView) currentScene.lookup("#topPreviewImage" + i)).setImage(trackImage);
+            String trackName = track.getName();
+            ArtistSimplified[] artists = track.getArtists();
+            StringBuilder allArtists = new StringBuilder("- ");
+            for (int k = 0; k < artists.length; k++) {
+                allArtists.append(artists[k].getName());
+                if (k != artists.length - 1) {
+                    allArtists.append(", ");
+                }
+            }
+            Label label = ((Label) currentScene.lookup("#topPreviewInfo" + i));
+            if (!(label.getStyleClass().contains("text"))){
+                label.getStyleClass().add("text");
+            }
+            label.setText("  " + trackName + "\n  " + allArtists);
+        }
+        for (int i = size; i < 8; i++) {
+            Node node = currentScene.lookup("#topPreview" + i);
+            node.setDisable(true);
+            node.setVisible(false);
+        }
+    }
+    public void handleEditSelection(MouseEvent event) {
+        Pane pane = (Pane) currentScene.lookup("#randomizeBackground");
+        Pane pane1 = (Pane) currentScene.lookup("#genreSpliceBackground");
+        String[] sourceInfo = parseSource(event);
+        if (!(currentPlaylistEditState.equals("")) && sourceInfo[1].toLowerCase().contains(currentPlaylistEditState)) {
+            return;
+        }
+        if (sourceInfo[1].toLowerCase().contains("randomize")) {
+            pane.getStyleClass().add("selected");
+            pane1.getStyleClass().remove("selected");
+            currentPlaylistEditState = "randomize";
+            buildRandomization();
+            return;
+        }
+        if (sourceInfo[1].toLowerCase().contains("genre")) {
+            pane.getStyleClass().remove("selected");
+            pane1.getStyleClass().add("selected");
+            currentPlaylistEditState = "genre";
+            buildGenreSplicing();
         }
     }
     public void handleSelection(MouseEvent event) {

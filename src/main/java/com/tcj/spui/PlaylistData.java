@@ -15,7 +15,7 @@ public class PlaylistData {
     private SpotifyApi spotifyApi = App.session.getAppUser()
             .getUserAuthorizationManager()
             .getRetrievedApi();
-    private String playlistId;
+    public String playlistId;
     public Playlist thisPlaylist;
     public Paging<PlaylistTrack> playlistInfo;
     public int position;
@@ -55,9 +55,7 @@ public class PlaylistData {
     }
     public void reorderItems() {
         ReorderPlaylistsItemsRequest reorderPlaylistsItemsRequest = this.spotifyApi.
-                reorderPlaylistsItems(this.playlistId, 0, 0)
-//          .range_length(rangeLength)
-//          .snapshot_id("JbtmHBDBAYu3/bt8BOXKjzKx3i0b6LCa/wVjyl6qQ2Yf6nFXkbmzuEa+ZI/U1yF+")
+                reorderPlaylistsItems(this.playlistId, 0, thisPlaylist.getTracks().getTotal())
                 .build();
         try {
             SnapshotResult snapshotResult = reorderPlaylistsItemsRequest.execute();

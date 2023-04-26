@@ -118,10 +118,29 @@
   -fx-background-color: #191414;
   -fx-background-radius: 10px;
 }
+#randomize {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+}
+#genreSplice {
+  -fx-font-size: 10px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFFFFF;
+}
+#randomizeDesc {
+  -fx-font-size: 10px;
+  -fx-text-fill: #FFFFFF;
+}
+#genreSpliceDesc {
+  -fx-font-size: 10px;
+  -fx-text-fill: #FFFFFF;
+}
 #topartistsLabel {
   -fx-font-size: 10px;
   -fx-font-weight: bold;
 }
+
 #discoveryLabel {
   -fx-font-size: 10px;
   -fx-font-weight: bold;
@@ -148,6 +167,14 @@
   -fx-background-radius: 10px;
 }
 #topsongsPane:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#randomizeBackground:hover {
+  -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
+  -fx-background-radius: 10px;
+}
+#genreSpliceBackground:hover {
   -fx-background-color: linear-gradient(to right, #323436, #5A5A5A);
   -fx-background-radius: 10px;
 }

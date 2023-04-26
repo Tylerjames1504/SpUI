@@ -128,16 +128,16 @@
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                        <children>
-                                          <Pane prefHeight="200.0" prefWidth="200.0">
+                                          <Pane fx:id="randomizeBackground" onMouseClicked="#handleEditSelection" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Label fx:id="randomize" prefHeight="155.0" prefWidth="138.0" text="           Randomize  " />
-                                                <Label fx:id="randomizeDesc" layoutX="138.0" prefHeight="155.0" prefWidth="239.0" text="Randomizes the order of the songs in... warning this may take some time" />
+                                                <Label fx:id="randomize" prefHeight="155.0" prefWidth="128.0" text="  Randomize  " />
+                                                <Label fx:id="randomizeDesc" layoutX="119.0" prefHeight="155.0" prefWidth="258.0" />
                                              </children>
                                           </Pane>
-                                          <Pane prefHeight="200.0" prefWidth="200.0">
+                                          <Pane fx:id="genreSpliceBackground" onMouseClicked="#handleEditSelection" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Label fx:id="genreSplice" prefHeight="155.0" prefWidth="138.0" text="           Genre Splice " />
-                                                <Label fx:id="genreSpliceDesc" layoutX="138.0" prefHeight="155.0" prefWidth="239.0" text="Extracts a playlist consisting only of songs that are of the top genre of.." />
+                                                <Label fx:id="genreSplice" prefHeight="155.0" prefWidth="138.0" text="  Genre Splice " />
+                                                <Label fx:id="genreSpliceDesc" layoutX="120.0" prefHeight="155.0" prefWidth="258.0" />
                                              </children>
                                           </Pane>
                                        </children>
@@ -160,8 +160,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage0" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo0" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -170,8 +170,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage1" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo1" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -180,8 +180,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage2" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo2" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -190,8 +190,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage3" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo3" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -207,8 +207,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage4" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo4" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -217,8 +217,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage5" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo5" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -227,8 +227,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage6" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo6" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -237,8 +237,8 @@
                                                          <children>
                                                             <HBox prefHeight="67.0" prefWidth="179.0">
                                                                <children>
-                                                                  <ImageView fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
-                                                                  <Label prefHeight="69.0" prefWidth="112.0" />
+                                                                  <ImageView fx:id="topPreviewImage7" fitHeight="67.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <Label fx:id="topPreviewInfo7" prefHeight="69.0" prefWidth="112.0" />
                                                                </children>
                                                             </HBox>
                                                          </children>
@@ -258,7 +258,7 @@
                                  </children></Pane>
                               <Pane fx:id="changeEditedPane2" prefHeight="325.0" prefWidth="100.0">
                                  <children>
-                                    <ImageView fx:id="plusbutton0" fitHeight="59.0" fitWidth="55.0" layoutX="13.0" layoutY="135.0" onMouseEntered="#hover" onMouseExited="#hover" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="plusbutton0" fitHeight="59.0" fitWidth="55.0" layoutX="13.0" layoutY="135.0" onMouseClicked="#buildTopPlaylist" onMouseEntered="#hover" onMouseExited="#hover" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@add_static.png" />
                                        </image>
@@ -306,7 +306,7 @@
                                           <Pane fx:id="newreleasesPane" onMouseClicked="#handleSelection" prefHeight="200.0" prefWidth="200.0">
                                              <children>
                                                 <Label fx:id="newreleasesLabel" prefHeight="75.0" prefWidth="138.0" text="  New Releases" textFill="WHITE" />
-                                                <Label layoutX="119.0" prefHeight="75.0" prefWidth="258.0" text="Creates a playlist from your new releases" textFill="WHITE">
+                                                <Label layoutX="119.0" prefHeight="75.0" prefWidth="258.0" text="Creates a playlist from new releases" textFill="WHITE">
                                                    <font>
                                                       <Font size="10.0" />
                                                    </font></Label>
