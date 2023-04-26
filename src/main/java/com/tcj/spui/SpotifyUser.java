@@ -5,6 +5,12 @@ import java.util.List;
 
 import se.michaelthelin.spotify.model_objects.specification.*;
 
+/*
+ * Class to wrap the current App's user Spotify data
+ * Contains data that was retrieved by the Spotify Web API calls that were made when AppManger created the Scenes
+ * This data is used to populate the components on the scenes (Images, Text, etc.)
+ * Contains a SpotifyUserAuthorizationManager object which handles the Spotify API auth flow
+ */
 public class SpotifyUser {
 
   final private SpotifyUserAuthorizationManager spotifyUserAuthorizationManager;

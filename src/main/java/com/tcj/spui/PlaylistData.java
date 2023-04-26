@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+/*
+ * Class that stores its instances in PlaylistBlockCycle
+ * Contains all necessary information about a singular playlist
+ */
 public class PlaylistData {
     private SpotifyApi spotifyApi = App.session.getAppUser()
             .getUserAuthorizationManager()
@@ -29,6 +33,9 @@ public class PlaylistData {
         refresh();
     }
 
+   /*
+    * Called on init of object
+    */
     public void refresh() {
         updatePlaylist();
         getElements();
@@ -45,6 +52,10 @@ public class PlaylistData {
         }
 
     }
+   /*
+    * Calls the API to get a Playlist object from a given ID
+    * Stores this Playlist object in thisPlaylist to use in PlaylistData and inherintly PlaylistController
+    */
     public void updatePlaylist() {
         try {
             final GetPlaylistRequest getPlaylistRequest = this.spotifyApi

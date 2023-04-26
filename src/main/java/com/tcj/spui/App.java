@@ -34,6 +34,10 @@ public class App extends Application {
         launch();
     }
 
+    /*
+     * Called via launch in main
+     * Creates a new AppManager object that manages the App's components
+     */
     @Override
     public void start(Stage initialStage)
             throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, URISyntaxException, IOException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, InterruptedException {
@@ -41,6 +45,15 @@ public class App extends Application {
         initiateLogin();
     }
 
+    /*
+     * Checks if MAC Address of user decrypts any refresh token (that is stored in the database) successfully
+     * If it can, then user has already logged in on the machine being used and does not need to log in again (Like a 'Remember me' flag)
+     * The decrypted refresh token is passed into the SpotifyAPI object and then is used to get a new access token
+     * Load the main scene using StageManager and SceneManager, skipping logging
+     *
+     * If it cannot, then the user is prompted to log into Spotify, then encrypts the refresh token using their MAC address and stores in database
+     * Load the login scene using StageManager and SceneManager, user then must accept the terms of using SpUI
+     */
     public void initiateLogin()
             throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, URISyntaxException, IOException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, InterruptedException {
         String refreshToken = App.db.checkUsers();

@@ -18,11 +18,22 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
+/*
+ * Class to handle all of Spotify Web API auth flow
+ * See: https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+ *
+ * Uses thelinmichael's SpotifyAPI wrapper to abstract sending HTTP requests
+ */
 public class SpotifyUserAuthorizationManager {
 
     private final SpotifyApi retrievedApi;
     private final String authorizationCodeRequestLink;
 
+    /*
+     * Use the client ID, client secret (retrieved from database) and redirect URI to build a SpotifyAPI object
+     * Create an authorization request link by building and executing an authorizationCodeUriRequest that specifies scope and state
+     * Stores the SpotifyAPI object 'retrievedAPI' that is used to build and execute Web API calls
+     */
     public SpotifyUserAuthorizationManager() {
 
         String clientId = "b6425f62083d455a89f1b1af33a23ca8"; // public info
@@ -56,6 +67,11 @@ public class SpotifyUserAuthorizationManager {
         return this.authorizationCodeRequestLink;
     }
 
+    /*
+     * Using an auth token that was retrieved via the WebEngine in LoginController
+     * Build and send a request that exchanges this auth token for an access token and a refresh token
+     * Add these tokens to the API object
+     */
     public void completeAuthorization(String token) {
         try {
             AuthorizationCodeRequest authorizationCodeRequest = this.retrievedApi.authorizationCode(token)
@@ -68,6 +84,13 @@ public class SpotifyUserAuthorizationManager {
         }
     }
 
+    /*
+     * The first access token that is received in exchange for the auth token expires after 3600 seconds
+     * Using the refresh token stored in 'retrievedAPI', refresh the access token
+     * Add the new access token to the API object
+     * NOTE: The refresh token can be recycled many times, you can use the SAME refresh token to get many new access tokens
+     *       The refresh token expires after a couple months (There is no given expiry time)
+     */
     public void refreshAuthCode() {
         AuthorizationCodeRefreshRequest authorizationCodeRefreshRequest = this.retrievedApi.authorizationCodeRefresh()
                 .build();
