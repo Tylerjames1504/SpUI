@@ -1,3 +1,7 @@
+/*
+ * See README.md for information about this project
+ */
+
 package com.tcj.spui;
 
 import javafx.application.Application;
