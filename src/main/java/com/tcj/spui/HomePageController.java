@@ -97,11 +97,13 @@ public class HomePageController extends SceneUtilities {
       if (App.session.getAppUser().getArtistPagingShort().getItems().length > 0) {
         Recommendations recommendations = getRecommendationsRequest.execute();
         recommendedTracks = Arrays.asList(recommendations.getTracks());
+        App.session.getAppUser().setRecommendedTracks(recommendedTracks);
       }
       Paging<AlbumSimplified> newReleases = getListOfNewReleasesRequest.execute();
       for (int i = 0; i < newReleases.getItems().length; i++) {
         GetAlbumsTracksRequest getAlbumsTracksRequest = this.spotifyApi.getAlbumsTracks(newReleases.getItems()[i].getId()).build();
         Paging<TrackSimplified> albumsTracks = getAlbumsTracksRequest.execute();
+        App.session.getAppUser().getNewReleases().add(albumsTracks.getItems()[0]);
         App.session.getAppUser().getDiscoveryPool().add(albumsTracks.getItems()[0]);
       }
       App.session.getAppUser().getDiscoveryPool().addAll(recommendedTracks);
@@ -111,7 +113,7 @@ public class HomePageController extends SceneUtilities {
   }
 
   public void displayDiscovery() {
-    if (App.session.getAppUser().getDiscoveryPool().size() < 8) {
+    if (App.session.getAppUser().getDiscoveryPool().size() < 16) {
       App.session.getAppUser().getDiscoveryPool().clear();
       loadDiscovery();
     }

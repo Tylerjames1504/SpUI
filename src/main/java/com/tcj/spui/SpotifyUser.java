@@ -1,6 +1,7 @@
 package com.tcj.spui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import se.michaelthelin.spotify.model_objects.specification.*;
 
@@ -14,6 +15,8 @@ public class SpotifyUser {
   private Paging<Artist> artistPagingShort;
   private Paging<Artist> artistPagingLong;
   private PlaylistBlockCycle playlistHead;
+  private List<TrackSimplified> recommendedTracks = new ArrayList();
+  private ArrayList<TrackSimplified> newReleases = new ArrayList();
 
   public SpotifyUser() {
     this.spotifyUserAuthorizationManager = new SpotifyUserAuthorizationManager();
@@ -61,4 +64,9 @@ public class SpotifyUser {
 
   public void setPlaylistHead(PlaylistBlockCycle playlistHead) { this.playlistHead = playlistHead; }
   public PlaylistBlockCycle getPlaylistHead() { return this.playlistHead; }
+
+  public void setRecommendedTracks(List<TrackSimplified> recommendedTracks) { this.recommendedTracks = recommendedTracks; }
+  public List<TrackSimplified> getRecommendedTracks() { return this.recommendedTracks; }
+  public void setNewReleases(ArrayList<TrackSimplified> newReleases) {this.newReleases = newReleases; }
+  public ArrayList<TrackSimplified> getNewReleases() {return this.newReleases;}
 }

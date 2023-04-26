@@ -3,72 +3,66 @@ package com.tcj.spui;
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
+import se.michaelthelin.spotify.model_objects.special.SnapshotResult;
 import se.michaelthelin.spotify.model_objects.specification.*;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistRequest;
+import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
+import se.michaelthelin.spotify.requests.data.playlists.ReorderPlaylistsItemsRequest;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 
 public class PlaylistData {
+    private SpotifyApi spotifyApi = App.session.getAppUser()
+            .getUserAuthorizationManager()
+            .getRetrievedApi();
     private String playlistId;
     public Playlist thisPlaylist;
-    public String topGenre = "Miscellaneous";
-    public PlaylistData(String playlistId) {
+    public Paging<PlaylistTrack> playlistInfo;
+    public int position;
+    public boolean selected = false;
+    public PlaylistData(String playlistId, int position) {
+        this.position = position;
         this.playlistId = playlistId;
         refresh();
     }
 
     public void refresh() {
         updatePlaylist();
-        calculateTopGenre();
+        getElements();
     }
-    public void calculateTopGenre() {
-        HashMap<String, Integer> genreMap = new HashMap<>();
-        String max = topGenre;
-        int maxAmount = 0;
+    public void getElements() {
         try {
-            SpotifyApi spotifyApi = App.session.getAppUser()
-                    .getUserAuthorizationManager()
-                    .getRetrievedApi();
-            int k = 0;
-            for (PlaylistTrack track : this.thisPlaylist.getTracks().getItems()) {
-                Track track1 = spotifyApi.getTrack(track.getTrack().getId()).build().execute();
-                List<ArtistSimplified> artistSimplifiedList = List.of(track1.getArtists());
-                if (k == 20) break;
-                k++;
-                for (ArtistSimplified artistSimplified : artistSimplifiedList) {
-                    Artist artist = spotifyApi.getArtist(artistSimplified.getId()).build().execute();
-                    List<String> genreList = List.of(artist.getGenres());
-                    for (String genre : genreList) {
-                        if (genreMap.containsKey(genre)) {
-                            int count = genreMap.get(genre) + 1;
-                            genreMap.put(genre, genreMap.get(genre) + 1);
-                            if (count > maxAmount) {
-                                maxAmount = count;
-                                max = genre;
-                            }
-                        } else {
-                            genreMap.put(genre, 1);
-                        }
-                    }
-                }
-            }
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            GetPlaylistsItemsRequest getPlaylistsItemsRequest = this.spotifyApi
+                    .getPlaylistsItems(this.playlistId)
+                    .build();
+            this.playlistInfo = getPlaylistsItemsRequest.execute();
+        }
+        catch (IOException | SpotifyWebApiException | ParseException e) {
             e.printStackTrace();
         }
-        this.topGenre = max;
+
     }
 
     public void updatePlaylist() {
         try {
-            final GetPlaylistRequest getPlaylistRequest = App.session.getAppUser()
-                    .getUserAuthorizationManager()
-                    .getRetrievedApi()
+            final GetPlaylistRequest getPlaylistRequest = this.spotifyApi
                     .getPlaylist(this.playlistId)
                     .build();
             this.thisPlaylist = getPlaylistRequest.execute();
         } catch (IOException | SpotifyWebApiException | ParseException e) {
+            System.out.println(e);
+        }
+    }
+    public void reorderItems() {
+        ReorderPlaylistsItemsRequest reorderPlaylistsItemsRequest = this.spotifyApi.
+                reorderPlaylistsItems(this.playlistId, 0, 0)
+//          .range_length(rangeLength)
+//          .snapshot_id("JbtmHBDBAYu3/bt8BOXKjzKx3i0b6LCa/wVjyl6qQ2Yf6nFXkbmzuEa+ZI/U1yF+")
+                .build();
+        try {
+            SnapshotResult snapshotResult = reorderPlaylistsItemsRequest.execute();
+        }
+        catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println(e);
         }
     }

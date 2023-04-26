@@ -15,6 +15,7 @@ module com.tcj.spui {
   requires nv.i18n;
   requires org.apache.httpcomponents.core5.httpcore5;
   requires com.google.gson;
+  requires org.json;
 
   opens com.tcj.spui to javafx.fxml;
   exports com.tcj.spui;
