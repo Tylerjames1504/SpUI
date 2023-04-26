@@ -118,22 +118,14 @@
   -fx-background-color: #191414;
   -fx-background-radius: 10px;
 }
-#randomize {
-  -fx-font-size: 10px;
-  -fx-font-weight: bold;
-  -fx-text-fill: #FFFFFF;
-}
-#genreSplice {
+#genreSpliceDesc {
   -fx-font-size: 10px;
   -fx-font-weight: bold;
   -fx-text-fill: #FFFFFF;
 }
 #randomizeDesc {
   -fx-font-size: 10px;
-  -fx-text-fill: #FFFFFF;
-}
-#genreSpliceDesc {
-  -fx-font-size: 10px;
+  -fx-font-weight: bold;
   -fx-text-fill: #FFFFFF;
 }
 #topartistsLabel {

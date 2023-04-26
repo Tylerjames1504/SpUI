@@ -121,23 +121,40 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                            <children>
-                              <Pane fx:id="changeEditedPane0" prefHeight="325.0" prefWidth="408.0">
+                              <Pane prefHeight="325.0" prefWidth="211.0" />
+                              <Pane fx:id="changeEditedPane0" prefHeight="325.0" prefWidth="212.0">
                                  <children>
-                                    <VBox prefHeight="325.0" prefWidth="388.0" spacing="5.0">
+                                    <VBox prefHeight="325.0" prefWidth="192.0" spacing="5.0">
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                        <children>
-                                          <Pane fx:id="randomizeBackground" onMouseClicked="#handleEditSelection" prefHeight="200.0" prefWidth="200.0">
+                                          <Pane fx:id="randomizeBackground" onMouseClicked="#handleEditSelection" prefHeight="158.0" prefWidth="182.0">
                                              <children>
-                                                <Label fx:id="randomize" prefHeight="155.0" prefWidth="128.0" text="  Randomize  " />
-                                                <Label fx:id="randomizeDesc" layoutX="119.0" prefHeight="155.0" prefWidth="258.0" />
+                                                <Pane layoutX="11.0" layoutY="62.0" prefHeight="81.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
+                                                   <children>
+                                                      <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="47.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@pngtree-shuffle-icon-vector-design-templates-white-on-background-png-image_4966514.jpg" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                                <Label fx:id="randomizeDesc" layoutY="14.0" prefHeight="46.0" prefWidth="182.0" textAlignment="CENTER" />
                                              </children>
                                           </Pane>
-                                          <Pane fx:id="genreSpliceBackground" onMouseClicked="#handleEditSelection" prefHeight="200.0" prefWidth="200.0">
+                                          <Pane fx:id="genreSpliceBackground" onMouseClicked="#handleEditSelection" prefHeight="155.0" prefWidth="239.0">
                                              <children>
-                                                <Label fx:id="genreSplice" prefHeight="155.0" prefWidth="138.0" text="  Genre Splice " />
-                                                <Label fx:id="genreSpliceDesc" layoutX="120.0" prefHeight="155.0" prefWidth="258.0" />
+                                                <Pane layoutX="11.0" layoutY="59.0" prefHeight="81.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
+                                                   <children>
+                                                      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="60.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@extract.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                                <Label fx:id="genreSpliceDesc" layoutY="14.0" prefHeight="46.0" prefWidth="182.0" textAlignment="CENTER" />
                                              </children>
                                           </Pane>
                                        </children>

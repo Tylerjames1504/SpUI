@@ -44,7 +44,7 @@ public class PlaylistController extends SceneUtilities {
     private ArrayList<Track> newReleasesPool = new ArrayList();
 
     private ArrayList<Track> genreSplicing = new ArrayList();
-    private String currentSplicedGenre = "";
+    private String currentSplicedGenre = "Genre";
 
     public void initialize() {
         this.parentStageKey = "main";
@@ -71,8 +71,8 @@ public class PlaylistController extends SceneUtilities {
                 if (!(playlistHead.block[i].selected)) {
                     pane.getStyleClass().remove("selected");
                 } else {
-                    randomizeDesc.setText("Randomizes the order of the songs in:\n\n" + this.currentSelected.thisPlaylist.getName());
-                    genreSpliceDesc.setText("Extracts a playlist consisting only of \nsongs that are of the top genre of:\n\n" + this.currentSelected.thisPlaylist.getName());
+                    randomizeDesc.setText("           Shuffle\n" + this.currentSelected.thisPlaylist.getName());
+                    genreSpliceDesc.setText(this.currentSplicedGenre + " from " + this.currentSelected.thisPlaylist.getName());
                     pane.getStyleClass().add("selected");
                 }
                 Image image = new Image(playlistHead.block[i].thisPlaylist.getImages()[0].getUrl(), 128, 128, false, false);
@@ -200,8 +200,8 @@ public class PlaylistController extends SceneUtilities {
             }
         }
         this.currentSelected = playlistHead.block[index];
-        randomizeDesc.setText("Randomizes the order of the songs in:\n\n" + this.currentSelected.thisPlaylist.getName());
-        genreSpliceDesc.setText("Extracts a playlist consisting only of \nsongs that are of the top genre of:\n\n" + this.currentSelected.thisPlaylist.getName());
+        randomizeDesc.setText("           Shuffle\n" + this.currentSelected.thisPlaylist.getName());
+        genreSpliceDesc.setText(this.currentSplicedGenre + " from " + this.currentSelected.thisPlaylist.getName()); // bug on initial select
         if (currentPlaylistEditState.equals("randomize")) {
             buildRandomization();
         }
@@ -232,7 +232,7 @@ public class PlaylistController extends SceneUtilities {
                 throw new RuntimeException(e);
             }
             String id = json.get("id").toString();
-            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "Top Artists Playlist")
+            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "Top Artists")
                     .public_(false)
                     .description("Playlist created from your top artists")
                     .build();
@@ -263,7 +263,7 @@ public class PlaylistController extends SceneUtilities {
                 throw new RuntimeException(e);
             }
             String id = json.get("id").toString();
-            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "Discovery Playlist")
+            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "Discovery")
                     .public_(false)
                     .description("Playlist created from your discovery")
                     .build();
@@ -293,7 +293,7 @@ public class PlaylistController extends SceneUtilities {
                 throw new RuntimeException(e);
             }
             String id = json.get("id").toString();
-            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "New Releases Playlist")
+            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "New Releases")
                     .public_(false)
                     .description("Playlist created from new releases")
                     .build();
@@ -323,7 +323,7 @@ public class PlaylistController extends SceneUtilities {
                 throw new RuntimeException(e);
             }
             String id = json.get("id").toString();
-            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "Top Songs Playlist")
+            CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, "Top Songs")
                     .public_(false)
                     .description("Playlist created from your top songs")
                     .build();
@@ -580,7 +580,7 @@ public class PlaylistController extends SceneUtilities {
             throw new RuntimeException(e);
         }
         String id = json.get("id").toString();
-        CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, this.currentSplicedGenre + " Playlist")
+        CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, this.currentSplicedGenre)
                 .public_(false)
                 .description("Playlist created from the genre " + this.currentSplicedGenre)
                 .build();
