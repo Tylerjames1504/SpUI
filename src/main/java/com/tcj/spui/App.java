@@ -48,9 +48,7 @@ public class App extends Application {
             App.session.getAppUser().getUserAuthorizationManager().getRetrievedApi()
                     .setRefreshToken(refreshToken);
             App.session.getAppUser().getUserAuthorizationManager().refreshAuthCode();
-            System.out.println("auto-start");
             App.session.loadAllAPIDependentStageSceneNetworks(); // once the authorization is complete we use the token from the SpotifyApi object in the UserAuthorizationManager to load all the information.
-            System.out.println("auto-done");
             App.session.getStageManager().retrieveStageSubNetworkWithKey("main").getParentStage().setScene(App.session.getStageManager().retrieveValidChildSceneFromStageParent("main", "homeScene"));
             App.session.getStageManager().retrieveStageSubNetworkWithKey("main").getParentStage().show();
 

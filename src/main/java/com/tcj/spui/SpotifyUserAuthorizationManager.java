@@ -8,8 +8,15 @@ import se.michaelthelin.spotify.requests.authorization.authorization_code.Author
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 public class SpotifyUserAuthorizationManager {
 
@@ -20,12 +27,15 @@ public class SpotifyUserAuthorizationManager {
 
         String clientId = "b6425f62083d455a89f1b1af33a23ca8"; // public info
         URI redirectUri = URI.create("http://localhost:8080/callback");
-        this.retrievedApi = new SpotifyApi.Builder()
-                .setClientId(clientId)
-                .setClientSecret(
-                        "f34cf82bfb4c408da66e11571688ff00") // get from database, currently hardcoded
-                .setRedirectUri(redirectUri)
-                .build();
+        try {
+            this.retrievedApi = new SpotifyApi.Builder()
+                    .setClientId(clientId)
+                    .setClientSecret(App.db.getClientSecret()).setRedirectUri(redirectUri).build();
+        } catch (URISyntaxException | IOException | InterruptedException | InvalidAlgorithmParameterException |
+                 NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException | BadPaddingException |
+                 InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
 
         AuthorizationCodeUriRequest authorizationCodeUriRequest = this.retrievedApi.authorizationCodeUri()
                 .state("x4xkmn9pu3j6uwt7en")
