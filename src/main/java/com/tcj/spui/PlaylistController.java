@@ -18,12 +18,12 @@ import se.michaelthelin.spotify.requests.data.artists.GetArtistsTopTracksRequest
 import se.michaelthelin.spotify.requests.data.playlists.CreatePlaylistRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
-import se.michaelthelin.spotify.requests.data.playlists.ReorderPlaylistsItemsRequest;
-import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public class PlaylistController extends SceneUtilities {
     @FXML
@@ -42,6 +42,9 @@ public class PlaylistController extends SceneUtilities {
     private Track[] artistTrack;
     private ArrayList<Track> discoveryPlaylistPool = new ArrayList();
     private ArrayList<Track> newReleasesPool = new ArrayList();
+
+    private ArrayList<Track> genreSplicing = new ArrayList();
+    private String currentSplicedGenre = "";
 
     public void initialize() {
         this.parentStageKey = "main";
@@ -354,6 +357,13 @@ public class PlaylistController extends SceneUtilities {
             ((Label) currentScene.lookup("#bottomPreviewLabel" + i)).setText("");
         }
     }
+    public void clearTopPreview() {
+        this.currentPlaylistEditState = "";
+        for (int i = 0; i < 8; i++) {
+            ((ImageView) currentScene.lookup("#topPreviewImage" + i)).setImage(null);
+            ((Label) currentScene.lookup("#topPreviewInfo" + i)).setText("");
+        }
+    }
     public void addPlaylistToChain(Playlist playlist) {
         PlaylistBlockCycle temp = this.absoluteHead.previous;
 
@@ -557,9 +567,44 @@ public class PlaylistController extends SceneUtilities {
             buildRandomization();
         }
         if (currentPlaylistEditState.equals("genre")) {
-
+            executeGenreSplicing();
         }
 
+    }
+    public void executeGenreSplicing() {
+        Playlist playlist;
+        JSONObject json;
+        try {
+            json = new JSONObject(App.session.getAppUser().getUserAuthorizationManager().getRetrievedApi().getCurrentUsersProfile().build().getJson());
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        String id = json.get("id").toString();
+        CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(id, this.currentSplicedGenre + " Playlist")
+                .public_(false)
+                .description("Playlist created from the genre " + this.currentSplicedGenre)
+                .build();
+        try {
+            playlist = createPlaylistRequest.execute();
+            String[] uris = new String[this.genreSplicing.size()];
+            for (int i = 0; i < this.genreSplicing.size(); i++) {
+                uris[i] = this.genreSplicing.get(i).getUri();
+            }
+            SnapshotResult snapshotResult = spotifyApi
+                    .addItemsToPlaylist(playlist.getId(), uris)
+                    .build()
+                    .execute();
+
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Pane pane = (Pane) currentScene.lookup("#genreSpliceBackground");
+        pane.getStyleClass().remove("selected");
+
+        clearTopPreview();
+        if (playlist != null) {
+            addPlaylistToChain(playlist);
+        }
     }
     public void buildGenreSplicing() {
         GetPlaylistsItemsRequest getPlaylistsItemsRequest = spotifyApi
@@ -573,7 +618,46 @@ public class PlaylistController extends SceneUtilities {
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             throw new RuntimeException(e);
         }
-        int size = tracks.getItems().length;
+        String genre = "";
+        Random random = new Random();
+        int randomGenre = random.nextInt(tracks.getItems().length);
+        Track track = null;
+        PlaylistTrack simpleTrack = tracks.getItems()[randomGenre];
+        try {
+            track = spotifyApi.getTrack(simpleTrack.getTrack().getId())
+                    .build()
+                    .execute();
+            ArtistSimplified artistSimplified = track.getArtists()[0];
+            Artist artist = this.spotifyApi.getArtist(artistSimplified.getId()).build().execute();
+            if (artist.getGenres().length > 0) {
+                genre = artist.getGenres()[0];
+            }
+        } catch (IOException | ParseException | SpotifyWebApiException e) {
+            throw new RuntimeException(e);
+        }
+        this.currentSplicedGenre = genre;
+
+        ArrayList<Track> splicedGenreTracks = new ArrayList();
+        for (int i = 0; i < tracks.getItems().length; i++) {
+            String genreLocated = "";
+            PlaylistTrack simple = tracks.getItems()[i];
+            try {
+                track = spotifyApi.getTrack(simple.getTrack().getId())
+                        .build()
+                        .execute();
+                ArtistSimplified artistSimplified = track.getArtists()[0];
+                Artist artist = this.spotifyApi.getArtist(artistSimplified.getId()).build().execute();
+                for (int j = 0; j < artist.getGenres().length; j++) {
+                    genreLocated = artist.getGenres()[j];
+                    if (genreLocated.equals(genre)) splicedGenreTracks.add(this.spotifyApi.getTrack(simple.getTrack().getId()).build().execute());
+                }
+
+            } catch (IOException | ParseException | SpotifyWebApiException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        int size = splicedGenreTracks.size();
         for (int i = 0; i < size; i++) {
             if (i == 8) {
                 break;
@@ -581,15 +665,7 @@ public class PlaylistController extends SceneUtilities {
             Node node = currentScene.lookup("#topPreview" + i);
             node.setDisable(false);
             node.setVisible(true);
-            PlaylistTrack simpleTrack = tracks.getItems()[i];
-            Track track = null;
-            try {
-                track = spotifyApi.getTrack(simpleTrack.getTrack().getId())
-                        .build()
-                        .execute();
-            } catch (IOException | ParseException | SpotifyWebApiException e) {
-                throw new RuntimeException(e);
-            }
+            track = splicedGenreTracks.get(i);
 
             Image trackImage = new Image(track.getAlbum().getImages()[0].getUrl(), 67, 67, false, false);
             ((ImageView) currentScene.lookup("#topPreviewImage" + i)).setImage(trackImage);
@@ -613,6 +689,7 @@ public class PlaylistController extends SceneUtilities {
             node.setDisable(true);
             node.setVisible(false);
         }
+        this.genreSplicing = splicedGenreTracks;
     }
 
 

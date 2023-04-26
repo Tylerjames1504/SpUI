@@ -10,6 +10,8 @@ import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest
 import se.michaelthelin.spotify.requests.data.playlists.ReorderPlaylistsItemsRequest;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 public class PlaylistData {
     private SpotifyApi spotifyApi = App.session.getAppUser()
@@ -20,6 +22,7 @@ public class PlaylistData {
     public Paging<PlaylistTrack> playlistInfo;
     public int position;
     public boolean selected = false;
+    public String topGenre;
     public PlaylistData(String playlistId, int position) {
         this.position = position;
         this.playlistId = playlistId;
@@ -42,7 +45,6 @@ public class PlaylistData {
         }
 
     }
-
     public void updatePlaylist() {
         try {
             final GetPlaylistRequest getPlaylistRequest = this.spotifyApi
