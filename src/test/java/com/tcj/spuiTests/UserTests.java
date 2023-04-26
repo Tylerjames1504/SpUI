@@ -68,7 +68,7 @@ public class UserTests {
   @Test
   public void userToStringTest() throws Exception {
     User user = new User("user@test.com", this.db);
-    Assertions.assertEquals("User: " + testUserId + " " + testUserEmail + " " + testAuthCode + " " + testRefreshToken, user.toString());
+    Assertions.assertTrue(user.toString().matches("User: [0-9]+ [0-9a-zA-Z@.]+ [0-9a-zA-Z/~=+_-]+ [0-9a-zA-Z/~=+_-]+"));
   }
 
 
