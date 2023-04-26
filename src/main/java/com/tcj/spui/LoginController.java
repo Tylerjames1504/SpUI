@@ -67,7 +67,9 @@ public class LoginController extends SceneUtilities {
                 .getParentStage()
                 .setScene(App.session.getStageManager().retrieveValidChildSceneFromStageParent("login","loading"));
         this.parentStage.centerOnScreen();
+        System.out.println("manual-start");
         App.session.loadAllAPIDependentStageSceneNetworks();
+        System.out.println("manual-end");
         this.swapToStage(true, "main", "homeScene");
       }
     });

@@ -23,7 +23,7 @@ import se.michaelthelin.spotify.requests.authorization.authorization_code.Author
 
 public class ClientManager {
 
-  private static final String CLIENT_ID = "4076d474b9884c8f88f3c9cf40f80890";
+  private static final String CLIENT_ID = "b6425f62083d455a89f1b1af33a23ca8";
   private static final URI REDIRECT_URI = URI.create("http://localhost:8080/callback");
   private final SpotifyApi spotifyApi;
   private final AuthorizationCodeUriRequest authorizationCodeUriRequest;

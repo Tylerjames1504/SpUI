@@ -17,12 +17,12 @@ public class SpotifyUserAuthorizationManager {
 
   public SpotifyUserAuthorizationManager() {
 
-    String clientId = "4076d474b9884c8f88f3c9cf40f80890"; // public info
+    String clientId = "b6425f62083d455a89f1b1af33a23ca8"; // public info
     URI redirectUri = URI.create("http://localhost:8080/callback");
     this.retrievedApi = new SpotifyApi.Builder()
         .setClientId(clientId)
         .setClientSecret(
-            "b604863adab94bfb947b81500e03c78e") // get from database, currently hardcoded
+            "f34cf82bfb4c408da66e11571688ff00") // get from database, currently hardcoded
         .setRedirectUri(redirectUri)
         .build();
 
