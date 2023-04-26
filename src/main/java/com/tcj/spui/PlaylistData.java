@@ -11,9 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PlaylistData {
-    private String playlistId;
     public Playlist thisPlaylist;
     public String topGenre = "Miscellaneous";
+    private final String playlistId;
+
     public PlaylistData(String playlistId) {
         this.playlistId = playlistId;
         refresh();
@@ -21,8 +22,9 @@ public class PlaylistData {
 
     public void refresh() {
         updatePlaylist();
-        calculateTopGenre();
+//        calculateTopGenre();
     }
+
     public void calculateTopGenre() {
         HashMap<String, Integer> genreMap = new HashMap<>();
         String max = topGenre;

@@ -11,7 +11,6 @@ import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
-import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -39,15 +38,16 @@ public class PlaylistController extends SceneUtilities {
             }
         });
     }
+
     public void displayPlaylists() {
         for (int i = 0; i < 4; i++) {
             if (playlistHead.block[i] != null) {
-                Node node = currentScene.lookup("#playlistBackground" + i);;
+                Node node = currentScene.lookup("#playlistBackground" + i);
                 node.setDisable(false);
                 node.setVisible(true);
 
                 Image image = new Image(playlistHead.block[i].thisPlaylist.getImages()[0].getUrl(), 128, 128, false, false);
-                ((ImageView)currentScene.lookup("#playListImage" + i)).setImage(image);
+                ((ImageView) currentScene.lookup("#playListImage" + i)).setImage(image);
                 String text = " " + playlistHead.block[i].thisPlaylist.getName();
                 text += "\n Mostly " + playlistHead.block[i].topGenre;
                 int amount = playlistHead.block[i].thisPlaylist.getTracks().getItems().length;
@@ -56,9 +56,8 @@ public class PlaylistController extends SceneUtilities {
                 } else {
                     text += "\n " + playlistHead.block[i].thisPlaylist.getTracks().getItems().length + " songs";
                 }
-                ((Label)currentScene.lookup("#playlistInfo" + i)).setText(text);
-            }
-            else {
+                ((Label) currentScene.lookup("#playlistInfo" + i)).setText(text);
+            } else {
                 Node node = currentScene.lookup("#playlistBackground" + i);
                 node.setDisable(true);
                 node.setVisible(false);
@@ -66,6 +65,7 @@ public class PlaylistController extends SceneUtilities {
         }
 
     }
+
     public void loadPlaylists() {
         // no playlist error --> incomplete pages too & disabling arrow buttons
         // refresh playlists using hashmap for genre and using playlist id
@@ -101,9 +101,11 @@ public class PlaylistController extends SceneUtilities {
         }
 
     }
-    public void swapScene(){
+
+    public void swapScene() {
         swapScene("homeScene", "Home");
     }
+
     public void hoverArrowImage(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
         String currentEvent = event.getEventType().toString();
@@ -126,6 +128,7 @@ public class PlaylistController extends SceneUtilities {
             leftButton.setImage(image);
         }
     }
+
     public void movePage(MouseEvent event) {
         String[] sourceInfo = parseSource(event.getSource());
         if (sourceInfo[1].toLowerCase().contains("left")) {

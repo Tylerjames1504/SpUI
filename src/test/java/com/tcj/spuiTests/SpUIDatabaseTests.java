@@ -72,7 +72,6 @@ public class SpUIDatabaseTests {
 
   }
 
-
   @Test
   public void addUserTest()
       throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
@@ -82,14 +81,7 @@ public class SpUIDatabaseTests {
 
   }
 
-//  @Test
-//  public void getUserByIdTest()
-//      throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
-//
-//    System.out.println(db.getUser(69));
-//    Assertions.assertEquals("user@gmail.com", db.getUser(69).get("user_email"));
-//
-//  }
+
 
   @Test
   public void checkUserEmailTest()
@@ -119,6 +111,13 @@ public class SpUIDatabaseTests {
   }
 
   @Test
+  public void checkUsersIsSighedInTest() throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, URISyntaxException, IOException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, InterruptedException {
+
+    Assertions.assertNotNull(db.checkUsers());
+
+  }
+
+  @Test
   public void deleteUserTest()
       throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
@@ -126,6 +125,14 @@ public class SpUIDatabaseTests {
     Assertions.assertNull(db.getUser("testUser"));
 
   }
+
+  @Test
+    public void deleteUserThatDoesNotExistTest()
+        throws URISyntaxException, IOException, InterruptedException {
+
+        Assertions.assertEquals(204, db.deleteUser("userThatDoesNotExist").statusCode());
+
+    }
 
 
 }

@@ -34,9 +34,6 @@ public class UserTests {
 
   }
 
-
-
-
   @Test
   public void getUserIdFromUserClassTest() throws Exception {
     User user = new User("user@test.com", this.db);
@@ -62,7 +59,21 @@ public class UserTests {
   }
 
   @Test
-  public void getUserThatDoesNotExistTest() throws Exception {
+  public void setAuthCodeTest() throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, URISyntaxException, IOException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, InterruptedException {
+    User user = new User("user@test.com", this.db);
+    user.setAuthCode("newAuthCode");
+    Assertions.assertEquals("newAuthCode", user.getAuthCode());
+  }
+
+  @Test
+  public void userToStringTest() throws Exception {
+    User user = new User("user@test.com", this.db);
+    Assertions.assertEquals("User: " + testUserId + " " + testUserEmail + " " + testAuthCode + " " + testRefreshToken, user.toString());
+  }
+
+
+  @Test
+  public void getUserThatDoesNotExistTest() {
 
     Assertions.assertThrows(NoSuchElementException.class, () -> {
       User user = new User("noSuchUser@gmail.com", this.db);
