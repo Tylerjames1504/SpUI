@@ -18,6 +18,11 @@ public class User {
     private final String refreshToken;
     private String authCode;
 
+    /*
+     * Constructor for User class
+     * Takes in a users email that should already be in the database and creates a User object
+     * so there will only need to be one database call
+     */
     public User(String email, SpUIDatabase db)
             throws NoSuchElementException, URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 

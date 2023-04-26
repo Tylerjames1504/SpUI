@@ -1,5 +1,6 @@
 package com.tcj.spui;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,12 +32,22 @@ public class SpUIDatabase {
     public HttpClient client;
 
 
+    /*
+     * SpUIDatabase constructor
+     * creates a new http client and connects to the initial endpoint
+     */
+
     public SpUIDatabase() throws IOException, InterruptedException {
 
         this.client = HttpClient.newHttpClient();
         this.response = initConnect();
 
     }
+
+    /*
+     * Takes a HttpResponse<String> and returns a Map<String, Object> with the
+     * auth_code and refresh_token decrypted
+     */
 
     public static Map<String, Object> stripResponse(HttpResponse<String> response)
             throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
@@ -54,16 +65,14 @@ public class SpUIDatabase {
             json = new JSONObject(response.body()).toMap();
         }
 
-        if (json.get("auth_code") != null) {
-            json.replace("auth_code", Encryption.decrypt((String) json.get("auth_code")));
-        }
-        if (json.get("refresh_token") != null) {
-            json.replace("refresh_token", Encryption.decrypt((String) json.get("refresh_token")));
-        }
-        return json;
+        return getStringObjectMap(json);
 
     }
 
+    /*
+     * Takes a String and returns a Map<String, Object> with the auth_code and
+     * refresh_token decrypted
+     */
     public static Map<String, Object> stripResponse(String response)
             throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
@@ -80,6 +89,16 @@ public class SpUIDatabase {
             json = new JSONObject(response).toMap();
         }
 
+        return getStringObjectMap(json);
+
+    }
+
+    /*
+     * Takes a Map<String, Object> and returns a Map<String, Object> with the
+     * auth_code and refresh_token decrypted
+     */
+    @NotNull
+    private static Map<String, Object> getStringObjectMap(Map<String, Object> json) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         if (json.get("auth_code") != null) {
             json.replace("auth_code", Encryption.decrypt((String) json.get("auth_code")));
         }
@@ -87,9 +106,11 @@ public class SpUIDatabase {
             json.replace("refresh_token", Encryption.decrypt((String) json.get("refresh_token")));
         }
         return json;
-
     }
 
+    /*
+     * Connects to the database initial endpoint and returns the response
+     */
     public HttpResponse<String> initConnect() throws IOException, InterruptedException {
 
         HttpResponse<String> response;
@@ -123,6 +144,9 @@ public class SpUIDatabase {
         }
     }
 
+    /*
+     * Returns the client secret from the database
+     */
     public String getClientSecret()
             throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
@@ -133,6 +157,9 @@ public class SpUIDatabase {
 
     }
 
+    /*
+     * Returns a Map<String, Object> with the user's information given the user's email
+     */
     public Map<String, Object> getUser(String usersEmail)
             throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
@@ -144,6 +171,10 @@ public class SpUIDatabase {
 
     }
 
+    /*
+     * Returns a String of the user's refresh token if the users MAC address was successfully
+     * used to decrypt any refresh token in the database else returns null
+     */
     public String checkUsers()
             throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
@@ -165,6 +196,10 @@ public class SpUIDatabase {
     }
 
 
+    /*
+     * Returns a HttpResponse<String> of the user's information after the user
+     * has been added to the database given the user's email, auth code, and refresh token
+     */
     public HttpResponse<String> initUser(String userEmail, String authCode, String refreshToken)
             throws URISyntaxException, IOException, InterruptedException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
 
@@ -178,6 +213,10 @@ public class SpUIDatabase {
 
     }
 
+    /*
+     * Returns a HttpResponse<String> that should have a status code of 204
+     * even if the user does not exist in the database
+     */
     public HttpResponse<String> deleteUser(String userEmail)
             throws URISyntaxException, IOException, InterruptedException {
         return this.client.send(HttpRequest.newBuilder().DELETE()
