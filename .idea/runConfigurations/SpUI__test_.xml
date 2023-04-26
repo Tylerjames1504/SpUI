@@ -27,7 +27,7 @@
             <list>
               <option value="-DCF_ACCESS_CLIENT_ID=f9cddd6e61dd8ba1d9d3ee54d865ecdf.access" />
               <option value="-DCF_ACCESS_CLIENT_SECRET=6d9f04156ab0028089d9284a55efa6fbc17a2d59ab0d2a50da93096e04b22640" />
-              <option value="-DCLIENT_SECRET=b604863adab94bfb947b81500e03c78e" />
+              <option value="-DCLIENT_SECRET=f34cf82bfb4c408da66e11571688ff00" />
               <option value="test" />
             </list>
           </option>
