@@ -71,8 +71,6 @@ public class PlaylistController extends SceneUtilities {
                 if (!(playlistHead.block[i].selected)) {
                     pane.getStyleClass().remove("selected");
                 } else {
-                    randomizeDesc.setText("           Shuffle\n" + this.currentSelected.thisPlaylist.getName());
-                    genreSpliceDesc.setText(this.currentSplicedGenre + " from " + this.currentSelected.thisPlaylist.getName());
                     pane.getStyleClass().add("selected");
                 }
                 Image image = new Image(playlistHead.block[i].thisPlaylist.getImages()[0].getUrl(), 128, 128, false, false);
@@ -200,8 +198,6 @@ public class PlaylistController extends SceneUtilities {
             }
         }
         this.currentSelected = playlistHead.block[index];
-        randomizeDesc.setText("           Shuffle\n" + this.currentSelected.thisPlaylist.getName());
-        genreSpliceDesc.setText(this.currentSplicedGenre + " from " + this.currentSelected.thisPlaylist.getName()); // bug on initial select
         if (currentPlaylistEditState.equals("randomize")) {
             buildRandomization();
         }

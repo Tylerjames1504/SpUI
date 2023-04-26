@@ -131,30 +131,28 @@
                                        <children>
                                           <Pane fx:id="randomizeBackground" onMouseClicked="#handleEditSelection" prefHeight="158.0" prefWidth="182.0">
                                              <children>
-                                                <Pane layoutX="11.0" layoutY="62.0" prefHeight="81.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
+                                                <Pane layoutX="11.0" layoutY="14.0" prefHeight="129.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
                                                    <children>
-                                                      <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="47.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="30.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@pngtree-shuffle-icon-vector-design-templates-white-on-background-png-image_4966514.jpg" />
                                                          </image>
                                                       </ImageView>
                                                    </children>
                                                 </Pane>
-                                                <Label fx:id="randomizeDesc" layoutY="14.0" prefHeight="46.0" prefWidth="182.0" textAlignment="CENTER" />
                                              </children>
                                           </Pane>
                                           <Pane fx:id="genreSpliceBackground" onMouseClicked="#handleEditSelection" prefHeight="155.0" prefWidth="239.0">
                                              <children>
-                                                <Pane layoutX="11.0" layoutY="59.0" prefHeight="81.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
+                                                <Pane layoutX="11.0" layoutY="13.0" prefHeight="129.0" prefWidth="160.0" style="-fx-background-color: White; -fx-background-radius: 10;">
                                                    <children>
-                                                      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="60.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="67.0" fitWidth="80.0" layoutX="47.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@extract.png" />
                                                          </image>
                                                       </ImageView>
                                                    </children>
                                                 </Pane>
-                                                <Label fx:id="genreSpliceDesc" layoutY="14.0" prefHeight="46.0" prefWidth="182.0" textAlignment="CENTER" />
                                              </children>
                                           </Pane>
                                        </children>
